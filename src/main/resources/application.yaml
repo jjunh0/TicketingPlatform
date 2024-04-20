@@ -1,0 +1,32 @@
+#spring.application.name=TicketingPlatform
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/C:/TicketingPlatformDB/test;MODE=MYSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  sql:
+    init:
+      encoding: UTF-8
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
