@@ -17,8 +17,9 @@ public class Ticket {
     @Column(nullable = false)
     private int ticketPrice;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String ticketSeat;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "seat_id", unique = true)
+    private Seat seat;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "order_id")
