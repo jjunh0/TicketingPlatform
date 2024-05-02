@@ -27,8 +27,9 @@ public class Performance {
     @Column(nullable = false)
     private int performanceCount;
 
-    @ElementCollection
-    private List<String> performanceSeat;
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinColumn(name = "seat")
+    private List<Seat> performanceSeats;
 
     private LocalDateTime performanceDate;
 }
