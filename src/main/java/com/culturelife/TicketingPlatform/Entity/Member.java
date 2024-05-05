@@ -1,9 +1,11 @@
 package com.culturelife.TicketingPlatform.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,14 +29,17 @@ public class Member {
     @Column(nullable = false, length = 50, unique = true)
     private String memberEmail;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "member")
-    private List<Order> orderList;
+    private List<Order> orderList = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "member")
-    private List<Ticket> ticketList;
+    private List<Ticket> ticketList = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "member", orphanRemoval = true)
-    private List<Question> questionList;
+    private List<Question> questionList = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean universityAttendance;
