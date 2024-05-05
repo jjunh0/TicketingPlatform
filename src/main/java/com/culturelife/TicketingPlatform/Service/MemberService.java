@@ -56,7 +56,7 @@ public class MemberService {
     }
 
     public Member findMemberById(Long id) {
-        Member findMember = memberRepository.findId(id);
+        Member findMember = memberRepository.findById(id);
         validateFindMember(findMember);
         return findMember;
     }
@@ -105,7 +105,7 @@ public class MemberService {
 
     @Transactional
     public Long deleteQuestion(Long questionId) {
-        Question deleteQuestion = questionRepository.findId(questionId);
+        Question deleteQuestion = questionRepository.findById(questionId);
         Member member = deleteQuestion.getMember();
         deleteQuestion.setMember(null);
         member.getQuestionList().remove(deleteQuestion);
