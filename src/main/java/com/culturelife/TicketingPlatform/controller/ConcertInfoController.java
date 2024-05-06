@@ -1,30 +1,48 @@
 package com.culturelife.TicketingPlatform.controller;
 
+import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Service.ConcertSeatService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.culturelife.TicketingPlatform.dto.SeatInfoDTO;
+import com.culturelife.TicketingPlatform.dto.SeatSelectionDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ConcertInfoController {
 
-//    private final ConcertSeatService concertSeatService;
-//    @Autowired
-//    public ConcertInfoController(ConcertSeatService concertSeatService) {
-//        this.concertSeatService = concertSeatService;
-//    }
-    @GetMapping("/concert-info")
-    public String concertInfo() {
-        System.out.println("concert-info");
-        return "concertinfo";
+    private final ConcertSeatService concertSeatService;
+    @GetMapping("/concertInfo")
+    public String concertInfo(@RequestParam Long id, Model model) {
+        Performance performance = concertSeatService.getPerformanceById(id);
+        model.addAttribute("name", performance.getPerformanceName());
+        model.addAttribute("contents", performance.getPerformanceContents());
+        model.addAttribute("price", performance.getPerformancePrice());
+        model.addAttribute("date", performance.getPerformanceDate());
+        return "concertInfo";
     }
-    @GetMapping("/concert-select")
+    @GetMapping("/concertInfo/seat")
     @ResponseBody
-    public String concertSelect(@RequestParam Integer id) {
-        return Integer.toString(id);
+    public String concertSelect(@RequestParam Long id, Model model) {
+        List<SeatInfoDTO> seat = concertSeatService.getSeatById(id);
+        model.addAttribute("seat", seat.stream().sorted(Comparator.comparing(SeatInfoDTO::getSeat)));
+        return "seatSelect";
     }
+
+    @PostMapping("/concertInfo/seatReserve")
+    public String seatReserve(SeatSelectionDTO seatSelectionForm) {
+        if(concertSeatService.reserve(seatSelectionForm.getId(), seatSelectionForm.getSeatId())) {
+            System.out.println("예약 성공");
+            return "redirect:/concertInfo";
+        }
+        System.out.println("예약 실패");
+        return "redirect:/concertInfo/seatReserve"
+    }
+
 
 }
