@@ -14,12 +14,12 @@
   <meta property="og:description" content="웹사이트입니다">
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
-  <title>로그인 | test1</title>
-  <link rel="stylesheet" href="../resources/static/css/setting.css">
-  <link rel="stylesheet" href="../resources/static/css/plugin.css">
-  <link rel="stylesheet" href="../resources/static/css/template.css">
-  <link rel="stylesheet" href="../resources/static/css/common.css">
-  <link rel="stylesheet" href="../resources/static/css/style.css">
+  <title>로그인회원가입 | test1</title>
+  <link rel="stylesheet" href="../resources/css/setting.css">
+  <link rel="stylesheet" href="../resources/css/plugin.css">
+  <link rel="stylesheet" href="../resources/css/template.css">
+  <link rel="stylesheet" href="../resources/css/common.css">
+  <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
         <div class="header-right">
           <div class="header-title header-mobile-top">
             <a href="javascript:void(0)">
-              <img src="../resources/static/images/img_logo_black.png" alt="로고">
+              <img src="../resources/images/img_logo_black.png" alt="로고">
             </a>
           </div>
           <ul class="header-gnblist">
@@ -46,27 +46,27 @@
             </li>
             <li class="header-gnbitem">
               <a class="header-gnblink" href="javascript:void(0)">
-                <span>공연예매</span>
+                <span>공연</span>
               </a>
             </li>
             <li class="header-gnbitem">
               <a class="header-gnblink" href="javascript:void(0)">
-                <span>고객센터</span>
+                <span contenteditable="true">게시판</span>
               </a>
             </li>
             <li class="header-gnbitem">
               <a class="header-gnblink" href="javascript:void(0)">
-                <span>회원가입</span>
+                <span>로그인</span>
               </a>
             </li>
           </ul>
         </div>
         <div class="header-utils">
           <button class="btn-momenu">
-            <img src="../resources/static/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+            <img src="../resources/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
           </button>
           <button class="btn-close">
-            <img src="../resources/static/icons/ico_close_black.svg" alt="닫기 아이콘">
+            <img src="../resources/icons/ico_close_black.svg" alt="닫기 아이콘">
           </button>
         </div>
       </div>
@@ -76,40 +76,54 @@
   <!-- [E]basic-N2 -->
   <main class="th-layout-main ">
     <!-- [S]basic-N37 -->
-    <div class="basic-N37" data-bid="FRLuQynxaj" id="">
-      <div class="contents-inner">
-        <div class="contents-container container-md">
-          <div class="form-group form-line">
-            <div class="contents-check">
-              <h6 class="form-tit">Login</h6>
-            </div>
-            <div class="inputset inputset-line inputset-lg inputset-label">
-              <label>
-                <h6 class="inputset-tit">
-                  <font color="#111111">아이디</font>
-                </h6>
-                <input type="text" class="inputset-input form-control" placeholder="아이디를 입력해주세요." aria-label="내용" required="">
-              </label>
-            </div>
-            <div class="inputset inputset-line inputset-lg inputset-label">
-              <label>
-                <h6 class="inputset-tit">비밀번호<span></span>
-                </h6>
-                <input type="text" class="inputset-input form-control" placeholder="비밀번호를 입력해주세요" aria-label="내용" required="">
-              </label>
-            </div>
-            <div class="inputset inputset-line inputset-lg inputset-label">
-              <label>
-              </label>
-            </div>
-            <div class="inputset inputset-line inputset-lg inputset-label">
-              <label>
-              </label>
-            </div>
-            <a href="javascript:void(0);" class="btnset">LOGIN</a>
+    <div class="basic-N37" data-bid="FRLuQynxaj">
+      <div class="container">
+        <!-- Heading -->
+        <!-- Links -->
+        <ul class="links">
+          <li>
+            <a href="#" id="signin">로그인</a>
+          </li>
+          <li>
+            <a href="#" id="signup" contenteditable="true">회원가입</a>
+          </li>
+          <li>
+          </li>
+        </ul>
+        <!-- Form -->
+        <form action="" method="post">
+          <!-- email input -->
+          <div class="first-input input__block first-input__block">
+            <input type="email" placeholder="Email" class="input" id="email">
           </div>
+          <!-- password input -->
+          <div class="input__block">
+            <input type="password" placeholder="Password" class="input" id="password">
+          </div>
+          <!-- repeat password input -->
+          <div class="input__block">
+            <input type="password" placeholder="Repeat password" class="input repeat__password" id="repeat__password">
+          </div>
+          <!-- id input-->
+          <div class="input__block">
+            <input type="id" placeholder="id" class="input id" id="id">
+          </div>
+          <!-- sign in button -->
+          <button class="signin__btn"> Sign in </button>
+        </form>
+        <!-- separator -->
+        <div class="separator">
+          <p>OR</p>
         </div>
+        <!-- google button -->
+        <button class="google__btn">
+          <i class="fa fa-google"></i> Sign in with Google </button>
+        <!-- google button -->
+        <button class="kakao__btn">
+          <i class="fa fa-kakao"></i> Sign in with kakao</button>
       </div>
+      <footer>
+      </footer>
     </div>
     <!-- [E]basic-N37 -->
   </main>
@@ -130,9 +144,9 @@
     </div>
   </div>
   <!-- [E]basic-N4 -->
-  <script src="../resources/static/js/setting.js"></script>
-  <script src="../resources/static/js/plugin.js"></script>
-  <script src="../resources/static/js/template.js"></script>
-  <script src="../resources/static/js/common.js"></script>
-  <script src="../resources/static/js/script.js"></script>
+  <script src="../resources/js/setting.js"></script>
+  <script src="../resources/js/plugin.js"></script>
+  <script src="../resources/js/template.js"></script>
+  <script src="../resources/js/common.js"></script>
+  <script src="../resources/js/script.js"></script>
 </body>
