@@ -1,6 +1,5 @@
 package com.culturelife.TicketingPlatform.Repository;
 
-import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Question;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +17,8 @@ public class QuestionRepository {
         em.persist(question);
     }
 
-    public Question findId(Long id) {
-        return em.find(Question.class, id);
+    public Question findById(Long questionId) {
+        return em.find(Question.class, questionId);
     }
 
     public List<Question> findByMemberId(String memberId) {
@@ -36,6 +35,8 @@ public class QuestionRepository {
     public Long deleteQuestion(Question question) {
         Long id = question.getId();
         em.remove(question);
+        em.flush();
+        em.clear();
         return id;
     }
 
