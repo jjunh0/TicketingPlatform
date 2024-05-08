@@ -6,6 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SeatSelectionDTO {
-    private Long id;
-    private Long seatId;
+    private Long seatNum;
 }
