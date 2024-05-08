@@ -22,4 +22,3 @@ public class CommunityController {
     return "community/view";
   }
 }
-de
