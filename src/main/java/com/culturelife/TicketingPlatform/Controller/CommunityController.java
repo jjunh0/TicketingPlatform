@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CommunityContoller {
+public class CommunityController {
   // 질의 응답 게시판 글 목록으로 이동
   @GetMapping("community/lists")
   public String communityListsContoller(){
