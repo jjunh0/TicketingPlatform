@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class SeatRepository {
@@ -38,11 +39,6 @@ public class SeatRepository {
         em.clear();
         return id;
     }
-    public Seat findByIdAndName(Long performanceId, String seatName) {
-        return em.createQuery("select s from Seat s where s.performance.id = :id and s.seatName = :name", Seat.class)
-                .setParameter("id", performanceId)
-                .setParameter("name", seatName)
-                .getSingleResult();
-    }
+
 
 }
