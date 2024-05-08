@@ -38,10 +38,10 @@ public class SeatRepository {
         em.clear();
         return id;
     }
-    public Seat findByIdAndName(Long performanceId, Long seatNum) {
-        return em.createQuery("select s from Seat s where s.performance.id = :id and s.seat = :name", Seat.class)
+    public Seat findByIdAndName(Long performanceId, String seatName) {
+        return em.createQuery("select s from Seat s where s.performance.id = :id and s.seatName = :name", Seat.class)
                 .setParameter("id", performanceId)
-                .setParameter("name", seatNum)
+                .setParameter("name", seatName)
                 .getSingleResult();
     }
 

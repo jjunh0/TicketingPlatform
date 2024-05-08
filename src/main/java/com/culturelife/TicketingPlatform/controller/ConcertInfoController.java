@@ -27,13 +27,13 @@ public class ConcertInfoController {
     @GetMapping("/performances/{performanceId}/seats")
     public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.getSeatById(performanceId);
-        model.addAttribute("seat", seat.stream().sorted(Comparator.comparing(SeatInfoDTO::getSeat)));
+        model.addAttribute("seat", seat.stream().sorted(Comparator.comparing(SeatInfoDTO::getSeatName)));
         return "seatSelect";
     }
 
     @PatchMapping("/seats/{performanceId}")
     public String seatReserve(@PathVariable("performanceId") Long performanceId, SeatSelectionDTO seatSelectionForm) {
-        if(concertSeatService.reserve(performanceId, seatSelectionForm.getSeatNum())) {
+        if(concertSeatService.reserve(performanceId, seatSelectionForm.getSeatName())) {
             System.out.println("예약 성공");
             return "redirect:/";
         }
