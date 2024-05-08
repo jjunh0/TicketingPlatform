@@ -18,8 +18,8 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public Member findId(Long id) {
-        return em.find(Member.class, id);
+    public Member findById(Long memberId) {
+        return em.find(Member.class, memberId);
     }
 
     public Optional<Member> findByMemberId(String memberId) {
