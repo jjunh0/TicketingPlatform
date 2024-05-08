@@ -1,0 +1,14 @@
+DB 접속방법
+
+1. resources 폴더에 h2 setup 설치파일 설지 (h2 db 2.1.214 버전)
+
+2.경로 C:/TicketingPlatformDB 폴더 생성
+
+3. h2 프로그램 실행 후 h2 db 웹페이지 열리면 
+ JDBC URL에  jdbc:h2:C:/TicketingPlatformDB/test 입력 후 접속
+(그러면 C:/TicketingPlatformDB/test 경로에 test.mv.db 인 데이터베이스 파일 생성) 
+db 파일이 제대로 생성되면 빨간색 N모양을 눌러 연결을 해제하고 
+스프링 어플리케이션을 IntelliJ에서 실행
+
+4. JDBC URL 에 jdbc:h2:tcp://localhost/C:/TicketingPlatformDB/test 입력 후 접속하면
+임의로 생성해놓은 member를 h2 웹페이지에서 확인 가능
