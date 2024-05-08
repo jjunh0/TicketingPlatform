@@ -4,6 +4,7 @@ import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Entity.Seat;
 import com.culturelife.TicketingPlatform.Repository.PerformanceRepository;
 import com.culturelife.TicketingPlatform.Repository.SeatRepository;
+import com.culturelife.TicketingPlatform.dto.PerformanceDTO;
 import com.culturelife.TicketingPlatform.dto.SeatInfoDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,16 @@ public class ConcertSeatService {
     private final SeatRepository seatRepository;
     private final PerformanceRepository performanceRepository;
 
-    public Performance getPerformanceById(Long id) {
-        return performanceRepository.findById(id);
+    public PerformanceDTO getPerformanceById(Long performanceId) {
+        Performance performance = performanceRepository.findById(performanceId);
+        return PerformanceDTO.builder()
+                .performanceId(performanceId)
+                .performanceName(performance.getPerformanceName())
+                .performanceContents(performance.getPerformanceContents())
+                .performancePrice(performance.getPerformancePrice())
+                .performanceCount(performance.getPerformanceCount())
+                .performanceDate(performance.getPerformanceDate())
+                .build();
     }
     public List<SeatInfoDTO> getSeatById(Long id) {
         List<Seat> seatList =  performanceRepository.findById(id).getPerformanceSeats();
@@ -34,8 +43,8 @@ public class ConcertSeatService {
         }
         return seatInfoDTO;
     }
-    public Boolean reserve(Long id, Long seatNum) {
-        Seat seat = seatRepository.findByIdAndName(id, seatNum);
+    public Boolean reserve(Long performanceId, Long seatNum) {
+        Seat seat = seatRepository.findByIdAndName(performanceId, seatNum);
         if(seat.getIsBooked()) {
             System.out.println("예약됨");
             return false;
