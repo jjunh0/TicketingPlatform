@@ -2,6 +2,7 @@ package com.culturelife.TicketingPlatform.controller;
 
 import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Service.ConcertSeatService;
+import com.culturelife.TicketingPlatform.dto.PerformanceDTO;
 import com.culturelife.TicketingPlatform.dto.SeatInfoDTO;
 import com.culturelife.TicketingPlatform.dto.SeatSelectionDTO;
 import lombok.RequiredArgsConstructor;
@@ -17,31 +18,27 @@ import java.util.List;
 public class ConcertInfoController {
 
     private final ConcertSeatService concertSeatService;
-    @GetMapping("/concertInfo")
-    public String concertInfo(@RequestParam Long id, Model model) {
-        Performance performance = concertSeatService.getPerformanceById(id);
-        model.addAttribute("name", performance.getPerformanceName());
-        model.addAttribute("contents", performance.getPerformanceContents());
-        model.addAttribute("price", performance.getPerformancePrice());
-        model.addAttribute("date", performance.getPerformanceDate());
+    @GetMapping("/performances/{performanceId}")
+    public String concertInfo(@PathVariable("performanceId") Long performanceId, Model model) {
+        PerformanceDTO performanceDTO = concertSeatService.getPerformanceById(performanceId);
+        model.addAttribute("performance", performanceDTO);
         return "concertInfo";
     }
-    @GetMapping("/concertInfo/seat")
-    @ResponseBody
-    public String concertSelect(@RequestParam Long id, Model model) {
-        List<SeatInfoDTO> seat = concertSeatService.getSeatById(id);
+    @GetMapping("/performances/{performanceId}/seats")
+    public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
+        List<SeatInfoDTO> seat = concertSeatService.getSeatById(performanceId);
         model.addAttribute("seat", seat.stream().sorted(Comparator.comparing(SeatInfoDTO::getSeat)));
         return "seatSelect";
     }
 
-    @PostMapping("/concertInfo/seatReserve")
-    public String seatReserve(SeatSelectionDTO seatSelectionForm) {
-        if(concertSeatService.reserve(seatSelectionForm.getId(), seatSelectionForm.getSeatId())) {
+    @PatchMapping("/seats/{performanceId}")
+    public String seatReserve(@PathVariable("performanceId") Long performanceId, SeatSelectionDTO seatSelectionForm) {
+        if(concertSeatService.reserve(performanceId, seatSelectionForm.getSeatNum())) {
             System.out.println("예약 성공");
-            return "redirect:/concertInfo";
+            return "redirect:/";
         }
         System.out.println("예약 실패");
-        return "redirect:/concertInfo/seatReserve"
+        return "redirect:/performances/" + performanceId + "/seats";
     }
 
 
