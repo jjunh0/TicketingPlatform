@@ -36,15 +36,15 @@ public class ConcertSeatService {
 
         for(Seat s : seatList) {
             SeatInfoDTO seatInfo = SeatInfoDTO.builder()
-                    .seat(s.getSeat())
+                    .seatName(s.getSeatName())
                     .isBooked(s.getIsBooked())
                     .build();
             seatInfoDTO.add(seatInfo);
         }
         return seatInfoDTO;
     }
-    public Boolean reserve(Long performanceId, Long seatNum) {
-        Seat seat = seatRepository.findByIdAndName(performanceId, seatNum);
+    public Boolean reserve(Long performanceId, String seatName) {
+        Seat seat = seatRepository.findByIdAndName(performanceId, seatName);
         if(seat.getIsBooked()) {
             System.out.println("예약됨");
             return false;
