@@ -2,7 +2,6 @@ package com.culturelife.TicketingPlatform.Service;
 
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Question;
-import com.culturelife.TicketingPlatform.Repository.MemberRepository;
 import com.culturelife.TicketingPlatform.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class QuestionService {
     }
 
     public Question findQuestionById(Long id) {
-        return questionRepository.findId(id);
+        return questionRepository.findById(id);
     }
 
     public List<Question> findQuestionByMemberId(String memberId) {

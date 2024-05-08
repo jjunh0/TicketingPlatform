@@ -1,11 +1,15 @@
 package com.culturelife.TicketingPlatform.Entity;
 
-import com.culturelife.TicketingPlatform.Entity.Enum.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "performance")
 public class Performance {
@@ -27,8 +31,9 @@ public class Performance {
     @Column(nullable = false)
     private int performanceCount;
 
-    @ElementCollection
-    private List<String> performanceSeat;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "performance", fetch=FetchType.LAZY)
+    private List<Seat> performanceSeats = new ArrayList<>();
 
     private LocalDateTime performanceDate;
 }
