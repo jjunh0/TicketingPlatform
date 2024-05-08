@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatInfoDTO {
-    private Long id;
+    private Long performanceId;
     private Long seat;
     private Boolean isBooked;
 }
