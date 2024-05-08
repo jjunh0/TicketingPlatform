@@ -1,5 +1,6 @@
 package com.culturelife.TicketingPlatform.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Question {
     @Column(length = 4000, nullable = false)
     private String questionContents;
 
+    @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

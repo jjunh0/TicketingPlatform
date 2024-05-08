@@ -1,8 +1,11 @@
 package com.culturelife.TicketingPlatform.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name = "ticket")
 public class Ticket {
@@ -17,17 +20,21 @@ public class Ticket {
     @Column(nullable = false)
     private int ticketPrice;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String ticketSeat;
+    @JsonManagedReference
+    @OneToOne(fetch=FetchType.LAZY, mappedBy = "ticket")
+    private Seat seat;
 
+    @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "performance_id")
     private Performance performance;
 
+    @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
