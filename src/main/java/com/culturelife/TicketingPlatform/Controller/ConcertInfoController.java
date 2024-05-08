@@ -1,10 +1,9 @@
-package com.culturelife.TicketingPlatform.controller;
+package com.culturelife.TicketingPlatform.Controller;
 
-import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Service.ConcertSeatService;
-import com.culturelife.TicketingPlatform.dto.PerformanceDTO;
-import com.culturelife.TicketingPlatform.dto.SeatInfoDTO;
-import com.culturelife.TicketingPlatform.dto.SeatSelectionDTO;
+import com.culturelife.TicketingPlatform.Entity.dto.PerformanceDTO;
+import com.culturelife.TicketingPlatform.Entity.dto.SeatInfoDTO;
+import com.culturelife.TicketingPlatform.Entity.dto.SeatSelectionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

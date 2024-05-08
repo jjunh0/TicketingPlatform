@@ -1,4 +1,4 @@
-package com.culturelife.TicketingPlatform.dto;
+package com.culturelife.TicketingPlatform.Entity.dto;
 
 import lombok.Builder;
 import lombok.Getter;
