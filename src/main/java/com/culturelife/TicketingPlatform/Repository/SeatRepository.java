@@ -12,10 +12,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SeatRepository {
     private final EntityManager em;
-    public Seat findByIdAndName(Long id, Long name) {
+    public Seat findByIdAndName(Long performanceId, Long seatNum) {
         return em.createQuery("select s from Seat s where s.performance.id = :id and s.seat = :name", Seat.class)
-                .setParameter("id", id)
-                .setParameter("name", name)
+                .setParameter("id", performanceId)
+                .setParameter("name", seatNum)
                 .getSingleResult();
     }
 
