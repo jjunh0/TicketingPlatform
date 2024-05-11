@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -14,7 +15,7 @@
   <meta property="og:description" content="웹사이트입니다">
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
-  <title>게시글 목록 | test1</title>
+  <title>공연목록 | test1</title>
   <link rel="stylesheet" href="../resources/static/css/setting.css">
   <link rel="stylesheet" href="../resources/static/css/plugin.css">
   <link rel="stylesheet" href="../resources/static/css/template.css">
@@ -23,164 +24,112 @@
 </head>
 
 <body>
-  <!-- [S]basic-N2 -->
-  <div class="basic-N2" data-bid="OPlVqR41MZ" id="">
-    <div class="header-inner">
-      <div class="header-container container-lg">
-        <h1 class="header-title">
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="ZxLVQQWYX6" id="">
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+            <img src="../resources/static/images/img_logo_black.png" alt="로고">
           </a>
-        </h1>
-        <div class="header-right">
-          <div class="header-title header-mobile-top">
-            <a href="javascript:void(0)">
-              <img src="../resources/static/images/img_logo_black.png" alt="로고">
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="home.html">
+              <span>홈</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="contestlist.html">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="community.html">
+              <span contenteditable="true">게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="signinup.html">
+              <span>로그인</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N28 -->
+  <div class="basic-N28" data-bid="TYlvQu87m0" id="">
+    <div class="contents-inner">
+      <div class="contents-container container-md">
+        <div class="textset">
+          <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
+        </div>
+        <div class="contents-group">
+          <div th:each="performance : ${performances}" class="cardset cardset-hover cardset-border text-center">
+            <a th:href="@{/book(performanceId=${performance.id})}">
+              <figure class="cardset-figure">
+                <img th:src="@{'/resources/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
+              </figure>
+              <div class="cardset-cont">
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
+                <p class="cardset-desc">
+                  <span th:text="${performance.performanceContents}">공연 내용</span> <br>
+                  <span th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
+                  <span th:text="${performance.performancePrice + '원'}">가격</span>
+                </p>
+              </div>
             </a>
           </div>
-          <ul class="header-gnblist">
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>홈</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>공연</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>게시판</span>
-              </a>
-            </li>
-            <li class="header-gnbitem item-active">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span contenteditable="true">로그인</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="header-utils">
-          <button class="btn-momenu">
-            <img src="../resources/static/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
-          </button>
-          <button class="btn-close">
-            <img src="../resources/static/icons/ico_close_black.svg" alt="닫기 아이콘">
-          </button>
         </div>
       </div>
     </div>
-    <div class="header-dim"></div>
-  </div>
-  <!-- [E]basic-N2 -->
-  <!-- [S]basic-N2 -->
-  <header class="basic-N2" data-bid="NGLUfRprSL" id="">
-    <div class="header-dim"></div>
-  </header>
-  <!-- [E]basic-N2 -->
-  <!-- [S]basic-N10 -->
-  <div class="basic-N10" data-bid="MnLUiKsftt" id="">
-  </div>
-  <!-- [E]basic-N10 -->
-  <!-- [S]basic-N34 -->
-  <div class="basic-N34" data-bid="KaLUJLXITm" id="">
-  </div>
-  <!-- [E]basic-N34 -->
-  <main class="th-layout-main ">
-    <!-- [S]basic-N37 -->
-    <div class="basic-N37" data-bid="ANLUFrPS7y" id="">
-    </div>
-    <!-- [E]basic-N37 -->
-    <!-- [S]basic-N53 -->
-    <div class="basic-N53" data-bid="QYlufrTUM0">
-      <div class="contents-inner">
-        <div class="contents-container container-md">
-          <h2> 게시판 </h2>
-          <hr class="hr1" noshade="">
-          <form>
-            <span class="right" ;="">
-              <input type="text" ;=""> <input type="button" name="검색" class="gradient" value="검색">
-            </span>
-          </form>
-          <br><br>
-          <button id="writeButton">글 작성</button>
-          <br>
-          <table>
-            <tbody>
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>글쓴이</th>
-                <th>일시</th>
-                <th>조회수</th>
-              </tr>
-              <tr>
-                <td class="center">1</td>
-                <td class="left">게시글 1 입니다.</td>
-                <td class="center">김oo</td>
-                <td class="center">0000-00-00</td>
-                <td class="center">0</td>
-              </tr>
-              <tr>
-                <td class="center">2</td>
-                <td class="left">게시글 2 입니다.</td>
-                <td class="center">김oo</td>
-                <td class="center">0000-00-00</td>
-                <td class="center">0</td>
-              </tr>
-              <tr>
-                <td class="center">3</td>
-                <td class="left">게시글 3 입니다.</td>
-                <td class="center">김oo</td>
-                <td class="center">0000-00-00</td>
-                <td class="center">0</td>
-              </tr>
-            </tbody>
-          </table>
-          <br>
-          <nav class="pagiset pagiset-line">
-            <div class="pagiset-ctrl">
-              <a class="pagiset-link pagiset-first" href="javascript:void(0)">
-                <span class="visually-hidden">처음</span>
-              </a>
-            </div>
-            <div class="pagiset-ctrl">
-              <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
-                <span class="visually-hidden">이전</span>
-              </a>
-            </div>
-            <div class="pagiset-list">
-              <a class="pagiset-link" href="javascript:void(0)">1</a>
-              <a class="pagiset-link" href="javascript:void(0)">2</a>
-              <a class="pagiset-link" href="javascript:void(0)">3</a>
-              <a class="pagiset-link" href="javascript:void(0)">4</a>
-            </div>
-            <div class="pagiset-ctrl">
-              <a class="pagiset-link pagiset-next" href="javascript:void(0)">
-                <span class="visually-hidden">다음</span>
-              </a>
-            </div>
-            <div class="pagiset-ctrl">
-              <a class="pagiset-link pagiset-last" href="javascript:void(0)">
-                <span class="visually-hidden">마지막</span>
-              </a>
-            </div>
-          </nav>
-          <span class="right" ;="">
-          </span>
-        </div>
+    <nav class="pagiset pagiset-line">
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-first" href="javascript:void(0)">
+          <span class="visually-hidden">처음</span>
+        </a>
       </div>
-    </div>
-    <!-- [E]basic-N53 -->
-    <!-- [S]basic-N24 -->
-    <div class="basic-N24" data-bid="BULujLZ1zl" id="">
-    </div>
-    <!-- [E]basic-N24 -->
-  </main>
-  <!-- [S]basic-N4 -->
-  <footer class="basic-N4" data-bid="wXLUfRPsjY" id="">
-    <div class="footer-container container-lg">
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
+          <span class="visually-hidden">이전</span>
+        </a>
+      </div>
+      <div class="pagiset-list">
+        <a class="pagiset-link" href="javascript:void(0)">1</a>
+        <a class="pagiset-link" href="javascript:void(0)">2</a>
+        <a class="pagiset-link" href="javascript:void(0)">3</a>
+        <a class="pagiset-link" href="javascript:void(0)">4</a>
+      </div>
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-next" href="javascript:void(0)">
+          <span class="visually-hidden">다음</span>
+        </a>
+      </div>
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-last" href="javascript:void(0)">
+          <span class="visually-hidden">마지막</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  </div>
+  <!-- [E]basic-N28 -->
+</main>
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="jzlvQQX1F2" id="">
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
       <div class="footer-bottom">
         <div class="footer-txt">
           <p><span>강원도 춘천시 강원대학길 1</span></p>
@@ -193,11 +142,12 @@
         </div>
       </div>
     </div>
-  </footer>
-  <!-- [E]basic-N4 -->
-  <script src="../resources/static/js/setting.js"></script>
-  <script src="../resources/static/js/plugin.js"></script>
-  <script src="../resources/static/js/template.js"></script>
-  <script src="../resources/static/js/common.js"></script>
-  <script src="../resources/static/js/script.js"></script>
+  </div>
+</div>
+<!-- [E]basic-N4 -->
+<script src="../resources/static/js/setting.js"></script>
+<script src="../resources/static/js/plugin.js"></script>
+<script src="../resources/static/js/template.js"></script>
+<script src="../resources/static/js/common.js"></script>
+<script src="../resources/static/js/script.js"></script>
 </body>

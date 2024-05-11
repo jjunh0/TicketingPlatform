@@ -1,4 +1,4 @@
-@charset "utf-8"; 
+@charset "utf-8";
 
 /* basic-N2 [CbLVQR1Eay] */
 .basic-N2 { position: relative; top: -100%; left: 0; width: 100%; z-index: 200; transition: 0.3s; background-color: var(--white); }
@@ -209,5 +209,18 @@ input[type="submit"]:active { width: 100px; height: 40px; font-size: 15px; borde
 .screen { background-color: #fff; height: 70px; width: 100%; margin: 15px 0; transform: rotateX(-45deg); box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7); }
 p.text { margin: 5px 0; }
 p.text span { color: #6feaf6; }
+.btn-pay {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-pay:hover {
+    background-color: #45a049;
+  }
 
 /* basic-N11 [cylvv7xpFV] : 편집됨 */
