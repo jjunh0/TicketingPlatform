@@ -15,7 +15,7 @@
   <meta property="og:description" content="웹사이트입니다">
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
-  <title>공연목록 | test1</title>
+  <title>게시글 작성 | test1</title>
   <link rel="stylesheet" href="../resources/static/css/setting.css">
   <link rel="stylesheet" href="../resources/static/css/plugin.css">
   <link rel="stylesheet" href="../resources/static/css/template.css">
@@ -25,7 +25,7 @@
 
 <body>
 <!-- [S]basic-N2 -->
-<div class="basic-N2" data-bid="ZxLVQQWYX6" id="">
+<div class="basic-N2" data-bid="iHLvqqyNrR" id="">
   <div class="header-inner">
     <div class="header-container container-lg">
       <h1 class="header-title">
@@ -68,66 +68,34 @@
 </div>
 <!-- [E]basic-N2 -->
 <main class="th-layout-main ">
-  <!-- [S]basic-N28 -->
-  <div class="basic-N28" data-bid="TYlvQu87m0" id="">
-    <div class="contents-inner">
-      <div class="contents-container container-md">
-        <div class="textset">
-          <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
-        </div>
-        <div class="contents-group">
-          <div th:each="performance : ${performances}" class="cardset cardset-hover cardset-border text-center">
-            <a th:href="@{/book(performanceId=${performance.id})}">
-              <figure class="cardset-figure">
-                <img th:src="@{'/resources/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
-              </figure>
-              <div class="cardset-cont">
-                <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
-                <p class="cardset-desc">
-                  <span th:text="${performance.performanceContents}">공연 내용</span> <br>
-                  <span th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
-                  <span th:text="${performance.performancePrice + '원'}">가격</span>
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+  <!-- [S]basic-N11 -->
+  <div class="basic-N11" data-bid="FtlvTT1I63" id="">
+    <div class="contents-container container-md">
+      <form th:action="@{/board}" th:object="${question}" method="post">
+        <h2>문의사항 게시 글 작성</h2>
+        <table>
+          <tbody>
+          <tr>
+            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{questionSubject}" name="questionSubject"></td>
+          </tr>
+          <tr>
+            <td><textarea placeholder="내용을 입력하세요" th:field="*{questionContents}" name="questionContents"></textarea></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" value="게시" onclick="alert('게시되었습니다')">
+              <button type="button" id="cancel" th:onclick="'window.location.href=\'' + @{/cancel} + '\''">취소</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
-    <nav class="pagiset pagiset-line">
-      <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-first" href="javascript:void(0)">
-          <span class="visually-hidden">처음</span>
-        </a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
-          <span class="visually-hidden">이전</span>
-        </a>
-      </div>
-      <div class="pagiset-list">
-        <a class="pagiset-link" href="javascript:void(0)">1</a>
-        <a class="pagiset-link" href="javascript:void(0)">2</a>
-        <a class="pagiset-link" href="javascript:void(0)">3</a>
-        <a class="pagiset-link" href="javascript:void(0)">4</a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-next" href="javascript:void(0)">
-          <span class="visually-hidden">다음</span>
-        </a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-last" href="javascript:void(0)">
-          <span class="visually-hidden">마지막</span>
-        </a>
-      </div>
-    </nav>
   </div>
-  </div>
-  <!-- [E]basic-N28 -->
+  <!-- [E]basic-N11 -->
 </main>
 <!-- [S]basic-N4 -->
-<div class="basic-N4" data-bid="jzlvQQX1F2" id="">
+<div class="basic-N4" data-bid="hPLvqQYq31">
   <div class="footer-container container-lg">
     <div class="footer-bottom">
       <div class="footer-bottom">
