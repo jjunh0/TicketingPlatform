@@ -56,7 +56,7 @@
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="signup.html">
+              <a class="header-gnblink" href="signinup.html">
                 <span>로그인</span>
               </a>
             </li>
@@ -124,11 +124,8 @@
               <div class="contents-btn-group">
                   <button class="btnset btnset-line" type="button">좌석선택</button>
               </div>
-              </div>
-          
-              
-          </div>
-            
+             </div>
+            </div>
           </div>
         </div>
       </div>
@@ -151,22 +148,21 @@
   <div class="basic-N15" data-bid="TjLvQtyfG2" id="">
     <div class="contents-inner">
       <div class="contents-container container-md">
-        <div class="textset">
-          <h2 class="textset-tit">상세 내역&nbsp;</h2>
-        </div>
-        <div class="cardset">
-          <figure class="cardset-figure">
-            <img class="cardset-img img-pc" src="../resources/static/images/img_basic_N15_1.png" alt="PC 이미지">
-            <img class="cardset-img img-mobile" src="../resources/static/images/img_basic_mobile_N15_1.png" alt="모바일 이미지">
-          </figure>
-          <div class="cardset-body">
-            <h5 class="cardset-tit">공연1</h5>
-            <p class="cardset-desc"> 웹사이트는 비즈니스의 온라인 존재감을 나타내는 중요한 수단이며, 비즈니스가 웹사이트를 보유하면 <br> 전 세계 어디에서든 제품과 서비스에 대한 정보를 제공할 수 있습니다. 이를 통해 새로운 고객을 유치하고, 기존 고객과의 관계를 유지할 수 있습니다. </p>
-            <p class="cardset-desc"> 웹사이트는 정보에 대한 쉬운 접근성을 제공합니다. 사용자는 언제 어디서든 웹사이트를 통해 필요한 정보를 검색할 수 있으며, <br> 일반적으로 정보에 대한 정확성과 신뢰성이 높습니다. 비즈니스의 경쟁력을 강화하는 데에 큰 역할을 합니다. <br> 경쟁업체들이 웹사이트를 갖추고 있을 때, 비즈니스가 웹사이트를 보유하지 않는다면 경쟁에서 밀릴 수 있습니다. </p>
+          <div class="textset">
+              <h2 class="textset-tit">상세 내역&nbsp;</h2>
           </div>
-        </div>
+          <div class="cardset" th:each="performance : ${performances}">
+              <figure class="cardset-figure">
+                  <img class="cardset-img img-pc" th:src="@{'/resources/static/images/' + ${performance.id} + '_1.png'}" alt="PC 이미지" th:alt="${performance.performanceName}">
+                  <img class="cardset-img img-mobile" th:src="@{'/resources/static/images/' + ${performance.id} + '_mobile_1.png'}" alt="모바일 이미지" th:alt="${performance.performanceName}">
+              </figure>
+              <div class="cardset-body">
+                  <h5 class="cardset-tit" th:text="${performance.performanceName}">공연이름</h5>
+                  <p class="cardset-desc" th:text="${performance.performanceContents}">공연설명</p>
+              </div>
+          </div>
       </div>
-    </div>
+  </div>
   </div>
   <!-- [E]basic-N15 -->
   <!-- [S]basic-N4 -->
