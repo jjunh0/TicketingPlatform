@@ -1,10 +1,9 @@
 package com.culturelife.TicketingPlatform.Service;
 
-
 import com.culturelife.TicketingPlatform.Entity.Member;
-import com.culturelife.TicketingPlatform.Entity.Question;
+import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
-import com.culturelife.TicketingPlatform.Repository.QuestionRepository;
+import com.culturelife.TicketingPlatform.Repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final QuestionRepository questionRepository;
+    private final PostRepository postRepository;
 
     @Transactional
     public Long createMember(Member member) {
@@ -28,72 +27,72 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Optional<Member> findMemberByMemberId = memberRepository.findByMemberId(member.getMemberId());
-        Optional<Member> findMemberByMemberEmail = memberRepository.findByEmail(member.getMemberEmail());
-        if (findMemberByMemberId.isPresent()) {
+        Optional<Member> readMemberByMemberId = memberRepository.readByMemberId(member.getMemberId());
+        Optional<Member> readMemberByMemberEmail = memberRepository.readByEmail(member.getMemberEmail());
+        if (readMemberByMemberId.isPresent()) {
             throw new IllegalStateException("이미 존재하는 ID의 회원입니다");
         }
 
-        if(findMemberByMemberEmail.isPresent()) {
+        if(readMemberByMemberEmail.isPresent()) {
             throw new IllegalStateException("이미 존재하는 Email의 회원입니다.");
         }
     }
 
-    private void validateFindMember(Member findMember) {
-        if(findMember == null) {
+    private void validateReadMember(Member readMember) {
+        if(readMember == null) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
     }
 
-    private void validateFindMember(List<Member> findMemberList) {
-        if(findMemberList.isEmpty()) {
+    private void validateReadMember(List<Member> readMemberList) {
+        if(readMemberList.isEmpty()) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
     }
 
-    public List<Member> findAllMembers() {
-        return memberRepository.findAll();
+    public List<Member> readAllMembers() {
+        return memberRepository.readAll();
     }
 
-    public Member findMemberById(Long id) {
-        Member findMember = memberRepository.findById(id);
-        validateFindMember(findMember);
-        return findMember;
+    public Member readMemberById(Long id) {
+        Member readMember = memberRepository.readById(id);
+        validateReadMember(readMember);
+        return readMember;
     }
 
-    public Member findMemberByMemberId(String memberId) {
-        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
-        validateFindMember(findMember.orElse(null));
-        return findMember.orElse(null);
+    public Member readMemberByMemberId(String memberId) {
+        Optional<Member> readMember = memberRepository.readByMemberId(memberId);
+        validateReadMember(readMember.orElse(null));
+        return readMember.orElse(null);
     }
 
-    public List<Member> findMemberByName(String name) {
-        List<Member> findMemberList = memberRepository.findByMemberName(name);
-        validateFindMember(findMemberList);
-        return findMemberList;
+    public List<Member> readMemberByName(String name) {
+        List<Member> readMemberList = memberRepository.readByMemberName(name);
+        validateReadMember(readMemberList);
+        return readMemberList;
     }
 
-    public Member findMemberByEmail(String email) {
-        Optional<Member> findMember = memberRepository.findByEmail(email);
-        validateFindMember(findMember.orElse(null));
-        return findMember.orElse(null);
+    public Member readMemberByEmail(String email) {
+        Optional<Member> readMember = memberRepository.readByEmail(email);
+        validateReadMember(readMember.orElse(null));
+        return readMember.orElse(null);
     }
 
     @Transactional
     public void updateMemberById(Long id, Member member) {
-        Member updateMember = findMemberById(id);
+        Member updateMember = readMemberById(id);
         updateMember = member;
     }
 
     @Transactional
     public void updateMemberByMemberId(String memberId, Member member) {
-        Member updateMember = findMemberByMemberId(memberId);
+        Member updateMember = readMemberByMemberId(memberId);
         updateMember = member;
     }
 
     @Transactional
     public void updateMemberByMemberName(String memberName, Member member) {
-        Member updateMember = findMemberByName(memberName).get(0);
+        Member updateMember = readMemberByName(memberName).get(0);
 
         if(updateMember == null) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
@@ -105,11 +104,11 @@ public class MemberService {
 
     @Transactional
     public Long deleteQuestion(Long questionId) {
-        Question deleteQuestion = questionRepository.findById(questionId);
-        Member member = deleteQuestion.getMember();
-        deleteQuestion.setMember(null);
-        member.getQuestionList().remove(deleteQuestion);
+        Post deletePost = postRepository.readById(questionId);
+        Member member = deletePost.getMember();
+        deletePost.setMember(null);
+        member.getPostList().remove(deletePost);
 
-        return deleteQuestion.getId();
+        return deletePost.getId();
     }
 }
