@@ -16,7 +16,7 @@ public class PerformanceRepository {
         em.persist(performance);
     }
 
-    public Performance findById(Long performanceId) {
+    public Performance readById(Long performanceId) {
         Performance performance = em.createQuery("select distinct p from Performance p left join fetch p.performanceSeats where p.id = :id", Performance.class)
                 .setParameter("id", performanceId)
                 .getSingleResult();
@@ -24,7 +24,7 @@ public class PerformanceRepository {
         return performance;
     }
 
-    public List<Performance> findPerformancePage(int page, int pageCount) {
+    public List<Performance> readPerformancePage(int page, int pageCount) {
         List<Performance> postList = em.createQuery("select p from Performance p", Performance.class)
                 .setFirstResult(page)
                 .setMaxResults(pageCount)
@@ -33,7 +33,7 @@ public class PerformanceRepository {
         return postList;
     }
 
-    public List<Performance> findByPerformanceName(String performanceName) {
+    public List<Performance> readByPerformanceName(String performanceName) {
         List<Performance> searchPerformanceList = null;
 
         searchPerformanceList = em.createQuery("select distinct p from Performance p where p.performanceName like :performanceName", Performance.class)
@@ -42,7 +42,7 @@ public class PerformanceRepository {
         return searchPerformanceList;
     }
 
-    public List<Performance> findAll() {
+    public List<Performance> readAll() {
         List<Performance> performanceList = em.createQuery("select distinct p from Performance p left join fetch p.performanceSeats", Performance.class)
                 .getResultList();
 

@@ -23,9 +23,9 @@ public class CommentService {
     private final MemberRepository memberRepository;
 
     public void createComment(String memberId, Long postId, String content) {
-        Optional<Member> returnMember = memberRepository.findByMemberId(memberId);
+        Optional<Member> returnMember = memberRepository.readByMemberId(memberId);
         Member member = returnMember.orElse(null);
-        Post post = postRepository.findById(postId);
+        Post post = postRepository.readById(postId);
 
         if(content.isEmpty() == false) {
             Comment comment = new Comment();
@@ -39,24 +39,24 @@ public class CommentService {
     }
 
     public List<Comment> readCommentList(Long postId) {
-        List<Comment> commentList = commentRepository.findAll(postId);
+        List<Comment> commentList = commentRepository.readAll(postId);
 
         return commentList;
     }
 
     public void updateComment(Long commentId, String content) {
-        Comment comment = commentRepository.findById(commentId);
+        Comment comment = commentRepository.reaById(commentId);
         comment.setCommentContents(content);
     }
     public void deleteComment(Long postId, Long commentId) {
-        Post post = postRepository.findById(postId);
+        Post post = postRepository.readById(postId);
         Comment comment = post.getCommentList().get((int) (commentId - 1));
         commentRepository.delete(comment);
         post.getCommentList().remove((int)(commentId-1));
     }
 
     public void deleteCommentAll(Long postId) {
-        Post post = postRepository.findById(postId);
+        Post post = postRepository.readById(postId);
         post.getCommentList().clear();
         commentRepository.deleteAll(postId);
     }

@@ -17,12 +17,12 @@ public class CommentRepository {
         em.persist(comment);
     }
 
-    public Comment findById(Long commentId) {
+    public Comment reaById(Long commentId) {
         Comment comment = em.find(Comment.class, commentId);
         return comment;
     }
 
-    public List<Comment> findAll(Long postId) {
+    public List<Comment> readAll(Long postId) {
         List<Comment> commentList = em.createQuery("select c from Comment c where c.post.id = :id", Comment.class)
                 .setParameter("id", postId)
                 .getResultList();

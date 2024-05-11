@@ -17,7 +17,7 @@ public class PostRepository {
         em.persist(post);
     }
 
-    public Post findById(Long postId) {
+    public Post readById(Long postId) {
         Post post = em.createQuery("select distinct p from Post p left join fetch p.commentList left join fetch p.member where p.id = :id", Post.class)
                 .setParameter("id", postId)
                 .getSingleResult();
@@ -25,13 +25,13 @@ public class PostRepository {
         return post;
     }
 
-    public List<Post> findByMemberId(String memberId) {
+    public List<Post> readByMemberId(String memberId) {
         return em.createQuery("select p from Post p where p.member.memberId like :memberId", Post.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
 
-    public List<Post> findAll() {
+    public List<Post> readAll() {
         return em.createQuery("select p from Post p", Post.class)
                 .getResultList();
     }
