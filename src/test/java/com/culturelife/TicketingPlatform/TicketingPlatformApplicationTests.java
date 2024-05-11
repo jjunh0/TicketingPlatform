@@ -40,7 +40,7 @@ class TicketingPlatformApplicationTests {
 		testSeat();
 
 //		System.out.println("allPerformanceList 시작");
-//		List<Performance> allPerformanceList = performanceService.findAllPerformance();
+//		List<Performance> allPerformanceList = performanceService.readAllPerformance();
 //
 //		for (Performance performance : allPerformanceList) {
 //			System.out.println(performance.getPerformanceName());

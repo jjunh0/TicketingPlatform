@@ -27,25 +27,25 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Optional<Member> findMemberByMemberId = memberRepository.readByMemberId(member.getMemberId());
-        Optional<Member> findMemberByMemberEmail = memberRepository.readByEmail(member.getMemberEmail());
-        if (findMemberByMemberId.isPresent()) {
+        Optional<Member> readMemberByMemberId = memberRepository.readByMemberId(member.getMemberId());
+        Optional<Member> readMemberByMemberEmail = memberRepository.readByEmail(member.getMemberEmail());
+        if (readMemberByMemberId.isPresent()) {
             throw new IllegalStateException("이미 존재하는 ID의 회원입니다");
         }
 
-        if(findMemberByMemberEmail.isPresent()) {
+        if(readMemberByMemberEmail.isPresent()) {
             throw new IllegalStateException("이미 존재하는 Email의 회원입니다.");
         }
     }
 
-    private void validateFindMember(Member findMember) {
-        if(findMember == null) {
+    private void validateReadMember(Member readMember) {
+        if(readMember == null) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
     }
 
-    private void validateFindMember(List<Member> findMemberList) {
-        if(findMemberList.isEmpty()) {
+    private void validateReadMember(List<Member> readMemberList) {
+        if(readMemberList.isEmpty()) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
     }
@@ -54,33 +54,33 @@ public class MemberService {
         return memberRepository.readAll();
     }
 
-    public Member findMemberById(Long id) {
-        Member findMember = memberRepository.readById(id);
-        validateFindMember(findMember);
-        return findMember;
+    public Member readMemberById(Long id) {
+        Member readMember = memberRepository.readById(id);
+        validateReadMember(readMember);
+        return readMember;
     }
 
     public Member readMemberByMemberId(String memberId) {
-        Optional<Member> findMember = memberRepository.readByMemberId(memberId);
-        validateFindMember(findMember.orElse(null));
-        return findMember.orElse(null);
+        Optional<Member> readMember = memberRepository.readByMemberId(memberId);
+        validateReadMember(readMember.orElse(null));
+        return readMember.orElse(null);
     }
 
     public List<Member> readMemberByName(String name) {
-        List<Member> findMemberList = memberRepository.readByMemberName(name);
-        validateFindMember(findMemberList);
-        return findMemberList;
+        List<Member> readMemberList = memberRepository.readByMemberName(name);
+        validateReadMember(readMemberList);
+        return readMemberList;
     }
 
     public Member readMemberByEmail(String email) {
-        Optional<Member> findMember = memberRepository.readByEmail(email);
-        validateFindMember(findMember.orElse(null));
-        return findMember.orElse(null);
+        Optional<Member> readMember = memberRepository.readByEmail(email);
+        validateReadMember(readMember.orElse(null));
+        return readMember.orElse(null);
     }
 
     @Transactional
     public void updateMemberById(Long id, Member member) {
-        Member updateMember = findMemberById(id);
+        Member updateMember = readMemberById(id);
         updateMember = member;
     }
 
