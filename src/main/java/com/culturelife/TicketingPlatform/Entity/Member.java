@@ -39,7 +39,11 @@ public class Member {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "member", orphanRemoval = true)
-    private List<Question> questionList = new ArrayList<>();
+    private List<Post> postList = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean universityAttendance;

@@ -1,5 +1,6 @@
 package com.culturelife.TicketingPlatform.Entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,25 +9,27 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "question")
-public class Question {
+@Table(name = "comment")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "question_id")
+    @Column(name = "comment_id")
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String questionSubject;
-
     @Column(length = 4000, nullable = false)
-    private String questionContents;
+    private String commentContents;
 
     @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    private LocalDateTime questionCreateDate;
+    @JsonBackReference
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
 
-    private LocalDateTime questionUpdateDate;
+    private LocalDateTime commentCreateDate;
+
+    private LocalDateTime commentUpdateDate;
 }
