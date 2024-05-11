@@ -2,9 +2,9 @@ package com.culturelife.TicketingPlatform.Service;
 
 
 import com.culturelife.TicketingPlatform.Entity.Member;
-import com.culturelife.TicketingPlatform.Entity.Question;
+import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
-import com.culturelife.TicketingPlatform.Repository.QuestionRepository;
+import com.culturelife.TicketingPlatform.Repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final QuestionRepository questionRepository;
+    private final PostRepository postRepository;
 
     @Transactional
     public Long createMember(Member member) {
@@ -105,11 +105,11 @@ public class MemberService {
 
     @Transactional
     public Long deleteQuestion(Long questionId) {
-        Question deleteQuestion = questionRepository.findById(questionId);
-        Member member = deleteQuestion.getMember();
-        deleteQuestion.setMember(null);
-        member.getQuestionList().remove(deleteQuestion);
+        Post deletePost = postRepository.findById(questionId);
+        Member member = deletePost.getMember();
+        deletePost.setMember(null);
+        member.getPostList().remove(deletePost);
 
-        return deleteQuestion.getId();
+        return deletePost.getId();
     }
 }
