@@ -18,7 +18,11 @@ public class PostRepository {
     }
 
     public Post findById(Long postId) {
-        return em.find(Post.class, postId);
+        Post post = em.createQuery("select distinct p from Post p left join fetch p.commentList left join fetch p.member where p.id = :id", Post.class)
+                .setParameter("id", postId)
+                .getSingleResult();
+
+        return post;
     }
 
     public List<Post> findByMemberId(String memberId) {
@@ -37,6 +41,15 @@ public class PostRepository {
                 .getSingleResult();
 
         return count;
+    }
+
+    public List<Post> readPostPage(int page, int pageCount) {
+        List<Post> postList = em.createQuery("select p from Post p", Post.class)
+                .setFirstResult(page)
+                .setMaxResults(pageCount)
+                .getResultList();
+
+        return postList;
     }
 
     public List<Post> readPostPage(int page, int pageCount, String searchText) {

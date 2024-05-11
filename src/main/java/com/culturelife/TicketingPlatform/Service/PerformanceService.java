@@ -27,7 +27,7 @@ public class PerformanceService {
         return performance.getId();
     }
 
-    public Page<Performance> searchPostPage(int page) {
+    public Page<Performance> readPostPage(int page) {
         Long total = performanceRepository.counts();
         int startPage = 0;
         int remainPageCount = 3;
@@ -47,15 +47,15 @@ public class PerformanceService {
         return performancePage;
     }
 
-    public Performance findPerformanceById(Long id) {
+    public Performance readPerformanceById(Long id) {
         return performanceRepository.findById(id);
     }
 
-    public List<Performance> findAllPerformance() {
+    public List<Performance> readAllPerformance() {
         return performanceRepository.findAll();
     }
 
-    public List<Performance> findQuestionByPerformanceName(String performanceName) {
+    public List<Performance> readQuestionByPerformanceName(String performanceName) {
         return performanceRepository.findByPerformanceName(performanceName);
     }
 
