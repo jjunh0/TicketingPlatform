@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,122 +23,126 @@
 </head>
 
 <body>
-  <!-- [S]basic-N2 -->
-  <div class="basic-N2" data-bid="hiluqyNI85" id="">
-    <div class="header-inner">
-      <div class="header-container container-lg">
-        <h1 class="header-title">
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="hiluqyNI85" id="">
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+            <img src="../resources/static/images/img_logo_black.png" alt="로고">
           </a>
-        </h1>
-        <div class="header-right">
-          <div class="header-title header-mobile-top">
-            <a href="javascript:void(0)">
-              <img src="../resources/static/images/img_logo_black.png" alt="로고">
-            </a>
-          </div>
-          <ul class="header-gnblist">
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>홈</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>공연</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span contenteditable="true">게시판</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>로그인</span>
-              </a>
-            </li>
-          </ul>
         </div>
-      </div>
-    </div>
-    <div class="header-dim"></div>
-  </div>
-  <!-- [E]basic-N2 -->
-  <main class="th-layout-main ">
-    <!-- [S]basic-N37 -->
-    <div class="basic-N37" data-bid="FRLuQynxaj">
-      <div class="container">
-        <!-- Heading -->
-        <!-- Links -->
-        <ul class="links">
-          <li>
-            <a href="#" id="signin">로그인</a>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="home.html">
+              <span>홈</span>
+            </a>
           </li>
-          <li>
-            <a href="#" id="signup" contenteditable="true">회원가입</a>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="contestlist.html">
+              <span>공연</span>
+            </a>
           </li>
-          <li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="community.html">
+              <span contenteditable="true">게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="signinup.html">
+              <span>로그인</span>
+            </a>
           </li>
         </ul>
-        <!-- Form -->
-        <form action="" method="post">
-          <!-- email input -->
-          <div class="first-input input__block first-input__block">
-            <input type="email" placeholder="Email" class="input" id="email">
-          </div>
-          <!-- password input -->
-          <div class="input__block">
-            <input type="password" placeholder="Password" class="input" id="password">
-          </div>
-          <!-- repeat password input -->
-          <div class="input__block">
-            <input type="password" placeholder="Repeat password" class="input repeat__password" id="repeat__password">
-          </div>
-          <!-- id input-->
-          <div class="input__block">
-            <input type="id" placeholder="id" class="input id" id="id">
-          </div>
-          <!-- sign in button -->
-          <button class="signin__btn"> Sign in </button>
-        </form>
-        <!-- separator -->
-        <div class="separator">
-          <p>OR</p>
-        </div>
-        <!-- google button -->
-        <button class="google__btn">
-          <i class="fa fa-google"></i> Sign in with Google </button>
-        <!-- google button -->
-        <button class="kakao__btn">
-          <i class="fa fa-kakao"></i> Sign in with kakao</button>
-      </div>
-      <footer>
-      </footer>
-    </div>
-    <!-- [E]basic-N37 -->
-  </main>
-  <!-- [S]basic-N4 -->
-  <div class="basic-N4" data-bid="yKLuqZbgI4" id="">
-    <div class="footer-container container-lg">
-      <div class="footer-bottom">
-        <div class="footer-txt">
-          <p><span>강원도 춘천시 강원대학길 1</span></p>
-          <p>
-            <span>T. 033-250-6114</span>
-          </p>
-        </div>
-        <div class="footer-txt">
-          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
-        </div>
       </div>
     </div>
   </div>
-  <!-- [E]basic-N4 -->
-  <script src="../resources/static/js/setting.js"></script>
-  <script src="../resources/static/js/plugin.js"></script>
-  <script src="../resources/static/js/template.js"></script>
-  <script src="../resources/static/js/common.js"></script>
-  <script src="../resources/static/js/script.js"></script>
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N37 -->
+  <div class="basic-N37" data-bid="FRLuQynxaj">
+    <div class="container">
+      <!-- Heading -->
+      <!-- Links -->
+      <ul class="links">
+        <li>
+          <a href="#" id="signin">로그인</a>
+        </li>
+        <li>
+          <a href="#" id="signup" contenteditable="true">회원가입</a>
+        </li>
+        <li>
+        </li>
+      </ul>
+      <!-- Form -->
+      <form th:action="@{/registerMember}" th:object="${member}" method="post">
+        <!-- email input -->
+        <div class="input__block">
+          <input type="email" placeholder="Member Email" th:field="*{memberEmail}" class="input memberemail" id="memberemail">
+        </div>
+        <!-- name input-->
+        <div class="input__block">
+          <input type="text" placeholder="Member Name" th:field="*{memberName}" class="input membername" id="membername">
+        </div>
+        <!-- id input-->
+        <div class="input__block">
+          <input type="text" placeholder="ID" th:field="*{memberId}" class="input id" id="id">
+        </div>
+        <!-- password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Password" th:field="*{password}" class="input password" id="password">
+        </div>
+        <!-- repeat password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Repeat password" class="input repeat__password" id="repeat__password">
+        </div>
+        <!-- sign in button -->
+        <button type="submit" class="signin__btn">Sign up</button>
+      </form>
+      <!-- separator -->
+      <div class="separator">
+        <p>OR</p>
+      </div>
+      <!-- google button -->
+      <button class="google__btn">
+        <i class="fa fa-google"></i> Sign in with Google </button>
+      <!-- google button -->
+      <button class="kakao__btn">
+        <i class="fa fa-kakao"></i> Sign in with kakao</button>
+    </div>
+    <footer>
+    </footer>
+  </div>
+  <!-- [E]basic-N37 -->
+</main>
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="yKLuqZbgI4" id="">
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
+      <div class="footer-txt">
+        <p><span>강원도 춘천시 강원대학길 1</span></p>
+        <p>
+          <span>T. 033-250-6114</span>
+        </p>
+      </div>
+      <div class="footer-txt">
+        <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- [E]basic-N4 -->
+<script src="../resources/static/js/setting.js"></script>
+<script src="../resources/static/js/plugin.js"></script>
+<script src="../resources/static/js/template.js"></script>
+<script src="../resources/static/js/common.js"></script>
+<script src="../resources/static/js/script.js"></script>
 </body>
