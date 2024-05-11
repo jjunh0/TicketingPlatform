@@ -16,17 +16,17 @@ public class SeatRepository {
         em.persist(seat);
     }
 
-    public Seat findById(Long seatId) {
+    public Seat readById(Long seatId) {
         return em.find(Seat.class, seatId);
     }
 
-    public List<Seat> findByPerformanceId(Long performanceId) {
+    public List<Seat> readByPerformanceId(Long performanceId) {
         return em.createQuery("select s from Seat s where s.performance.id = :performanceId", Seat.class)
                 .setParameter("performanceId", performanceId)
                 .getResultList();
     }
 
-    public List<Seat> findAll() {
+    public List<Seat> readAll() {
         return em.createQuery("select s from Seat s", Seat.class)
                 .getResultList();
     }
@@ -38,7 +38,7 @@ public class SeatRepository {
         em.clear();
         return id;
     }
-    public Seat findByIdAndName(Long performanceId, String seatName) {
+    public Seat readByIdAndName(Long performanceId, String seatName) {
         return em.createQuery("select s from Seat s where s.performance.id = :id and s.seatName = :name", Seat.class)
                 .setParameter("id", performanceId)
                 .setParameter("name", seatName)
