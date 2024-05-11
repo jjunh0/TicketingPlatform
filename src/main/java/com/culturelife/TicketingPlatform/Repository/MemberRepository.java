@@ -18,11 +18,11 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public Member findById(Long memberId) {
+    public Member readById(Long memberId) {
         return em.find(Member.class, memberId);
     }
 
-    public Optional<Member> findByMemberId(String memberId) {
+    public Optional<Member> readByMemberId(String memberId) {
         List<Member> resultList = em.createQuery("select m from Member m where m.memberId like :memberId", Member.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
@@ -34,18 +34,18 @@ public class MemberRepository {
         }
     }
 
-    public List<Member> findByMemberName(String memberName) {
+    public List<Member> readByMemberName(String memberName) {
         return em.createQuery("select m from Member m where m.memberName like :memberName", Member.class)
                 .setParameter("memberName", memberName)
                 .getResultList();
     }
 
-    public List<Member> findAll() {
+    public List<Member> readAll() {
         return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
-    public Optional<Member> findByEmail(String memberEmail) {
+    public Optional<Member> readByEmail(String memberEmail) {
         List<Member> resultList = em.createQuery("select m from Member m where m.memberEmail like :memberEmail", Member.class)
                 .setParameter("memberEmail", memberEmail)
                 .getResultList();
