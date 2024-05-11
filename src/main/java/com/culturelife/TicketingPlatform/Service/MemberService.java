@@ -1,6 +1,5 @@
 package com.culturelife.TicketingPlatform.Service;
 
-
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
@@ -51,7 +50,7 @@ public class MemberService {
         }
     }
 
-    public List<Member> findAllMembers() {
+    public List<Member> readAllMembers() {
         return memberRepository.findAll();
     }
 
@@ -61,19 +60,19 @@ public class MemberService {
         return findMember;
     }
 
-    public Member findMemberByMemberId(String memberId) {
+    public Member readMemberByMemberId(String memberId) {
         Optional<Member> findMember = memberRepository.findByMemberId(memberId);
         validateFindMember(findMember.orElse(null));
         return findMember.orElse(null);
     }
 
-    public List<Member> findMemberByName(String name) {
+    public List<Member> readMemberByName(String name) {
         List<Member> findMemberList = memberRepository.findByMemberName(name);
         validateFindMember(findMemberList);
         return findMemberList;
     }
 
-    public Member findMemberByEmail(String email) {
+    public Member readMemberByEmail(String email) {
         Optional<Member> findMember = memberRepository.findByEmail(email);
         validateFindMember(findMember.orElse(null));
         return findMember.orElse(null);
@@ -87,13 +86,13 @@ public class MemberService {
 
     @Transactional
     public void updateMemberByMemberId(String memberId, Member member) {
-        Member updateMember = findMemberByMemberId(memberId);
+        Member updateMember = readMemberByMemberId(memberId);
         updateMember = member;
     }
 
     @Transactional
     public void updateMemberByMemberName(String memberName, Member member) {
-        Member updateMember = findMemberByName(memberName).get(0);
+        Member updateMember = readMemberByName(memberName).get(0);
 
         if(updateMember == null) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");

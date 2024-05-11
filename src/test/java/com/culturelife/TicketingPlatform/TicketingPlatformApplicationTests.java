@@ -101,9 +101,9 @@ class TicketingPlatformApplicationTests {
 		}
 
 		System.out.println("Performance 페이지 테스트");
-		Page<Performance> performances_0 = performanceService.searchPostPage(1);
-		Page<Performance> performances_1 = performanceService.searchPostPage(2);
-		Page<Performance> performances_2 = performanceService.searchPostPage(3);
+		Page<Performance> performances_0 = performanceService.readPostPage(1);
+		Page<Performance> performances_1 = performanceService.readPostPage(2);
+		Page<Performance> performances_2 = performanceService.readPostPage(3);
 
 		System.out.println("페이지 테스트 끝.");
 	}

@@ -19,7 +19,7 @@ public class ConcertSeatService {
     private final SeatRepository seatRepository;
     private final PerformanceRepository performanceRepository;
 
-    public PerformanceDTO getPerformanceById(Long performanceId) {
+    public PerformanceDTO readPerformanceById(Long performanceId) {
         Performance performance = performanceRepository.findById(performanceId);
         return PerformanceDTO.builder()
                 .performanceId(performanceId)
@@ -30,7 +30,8 @@ public class ConcertSeatService {
                 .performanceDate(performance.getPerformanceDate())
                 .build();
     }
-    public List<SeatInfoDTO> getSeatById(Long id) {
+
+    public List<SeatInfoDTO> readSeatById(Long id) {
         List<Seat> seatList =  performanceRepository.findById(id).getPerformanceSeats();
         List<SeatInfoDTO> seatInfoDTO = new ArrayList<>();
 

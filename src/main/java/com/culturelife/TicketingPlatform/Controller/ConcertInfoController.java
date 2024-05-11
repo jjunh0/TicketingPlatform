@@ -19,13 +19,13 @@ public class ConcertInfoController {
     private final ConcertSeatService concertSeatService;
     @GetMapping("/performances/{performanceId}")
     public String concertInfo(@PathVariable("performanceId") Long performanceId, Model model) {
-        PerformanceDTO performanceDTO = concertSeatService.getPerformanceById(performanceId);
+        PerformanceDTO performanceDTO = concertSeatService.readPerformanceById(performanceId);
         model.addAttribute("performance", performanceDTO);
         return "concertInfo";
     }
     @GetMapping("/performances/{performanceId}/seats")
     public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
-        List<SeatInfoDTO> seat = concertSeatService.getSeatById(performanceId);
+        List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
         model.addAttribute("seat", seat.stream().sorted(Comparator.comparing(SeatInfoDTO::getSeatName)));
         return "seatSelect";
     }

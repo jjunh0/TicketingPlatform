@@ -1,6 +1,5 @@
 package com.culturelife.TicketingPlatform.Service;
 
-
 import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Entity.Seat;
 import com.culturelife.TicketingPlatform.Repository.PerformanceRepository;
@@ -28,7 +27,7 @@ public class SeatService {
         seatRepository.save(seat);
     }
 
-    public List<Seat> findByPerformanceId(Long performanceId) {
+    public List<Seat> readByPerformanceId(Long performanceId) {
         List<Seat> seatList = seatRepository.findByPerformanceId(performanceId);
 
         return seatList;
