@@ -20,7 +20,7 @@ public class PerformanceController {
     @GetMapping("/list")
     public String list(Model model) {
 
-        List<Performance> allPerformanceList = performanceService.findAllPerformance();
+        List<Performance> allPerformanceList = performanceService.readAllPerformance();
         model.addAttribute("performanceList", allPerformanceList);
 
         return "home"; // 임시(수정필요)
