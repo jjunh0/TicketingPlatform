@@ -1,21 +1,14 @@
 package com.culturelife.TicketingPlatform.Controller;
 
-import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Performance;
-import com.culturelife.TicketingPlatform.Entity.Seat;
-import com.culturelife.TicketingPlatform.Repository.PerformanceRepository;
 import com.culturelife.TicketingPlatform.Service.PerformanceService;
-import com.culturelife.TicketingPlatform.Service.SeatService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -27,10 +20,21 @@ public class PerformanceController {
     @GetMapping("/list")
     public String list(Model model) {
 
-        List<Performance> allPerformanceList = performanceService.findAllPerformance();
+        List<Performance> allPerformanceList = performanceService.readAllPerformance();
         model.addAttribute("performanceList", allPerformanceList);
 
-        return "PerformanceList";
+        return "home"; // 임시(수정필요)
     }
 
+
+    @GetMapping({"/list/{id}"})
+    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page) {
+
+        Page<Performance> performancePage = null;
+        performancePage = performanceService.readPostPage(page);
+
+        model.addAttribute("performancePage", performancePage);
+
+        return "home"; // 임시(수정필요)
+    }
 }
