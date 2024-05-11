@@ -31,11 +31,11 @@ public class Ticket {
 
     @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "performance_id")
+    @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
     @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 }
