@@ -20,7 +20,7 @@ public class SeatService {
 
     @Transactional
     public void createSeat(Long performanceId, Seat seat) {
-        Performance performance = performanceRepository.findById(performanceId);
+        Performance performance = performanceRepository.readById(performanceId);
         seat.setPerformance(performance);
 
         performance.getPerformanceSeats().add(seat);
@@ -28,7 +28,7 @@ public class SeatService {
     }
 
     public List<Seat> readByPerformanceId(Long performanceId) {
-        List<Seat> seatList = seatRepository.findByPerformanceId(performanceId);
+        List<Seat> seatList = seatRepository.readByPerformanceId(performanceId);
 
         return seatList;
     }

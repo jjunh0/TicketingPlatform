@@ -27,8 +27,8 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Optional<Member> findMemberByMemberId = memberRepository.findByMemberId(member.getMemberId());
-        Optional<Member> findMemberByMemberEmail = memberRepository.findByEmail(member.getMemberEmail());
+        Optional<Member> findMemberByMemberId = memberRepository.readByMemberId(member.getMemberId());
+        Optional<Member> findMemberByMemberEmail = memberRepository.readByEmail(member.getMemberEmail());
         if (findMemberByMemberId.isPresent()) {
             throw new IllegalStateException("이미 존재하는 ID의 회원입니다");
         }
@@ -51,29 +51,29 @@ public class MemberService {
     }
 
     public List<Member> readAllMembers() {
-        return memberRepository.findAll();
+        return memberRepository.readAll();
     }
 
     public Member findMemberById(Long id) {
-        Member findMember = memberRepository.findById(id);
+        Member findMember = memberRepository.readById(id);
         validateFindMember(findMember);
         return findMember;
     }
 
     public Member readMemberByMemberId(String memberId) {
-        Optional<Member> findMember = memberRepository.findByMemberId(memberId);
+        Optional<Member> findMember = memberRepository.readByMemberId(memberId);
         validateFindMember(findMember.orElse(null));
         return findMember.orElse(null);
     }
 
     public List<Member> readMemberByName(String name) {
-        List<Member> findMemberList = memberRepository.findByMemberName(name);
+        List<Member> findMemberList = memberRepository.readByMemberName(name);
         validateFindMember(findMemberList);
         return findMemberList;
     }
 
     public Member readMemberByEmail(String email) {
-        Optional<Member> findMember = memberRepository.findByEmail(email);
+        Optional<Member> findMember = memberRepository.readByEmail(email);
         validateFindMember(findMember.orElse(null));
         return findMember.orElse(null);
     }
@@ -104,7 +104,7 @@ public class MemberService {
 
     @Transactional
     public Long deleteQuestion(Long questionId) {
-        Post deletePost = postRepository.findById(questionId);
+        Post deletePost = postRepository.readById(questionId);
         Member member = deletePost.getMember();
         deletePost.setMember(null);
         member.getPostList().remove(deletePost);

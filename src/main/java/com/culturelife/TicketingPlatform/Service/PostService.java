@@ -72,15 +72,15 @@ public class PostService {
 
 
     public List<Post> readAllPosts() {
-        return postRepository.findAll();
+        return postRepository.readAll();
     }
 
     public Post readPostById(Long id) {
-        return postRepository.findById(id);
+        return postRepository.readById(id);
     }
 
     public List<Post> readPostByMemberId(String memberId) {
-        return postRepository.findByMemberId(memberId);
+        return postRepository.readByMemberId(memberId);
     }
 
 }

@@ -38,7 +38,7 @@ public class PerformanceService {
             startPage = 0;
         }
 
-        List<Performance> performanceList = performanceRepository.findPerformancePage(startPage, remainPageCount);
+        List<Performance> performanceList = performanceRepository.readPerformancePage(startPage, remainPageCount);
         Collections.reverse(performanceList);
 
 
@@ -48,20 +48,20 @@ public class PerformanceService {
     }
 
     public Performance readPerformanceById(Long id) {
-        return performanceRepository.findById(id);
+        return performanceRepository.readById(id);
     }
 
     public List<Performance> readAllPerformance() {
-        return performanceRepository.findAll();
+        return performanceRepository.readAll();
     }
 
     public List<Performance> readQuestionByPerformanceName(String performanceName) {
-        return performanceRepository.findByPerformanceName(performanceName);
+        return performanceRepository.readByPerformanceName(performanceName);
     }
 
     @Transactional
     public void updatePerformance(Long performanceId, Performance newPerformance) {
-        Performance performance = performanceRepository.findById(performanceId);
+        Performance performance = performanceRepository.readById(performanceId);
         performance.setPerformanceName(newPerformance.getPerformanceName());
         performance.setPerformanceSeats(newPerformance.getPerformanceSeats());
         performance.setPerformanceContents(newPerformance.getPerformanceContents());
