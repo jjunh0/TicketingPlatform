@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -88,16 +89,6 @@
             <div class="contents-thumbnail">
               <img class="contents-thumbimg" src="../resources/static/images/img_basic_N51_1.png" alt="썸네일이미지">
             </div>
-            <ul class="contents-thumblist">
-              <li class="contents-thumbitem">
-              </li>
-              <li class="contents-thumbitem">
-              </li>
-              <li class="contents-thumbitem">
-              </li>
-              <li class="contents-thumbitem">
-              </li>
-            </ul>
           </div>
           <div class="contents-right">
             <div class="contents-right-group">
@@ -112,59 +103,32 @@
                   </button>
                 </div>
               </div>
-              <div class="textset">
-                <h2 class="textset-tit">공연1</h2>
-                <p class="textset-desc"></p>
+              <div th:each="performance : ${performances}">
+                <div>
+                  <h2 th:text="${performance.performanceName}">Performance Name</h2>
+                  <p th:text="${performance.performanceContents}">Contents</p>
+                  <p th:text="'Date: ' + ${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">Date</p>
+                  <p th:text="'Price: ' + ${performance.performancePrice} + '원'">Price</p>
               </div>
-              <div class="textset">
-                <h2 class="textset-tit">공연 기간 00-00() ~ 00-00()</h2>
-                <p class="textset-desc"></p>
-              </div>
-              <div class="textset">
-                <h2 class="textset-tit">관람 시간 : 00:00 ~ 00:00</h2>
-                <p class="textset-desc"></p>
-              </div>
-              <div class="textset">
-                <h2 class="textset-tit">강원대학교 아트홀</h2>
-                <p class="textset-desc"></p>
-              </div>
-              <p class="contents-price">32,000 <span>원</span>
-              </p>
             </div>
             <div class="contents-right-group">
-              <ul class="contents-right-list">
-              </ul>
-              <div class="contents-total">
-                <strong>총 결제금액</strong>
-                <p class="contents-price">32,000 <span>원</span>
-                </p>
-              </div>
               <div class="selectset selectset-round selectset-lg">
-                <button class="selectset-toggle btn" type="button">
+              <button class="selectset-toggle btn" type="button">
                   <span>날짜를 고르시오</span>
-                </button>
-                <ul class="selectset-list">
-                  <li class="selectset-item">
-                    <button class="selectset-link btn" type="button" data-value="선택1">
-                      <span>선택1</span>
-                    </button>
+              </button>
+              <ul class="selectset-list">
+                  <li th:each="performance : ${performances}" class="selectset-item">
+                      <button class="selectset-link btn" type="button" th:data-value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
                   </li>
-                  <li class="selectset-item">
-                    <button class="selectset-link btn" type="button" data-value="선택2">
-                      <span>선택2</span>
-                    </button>
-                  </li>
-                  <li class="selectset-item">
-                    <button class="selectset-link btn" type="button" data-value="선택3">
-                      <span>선택3</span>
-                    </button>
-                  </li>
-                </ul>
+              </ul>
+              <div class="contents-btn-group">
+                  <button class="btnset btnset-line" type="button">좌석선택</button>
               </div>
-            </div>
-            <div class="contents-btn-group">
-              <button class="btnset btnset-line" type="button">좌석선택</button>
-            </div>
+              </div>
+          
+              
+          </div>
+            
           </div>
         </div>
       </div>
