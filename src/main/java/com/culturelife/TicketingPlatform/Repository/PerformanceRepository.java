@@ -24,6 +24,15 @@ public class PerformanceRepository {
         return performance;
     }
 
+    public List<Performance> findPerformancePage(int page, int pageCount) {
+        List<Performance> postList = em.createQuery("select p from Performance p", Performance.class)
+                .setFirstResult(page)
+                .setMaxResults(pageCount)
+                .getResultList();
+
+        return postList;
+    }
+
     public List<Performance> findByPerformanceName(String performanceName) {
         List<Performance> searchPerformanceList = null;
 
@@ -38,6 +47,13 @@ public class PerformanceRepository {
                 .getResultList();
 
         return performanceList;
+    }
+
+    public Long counts() {
+        Long count = em.createQuery("select COUNT(p) from Performance p", Long.class)
+                .getSingleResult();
+
+        return count;
     }
 
     public Long deletePerformance(Performance performance) {
