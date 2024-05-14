@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -60,7 +61,7 @@
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="signup.html">
+              <a class="header-gnblink" href="signinup.html">
                 <span>로그인</span>
               </a>
             </li>
@@ -91,67 +92,12 @@
         </ul>
         <div class="container">
           <div class="screen"></div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat "></div>
-            <div class="seat "></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat "></div>
-            <div class="seat "></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat "></div>
-            <div class="seat "></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-          </div>
-          <div class="row">
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat"></div>
-            <div class="seat "></div>
-            <div class="seat "></div>
-            <div class="seat "></div>
-            <div class="seat"></div>
+          <div th:each="seat : ${seats}">
+            <div th:class="${seat.isBooked} ? 'seat occupied' : 'seat'" th:id="${'seat-' + seat.id}" th:onclick="${seat.isBooked} ? '' : 'selectSeat(this, ' + ${seat.id} + ');'">
+            </div>
           </div>
         </div>
+        <button class="btn-pay" onclick="submitSeats();">결제하기</button>
       </div>
     </div>
     <!-- [E]basic-N11 -->

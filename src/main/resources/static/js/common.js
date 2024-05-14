@@ -58,86 +58,97 @@ $(document).ready(function() {
   let hidden_input = $("form").find(".input__block").find("#repeat__password");
   let signin_btn = $("form").find(".signin__btn");
   let id_input = $("form").find(".input__block").find("#id");
+  let email_input = $("form").find(".input__block").find("#memberemail");
+  let name_input = $("form").find(".input__block").find("#membername");
   //----------- sign up ---------------------
   signup.on("click", function(e) {
     e.preventDefault();
     $(this).parent().parent().siblings("h1").text("SIGN UP");
     $(this).parent().css("opacity", "1");
     $(this).parent().siblings().css("opacity", ".6");
-    first_input.removeClass("first-input__block").addClass("signup-input__block");
-    hidden_input.css({
+
+    // Display all fields for signup
+    id_input.css({
       "opacity": "1",
       "display": "block"
     });
-    id_input.css({ // 추가
+    email_input.css({
+      "opacity": "1",
+      "display": "block"
+    });
+    name_input.css({
+      "opacity": "1",
+      "display": "block"
+    });
+    hidden_input.css({
       "opacity": "1",
       "display": "block"
     });
     signin_btn.text("Sign up");
   });
+
   //----------- sign in ---------------------
   signin.on("click", function(e) {
     e.preventDefault();
     $(this).parent().parent().siblings("h1").text("SIGN IN");
     $(this).parent().css("opacity", "1");
     $(this).parent().siblings().css("opacity", ".6");
-    first_input.addClass("first-input__block").removeClass("signup-input__block");
-    hidden_input.css({
+
+    // Display only ID and password for signin
+    id_input.css({
+      "opacity": "1",
+      "display": "block"
+    });
+    email_input.css({
       "opacity": "0",
       "display": "none"
     });
-    id_input.css({ // 추가
+    name_input.css({
+      "opacity": "0",
+      "display": "none"
+    });
+    hidden_input.css({
       "opacity": "0",
       "display": "none"
     });
     signin_btn.text("Sign in");
   });
+
+
+
+
 });
 
 // basic-N11 [SHlvv7XJ9G]
-const movieSelect = document.getElementById('movie');
-const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
-let ticketPrice = +movieSelect.value;
-populateUI();
+let selectedSeats = [];
 
-function populateUI() {
-  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
-  if (selectedSeats !== null && selectedSeats.length > 0) {
-    selectedSeats.forEach((seatIndex) => {
-      seats[seatIndex].classList.add('selected');
-    });
-  }
-  const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-  if (selectedMovieIndex !== null) {
-    movieSelect.selectedIndex = selectedMovieIndex;
+function selectSeat(seat, seatId) {
+  if (!seat.classList.contains('occupied')) {
+    seat.classList.toggle('selected');
+    if (seat.classList.contains('selected')) {
+      selectedSeats.push(seatId);
+    } else {
+      selectedSeats = selectedSeats.filter(id => id !== seatId);
+    }
   }
 }
 
-function setMovieData(movieIndex, moviePrice) {
-  localStorage.setItem('selectedMovieIndex', movieIndex);
-  localStorage.setItem('selectedMoviePrice', moviePrice);
-}
-
-function updateSelectedCount() {
-  const selectedSeats = document.querySelectorAll('.row .selected');
-  const selectedSeatCount = +selectedSeats.length;
-  const selectedSeatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
-  localStorage.setItem('selectedSeats', JSON.stringify(selectedSeatsIndex));
-  count.textContent = selectedSeatCount;
-  total.textContent = selectedSeatCount * ticketPrice;
-}
-movieSelect.addEventListener('change', (event) => {
-  ticketPrice = +event.target.value;
-  setMovieData(event.target.selectedIndex, event.target.value);
-  updateSelectedCount();
-});
-container.addEventListener('click', (event) => {
-  if (event.target.classList.contains('seat') && !event.target.classList.contains('occupied')) {
-    event.target.classList.toggle('selected');
-    updateSelectedCount();
+function submitSeats() {
+  if (selectedSeats.length > 0) {
+    const url = '/reserveSeats';
+    fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          seats: selectedSeats
+        })
+      })
+      .then(response => response.json())
+      .then(data => alert('Booking successful: ' + data.message))
+      .catch(error => console.error('Error:', error));
+  } else {
+    alert('No seats selected.');
   }
-});
-updateSelectedCount();
+}

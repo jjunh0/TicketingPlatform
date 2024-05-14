@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -23,103 +24,98 @@
 </head>
 
 <body>
-  <!-- [S]basic-N2 -->
-  <div class="basic-N2" data-bid="iHLvqqyNrR" id="">
-    <div class="header-inner">
-      <div class="header-container container-lg">
-        <h1 class="header-title">
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="iHLvqqyNrR" id="">
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+            <img src="../resources/static/images/img_logo_black.png" alt="로고">
           </a>
-        </h1>
-        <div class="header-right">
-          <div class="header-title header-mobile-top">
-            <a href="javascript:void(0)">
-              <img src="../resources/static/images/img_logo_black.png" alt="로고">
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="home.html">
+              <span>홈</span>
             </a>
-          </div>
-          <ul class="header-gnblist">
-            <li class="header-gnbitem item-active">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span contenteditable="true">홈</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>공연</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>게시판</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>로그인</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="header-utils">
-          <button class="btn-momenu">
-            <img src="../resources/static/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
-          </button>
-          <button class="btn-close">
-            <img src="../resources/static/icons/ico_close_black.svg" alt="닫기 아이콘">
-          </button>
-        </div>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="contestlist.html">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="community.html">
+              <span contenteditable="true">게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="signinup.html">
+              <span>로그인</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="header-dim"></div>
   </div>
-  <!-- [E]basic-N2 -->
-  <main class="th-layout-main ">
-    <!-- [S]basic-N11 -->
-    <div class="basic-N11" data-bid="FtlvTT1I63" id="">
-      <div class="contents-container container-md">
-        <form action="board.html" method="post">
-          <h2>문의사항 게시 글 작성</h2>
-          <table>
-            <tbody>
-              <tr>
-                <td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
-              </tr>
-              <tr>
-                <td><textarea placeholder="내용을 입력하세요" name="detail"></textarea></td>
-              </tr>
-              <tr>
-                <td><input type="submit" value="게시" onclick="alert('게시되었습니다')"><button id="cancel">취소</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N11 -->
+  <div class="basic-N11" data-bid="FtlvTT1I63" id="">
+    <div class="contents-container container-md">
+      <form th:action="@{/board}" th:object="${question}" method="post">
+        <h2>문의사항 게시 글 작성</h2>
+        <table>
+          <tbody>
+          <tr>
+            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{questionSubject}" name="questionSubject"></td>
+          </tr>
+          <tr>
+            <td><textarea placeholder="내용을 입력하세요" th:field="*{questionContents}" name="questionContents"></textarea></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" value="게시" onclick="alert('게시되었습니다')">
+              <button type="button" id="cancel" th:onclick="'window.location.href=\'' + @{/cancel} + '\''">취소</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
-    <!-- [E]basic-N11 -->
-  </main>
-  <!-- [S]basic-N4 -->
-  <div class="basic-N4" data-bid="hPLvqQYq31">
-    <div class="footer-container container-lg">
+  </div>
+  <!-- [E]basic-N11 -->
+</main>
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="hPLvqQYq31">
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
       <div class="footer-bottom">
-        <div class="footer-bottom">
-          <div class="footer-txt">
-            <p><span>강원도 춘천시 강원대학길 1</span></p>
-            <p>
-              <span>T. 033-250-6114</span>
-            </p>
-          </div>
-          <div class="footer-txt">
-            <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
-          </div>
+        <div class="footer-txt">
+          <p><span>강원도 춘천시 강원대학길 1</span></p>
+          <p>
+            <span>T. 033-250-6114</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
         </div>
       </div>
     </div>
   </div>
-  <!-- [E]basic-N4 -->
-  <script src="../resources/static/js/setting.js"></script>
-  <script src="../resources/static/js/plugin.js"></script>
-  <script src="../resources/static/js/template.js"></script>
-  <script src="../resources/static/js/common.js"></script>
-  <script src="../resources/static/js/script.js"></script>
+</div>
+<!-- [E]basic-N4 -->
+<script src="../resources/static/js/setting.js"></script>
+<script src="../resources/static/js/plugin.js"></script>
+<script src="../resources/static/js/template.js"></script>
+<script src="../resources/static/js/common.js"></script>
+<script src="../resources/static/js/script.js"></script>
 </body>

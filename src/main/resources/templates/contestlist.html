@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -23,149 +24,130 @@
 </head>
 
 <body>
-  <!-- [S]basic-N2 -->
-  <div class="basic-N2" data-bid="ZxLVQQWYX6" id="">
-    <div class="header-inner">
-      <div class="header-container container-lg">
-        <h1 class="header-title">
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="ZxLVQQWYX6" id="">
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+            <img src="../resources/static/images/img_logo_black.png" alt="로고">
           </a>
-        </h1>
-        <div class="header-right">
-          <div class="header-title header-mobile-top">
-            <a href="javascript:void(0)">
-              <img src="../resources/static/images/img_logo_black.png" alt="로고">
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="home.html">
+              <span>홈</span>
             </a>
-          </div>
-          <ul class="header-gnblist">
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>홈</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>공연</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>게시판</span>
-              </a>
-            </li>
-            <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span>로그인</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="header-utils">
-          <button class="btn-momenu">
-            <img src="../resources/static/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
-          </button>
-          <button class="btn-close">
-            <img src="../resources/static/icons/ico_close_black.svg" alt="닫기 아이콘">
-          </button>
-        </div>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="contestlist.html">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="community.html">
+              <span contenteditable="true">게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" href="signinup.html">
+              <span>로그인</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="header-dim"></div>
   </div>
-  <!-- [E]basic-N2 -->
-  <main class="th-layout-main ">
-    <!-- [S]basic-N28 -->
-    <div class="basic-N28" data-bid="TYlvQu87m0" id="">
-      <div class="contents-inner">
-        <div class="contents-container container-md">
-          <div class="textset">
-            <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
-          </div>
-          <div class="contents-group">
-            <div class="cardset cardset-hover cardset-border text-center">
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N28 -->
+  <div class="basic-N28" data-bid="TYlvQu87m0" id="">
+    <div class="contents-inner">
+      <div class="contents-container container-md">
+        <div class="textset">
+          <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
+        </div>
+        <div class="contents-group">
+          <div th:each="performance : ${performances}" class="cardset cardset-hover cardset-border text-center">
+            <a th:href="@{/book(performanceId=${performance.id})}">
               <figure class="cardset-figure">
-                <img class="cardset-img" src="../resources/static/images/img_basic_N28_1.png" alt="카드 이미지">
+                <img th:src="@{'/resources/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
               </figure>
               <div class="cardset-cont">
-                <h2 class="cardset-tit">공연1</h2>
-                <p class="cardset-desc"> 공연아티스트 <br> 공연 날짜 및 시간 <br>가격 </p>
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
+                <p class="cardset-desc">
+                  <span th:text="${performance.performanceContents}">공연 내용</span> <br>
+                  <span th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
+                  <span th:text="${performance.performancePrice + '원'}">가격</span>
+                </p>
               </div>
-            </div>
-            <div class="cardset cardset-hover cardset-border text-center">
-              <figure class="cardset-figure">
-                <img class="cardset-img" src="../resources/static/images/img_basic_N28_2.png" alt="카드 이미지">
-              </figure>
-              <div class="cardset-cont">
-                <h2 class="cardset-tit">공연2</h2>
-                <p class="cardset-desc"> 공연아티스트 <br> 공연 날짜 및 시간 <br>가격 </p>
-              </div>
-            </div>
-            <div class="cardset cardset-hover cardset-border text-center">
-              <figure class="cardset-figure">
-                <img class="cardset-img" src="../resources/static/images/img_basic_N28_3.png" alt="카드 이미지">
-              </figure>
-              <div class="cardset-cont">
-                <h2 class="cardset-tit">공연3</h2>
-                <p class="cardset-desc"> 공연아티스트 <br> 공연 날짜 및 시간 <br>가격 </p>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
-        <nav class="pagiset pagiset-line">
-          <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-first" href="javascript:void(0)">
-              <span class="visually-hidden">처음</span>
-            </a>
-          </div>
-          <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
-              <span class="visually-hidden">이전</span>
-            </a>
-          </div>
-          <div class="pagiset-list">
-            <a class="pagiset-link" href="javascript:void(0)">1</a>
-            <a class="pagiset-link" href="javascript:void(0)">2</a>
-            <a class="pagiset-link" href="javascript:void(0)">3</a>
-            <a class="pagiset-link" href="javascript:void(0)">4</a>
-          </div>
-          <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-next" href="javascript:void(0)">
-              <span class="visually-hidden">다음</span>
-            </a>
-          </div>
-          <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-last" href="javascript:void(0)">
-              <span class="visually-hidden">마지막</span>
-            </a>
-          </div>
-        </nav>
       </div>
     </div>
-    <!-- [E]basic-N28 -->
-  </main>
-  <!-- [S]basic-N4 -->
-  <div class="basic-N4" data-bid="jzlvQQX1F2" id="">
-    <div class="footer-container container-lg">
+    <nav class="pagiset pagiset-line">
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-first" href="javascript:void(0)">
+          <span class="visually-hidden">처음</span>
+        </a>
+      </div>
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
+          <span class="visually-hidden">이전</span>
+        </a>
+      </div>
+      <div class="pagiset-list">
+        <a class="pagiset-link" href="javascript:void(0)">1</a>
+        <a class="pagiset-link" href="javascript:void(0)">2</a>
+        <a class="pagiset-link" href="javascript:void(0)">3</a>
+        <a class="pagiset-link" href="javascript:void(0)">4</a>
+      </div>
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-next" href="javascript:void(0)">
+          <span class="visually-hidden">다음</span>
+        </a>
+      </div>
+      <div class="pagiset-ctrl">
+        <a class="pagiset-link pagiset-last" href="javascript:void(0)">
+          <span class="visually-hidden">마지막</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  </div>
+  <!-- [E]basic-N28 -->
+</main>
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="jzlvQQX1F2" id="">
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
       <div class="footer-bottom">
-        <div class="footer-bottom">
-          <div class="footer-txt">
-            <p><span>강원도 춘천시 강원대학길 1</span></p>
-            <p>
-              <span>T. 033-250-6114</span>
-            </p>
-          </div>
-          <div class="footer-txt">
-            <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
-          </div>
+        <div class="footer-txt">
+          <p><span>강원도 춘천시 강원대학길 1</span></p>
+          <p>
+            <span>T. 033-250-6114</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
         </div>
       </div>
     </div>
   </div>
-  <!-- [E]basic-N4 -->
-  <script src="../resources/static/js/setting.js"></script>
-  <script src="../resources/static/js/plugin.js"></script>
-  <script src="../resources/static/js/template.js"></script>
-  <script src="../resources/static/js/common.js"></script>
-  <script src="../resources/static/js/script.js"></script>
+</div>
+<!-- [E]basic-N4 -->
+<script src="../resources/static/js/setting.js"></script>
+<script src="../resources/static/js/plugin.js"></script>
+<script src="../resources/static/js/template.js"></script>
+<script src="../resources/static/js/common.js"></script>
+<script src="../resources/static/js/script.js"></script>
 </body>
