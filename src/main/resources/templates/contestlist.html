@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="imagetoolbar" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <meta name="title" content="웹사이트">
@@ -15,11 +14,11 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>공연목록 | test1</title>
-  <link rel="stylesheet" href="../resources/static/css/setting.css">
-  <link rel="stylesheet" href="../resources/static/css/plugin.css">
-  <link rel="stylesheet" href="../resources/static/css/template.css">
-  <link rel="stylesheet" href="../resources/static/css/common.css">
-  <link rel="stylesheet" href="../resources/static/css/style.css">
+  <link rel="stylesheet" href="../static/css/setting.css">
+  <link rel="stylesheet" href="../static/css/plugin.css">
+  <link rel="stylesheet" href="../static/css/template.css">
+  <link rel="stylesheet" href="../static/css/common.css">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
@@ -35,7 +34,7 @@
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../resources/static/images/img_logo_black.png" alt="로고">
+            <img src="../static/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
@@ -78,7 +77,7 @@
           <div th:each="performance : ${performances}" class="cardset cardset-hover cardset-border text-center">
             <a th:href="@{/book(performanceId=${performance.id})}">
               <figure class="cardset-figure">
-                <img th:src="@{'/resources/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
+                <img th:src="@{'/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
               </figure>
               <div class="cardset-cont">
                 <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
@@ -122,7 +121,7 @@
       </div>
     </nav>
   </div>
-  </div>
+
   <!-- [E]basic-N28 -->
 </main>
 <!-- [S]basic-N4 -->
@@ -144,9 +143,9 @@
   </div>
 </div>
 <!-- [E]basic-N4 -->
-<script src="../resources/static/js/setting.js"></script>
-<script src="../resources/static/js/plugin.js"></script>
-<script src="../resources/static/js/template.js"></script>
-<script src="../resources/static/js/common.js"></script>
-<script src="../resources/static/js/script.js"></script>
+<script src="../static/js/setting.js"></script>
+<script src="../static/js/plugin.js"></script>
+<script src="../static/js/template.js"></script>
+<script src="../static/js/common.js"></script>
+<script src="../static/js/script.js"></script>
 </body>
