@@ -19,8 +19,8 @@ public class ConcertSeatService {
     private final SeatRepository seatRepository;
     private final PerformanceRepository performanceRepository;
 
-    public PerformanceDTO getPerformanceById(Long performanceId) {
-        Performance performance = performanceRepository.findById(performanceId);
+    public PerformanceDTO readPerformanceById(Long performanceId) {
+        Performance performance = performanceRepository.readById(performanceId);
         return PerformanceDTO.builder()
                 .performanceId(performanceId)
                 .performanceName(performance.getPerformanceName())
@@ -30,8 +30,9 @@ public class ConcertSeatService {
                 .performanceDate(performance.getPerformanceDate())
                 .build();
     }
-    public List<SeatInfoDTO> getSeatById(Long id) {
-        List<Seat> seatList =  performanceRepository.findById(id).getPerformanceSeats();
+
+    public List<SeatInfoDTO> readSeatById(Long id) {
+        List<Seat> seatList =  performanceRepository.readById(id).getPerformanceSeats();
         List<SeatInfoDTO> seatInfoDTO = new ArrayList<>();
 
         for(Seat s : seatList) {
@@ -44,7 +45,7 @@ public class ConcertSeatService {
         return seatInfoDTO;
     }
     public Boolean reserve(Long performanceId, String seatName) {
-        Seat seat = seatRepository.findByIdAndName(performanceId, seatName);
+        Seat seat = seatRepository.readByIdAndName(performanceId, seatName);
         if(seat.getIsBooked()) {
             System.out.println("예약됨");
             return false;
