@@ -101,7 +101,7 @@
                   </button>
                 </div>
               </div>
-              <div th:each="performance : ${performances}">
+              <div th:each="performance : ${performanceList}">
                 <div>
                   <h2 th:text="${performance.performanceName}">Performance Name</h2>
                   <p th:text="${performance.performanceContents}">Contents</p>
@@ -115,7 +115,7 @@
                   <span>날짜를 고르시오</span>
               </button>
               <ul class="selectset-list">
-                  <li th:each="performance : ${performances}" class="selectset-item">
+                  <li th:each="performance : ${performanceList}" class="selectset-item">
                       <button class="selectset-link btn" type="button" th:data-value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
                   </li>
               </ul>
@@ -147,7 +147,7 @@
           <div class="textset">
               <h2 class="textset-tit">상세 내역&nbsp;</h2>
           </div>
-          <div class="cardset" th:each="performance : ${performances}">
+          <div class="cardset" th:each="performance : ${performanceList}">
               <figure class="cardset-figure">
                   <img class="cardset-img img-pc" th:src="@{'../static/images/' + ${performance.id} + '_1.png'}" alt="PC 이미지" th:alt="${performance.performanceName}">
                   <img class="cardset-img img-mobile" th:src="@{'../static/images/' + ${performance.id} + '_mobile_1.png'}" alt="모바일 이미지" th:alt="${performance.performanceName}">

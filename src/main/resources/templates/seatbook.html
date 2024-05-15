@@ -87,7 +87,7 @@
         </ul>
         <div class="container">
           <div class="screen"></div>
-          <div th:each="seat : ${seats}">
+          <div th:each="seat : ${seatlist}">
             <div th:class="${seat.isBooked} ? 'seat occupied' : 'seat'" th:id="${'seat-' + seat.id}" th:onclick="${seat.isBooked} ? '' : 'selectSeat(this, ' + ${seat.id} + ');'">
             </div>
           </div>
