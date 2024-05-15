@@ -2,10 +2,13 @@ package com.culturelife.TicketingPlatform;
 
 import com.culturelife.TicketingPlatform.Entity.*;
 import com.culturelife.TicketingPlatform.Service.*;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.test.annotation.Rollback;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +27,8 @@ class TicketingPlatformApplicationTests {
 	private PostService postService;
 	@Autowired
 	private CommentService commentService;
-
+	@Autowired
+	private EntityManager em;
 
 	@Test
 	void contextLoads() {
@@ -34,10 +38,10 @@ class TicketingPlatformApplicationTests {
 	void testJpa() {
 		testMember();
 		testPost();
-		testComment();
-
-		testPerformance();
-		testSeat();
+//		testComment();
+//
+//		testPerformance();
+//		testSeat();
 
 //		System.out.println("allPerformanceList 시작");
 //		List<Performance> allPerformanceList = performanceService.readAllPerformance();
@@ -68,6 +72,7 @@ class TicketingPlatformApplicationTests {
 		}
 	}
 
+
 	private void testPost() {
 
 		System.out.println("Post 테스트 시작");
@@ -78,6 +83,9 @@ class TicketingPlatformApplicationTests {
 			post.setPostContents("내용 테스트 " + i);
 			postService.createPost("knu",post);
 		}
+
+		Post post = postService.readPostById(1L);
+		System.out.println(post.getViewCount());
 	}
 
 
