@@ -24,6 +24,8 @@ public class Post {
     @Column(length = 4000, nullable = false)
     private String postContents;
 
+    private Long viewCount = 0L;
+
     @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
