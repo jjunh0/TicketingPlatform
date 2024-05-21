@@ -6,6 +6,7 @@ import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Entity.dto.postFormDTO;
 import com.culturelife.TicketingPlatform.Service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,11 @@ import java.util.List;
 public class CommunityController {
   private final PostService postService;
   // 질의 응답 게시판 글 목록으로 이동
-  @GetMapping("community")
-  public String communityListsController(){
+  @GetMapping("community/{current_page_number}")
+  public String communityListsController(@PathVariable("current_page_number") int currentPageNumber,  Model model){
+    Page<Post> postList = postService.readPostPage(currentPageNumber);
+    model.addAttribute("postList", postList.toList());
+    model.addAttribute("totalPageNumber", postList.getTotalPages());
     return "community";
   }
   // 질의 응답 글 작성 페이지로 이동
