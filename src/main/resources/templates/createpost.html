@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="imagetoolbar" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <meta name="title" content="웹사이트">
@@ -16,16 +14,16 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>게시글 작성 | test1</title>
-  <link rel="stylesheet" href="../resources/static/css/setting.css">
-  <link rel="stylesheet" href="../resources/static/css/plugin.css">
-  <link rel="stylesheet" href="../resources/static/css/template.css">
-  <link rel="stylesheet" href="../resources/static/css/common.css">
-  <link rel="stylesheet" href="../resources/static/css/style.css">
+  <link rel="stylesheet" href="../static/css/setting.css">
+  <link rel="stylesheet" href="../static/css/plugin.css">
+  <link rel="stylesheet" href="../static/css/template.css">
+  <link rel="stylesheet" href="../static/css/common.css">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
 <!-- [S]basic-N2 -->
-<div class="basic-N2" data-bid="iHLvqqyNrR" id="">
+<div class="basic-N2" data-bid="iHLvqqyNrR" >
   <div class="header-inner">
     <div class="header-container container-lg">
       <h1 class="header-title">
@@ -36,7 +34,7 @@
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../resources/static/images/img_logo_black.png" alt="로고">
+            <img src="../static/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
@@ -52,7 +50,7 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" href="community.html">
-              <span contenteditable="true">게시판</span>
+              <span >게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
@@ -69,17 +67,17 @@
 <!-- [E]basic-N2 -->
 <main class="th-layout-main ">
   <!-- [S]basic-N11 -->
-  <div class="basic-N11" data-bid="FtlvTT1I63" id="">
+  <div class="basic-N11" data-bid="FtlvTT1I63" >
     <div class="contents-container container-md">
-      <form th:action="@{/board}" th:object="${question}" method="post">
+      <form th:action="@{/board}" th:object="${Post}" method="post">
         <h2>문의사항 게시 글 작성</h2>
         <table>
           <tbody>
           <tr>
-            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{questionSubject}" name="questionSubject"></td>
+            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{postSubject}" name="postSubject"></td>
           </tr>
           <tr>
-            <td><textarea placeholder="내용을 입력하세요" th:field="*{questionContents}" name="questionContents"></textarea></td>
+            <td><textarea placeholder="내용을 입력하세요" th:field="*{postContents}" name="postContents"></textarea></td>
           </tr>
           <tr>
             <td>
@@ -97,7 +95,7 @@
 <!-- [S]basic-N4 -->
 <div class="basic-N4" data-bid="hPLvqQYq31">
   <div class="footer-container container-lg">
-    <div class="footer-bottom">
+
       <div class="footer-bottom">
         <div class="footer-txt">
           <p><span>강원도 춘천시 강원대학길 1</span></p>
@@ -109,13 +107,13 @@
           <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
         </div>
       </div>
-    </div>
+
   </div>
 </div>
 <!-- [E]basic-N4 -->
-<script src="../resources/static/js/setting.js"></script>
-<script src="../resources/static/js/plugin.js"></script>
-<script src="../resources/static/js/template.js"></script>
-<script src="../resources/static/js/common.js"></script>
-<script src="../resources/static/js/script.js"></script>
+<script src="../static/js/setting.js"></script>
+<script src="../static/js/plugin.js"></script>
+<script src="../static/js/template.js"></script>
+<script src="../static/js/common.js"></script>
+<script src="../static/js/script.js"></script>
 </body>
