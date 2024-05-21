@@ -38,7 +38,13 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
+                }))
+
+                /*
+                권한이 없는 사용자(비로그인) 접근을 허용할 페이지가 있을 경우
+                바로 아래 라인의 ignoringRequestMatchers 메소드 파라미터에 ("/", "/...") 형태로 추가해주시면 됩니다.
+                 */
+                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
