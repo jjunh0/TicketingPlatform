@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="imagetoolbar" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <meta name="title" content="웹사이트">
@@ -16,15 +14,15 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>게시글 페이지 | test1</title>
-  <link rel="stylesheet" href="../resources/static/css/setting.css">
-  <link rel="stylesheet" href="../resources/static/css/plugin.css">
-  <link rel="stylesheet" href="../resources/static/css/template.css">
-  <link rel="stylesheet" href="../resources/static/css/common.css">
-  <link rel="stylesheet" href="../resources/static/css/style.css">
+  <link rel="stylesheet" href="../static/css/setting.css">
+  <link rel="stylesheet" href="../static/css/plugin.css">
+  <link rel="stylesheet" href="../static/css/template.css">
+  <link rel="stylesheet" href="../static/css/common.css">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
-<div class="basic-N2" data-bid="csLVQQYZJB" id="">
+<div class="basic-N2" data-bid="csLVQQYZJB" >
   <div class="header-inner">
     <div class="header-container container-lg">
       <h1 class="header-title">
@@ -71,8 +69,6 @@
       </div>
     </div>
   </div>
-  <div class="header-dim"></div>
-</div>
 <!-- [E]basic-N2 -->
 <main class="th-layout-main ">
   <!-- [S]basic-N24 -->
@@ -80,18 +76,18 @@
     <div class="contents-inner">
       <div class="contents-container container-md">
         <div class="textset">
-          <h2 class="textset-tit" th:text="${question.questionSubject}"></h2>
+          <h2 class="textset-tit" th:text="${post.postSubject}"></h2>
         </div>
         <table>
           <tbody>
           <tr>
-            <th class="name" th:text="${question.member.memberName}">user1</th>
-            <th class="date" th:text="${#dates.format(question.questionCreateDate, 'yyyy-MM-dd')}">0000-00-00</th>
+            <th class="name" th:text="${post.member.memberName}">user1</th>
+            <th class="date" th:text="${#dates.format(post.postCreateDate, 'yyyy-MM-dd')}">0000-00-00</th>
           </tr>
           </tbody>
         </table>
-        <p th:text="${question.questionContents}">문의 내용</p>        <hr>        <!-- 댓글 입력 폼 -->
-        <form th:action="@{/submitComment(questionId=${question.id})}" method="post">
+        <p th:text="${post.postContents}">문의 내용</p>        <hr>        <!-- 댓글 입력 폼 -->
+        <form th:action="@{/submitComment(postId=${post.id})}" method="post">
           <textarea class="inputset-textarea form-control" placeholder="댓글을 작성하시오." required="" name="commentContent"></textarea>
           <button class="regist" type="submit">등록</button>
         </form>        <br><br><hr>        <!-- 댓글 목록 -->
@@ -115,7 +111,7 @@
   <!-- [E]basic-N24 --></main>
 <!-- [S]basic-N4 -->
 <div class="basic-N4" data-bid="yPlvQQZ1v3" id="">
-  <div class="footer-container container-lg">    <div class="footer-bottom">
+  <div class="footer-container container-lg">
     <div class="footer-bottom">
       <div class="footer-txt">
         <p><span>강원도 춘천시 강원대학길 1</span></p>
@@ -127,7 +123,14 @@
       </div>
     </div>
   </div>
-  </div>
+
+</div>
 </div>
 <!-- [E]basic-N4 -->
-<script src="../resources/js/setting.js"></script><script src="../resources/js/plugin.js"></script><script src="../resources/js/template.js"></script><script src="../resources/js/common.js"></script><script src="../resources/js/script.js"></script></body></html>
+<script src="../static/js/setting.js"></script>
+  <script src="../static/js/plugin.js"></script>
+  <script src="../static/js/template.js"></script>
+  <script src="../static/js/common.js"></script>
+  <script src="../static/js/script.js"></script>
+</body>
+</html>

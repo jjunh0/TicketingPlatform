@@ -55,7 +55,7 @@ public class PerformanceService {
         return performanceRepository.readAll();
     }
 
-    public List<Performance> readQuestionByPerformanceName(String performanceName) {
+    public List<Performance> readPerformanceByName(String performanceName) {
         return performanceRepository.readByPerformanceName(performanceName);
     }
 
