@@ -20,8 +20,11 @@ public class Member {
     @Column(nullable = false, length = 30, unique = true)
     private String memberId;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 70)
     private String password;
+
+    @Transient
+    private String repeatPassword;
 
     @Column(nullable = false, length = 10)
     private String memberName;
