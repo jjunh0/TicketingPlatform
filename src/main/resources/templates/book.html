@@ -101,28 +101,28 @@
                   </button>
                 </div>
               </div>
-              <div th:each="performance : ${performanceList}">
-                <div>
-                  <h2 th:text="${performance.performanceName}">Performance Name</h2>
-                  <p th:text="${performance.performanceContents}">Contents</p>
-                  <p th:text="'Date: ' + ${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">Date</p>
-                  <p th:text="'Price: ' + ${performance.performancePrice} + '원'">Price</p>
+              <div>
+                <h2 th:text="${performance.performanceName}">Performance Name</h2>
+                <p th:text="${performance.performanceContents}">Contents</p>
+                <p th:text="'Date: ' + ${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">Date</p>
+                <p th:text="'Price: ' + ${performance.performancePrice} + '원'">Price</p>
               </div>
-            </div>
             <div class="contents-right-group">
               <div class="selectset selectset-round selectset-lg">
-              <button class="selectset-toggle btn" type="button">
-                  <span>날짜를 고르시오</span>
-              </button>
-              <ul class="selectset-list">
-                  <li th:each="performance : ${performanceList}" class="selectset-item">
-                      <button class="selectset-link btn" type="button" th:data-value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
-                  </li>
-              </ul>
-              <div class="contents-btn-group">
-                  <button class="btnset btnset-line" type="button">좌석선택</button>
+                <form th:action="@{/seatbook}" method="get">
+                  <button class="selectset-toggle btn" type="button">
+                    <span>날짜를 고르시오</span>
+                  </button>
+                  <ul class="selectset-list">
+                    <li th:each="performance : ${performanceList}" class="selectset-item">
+                      <button class="selectset-link btn" type="submit" th:name="selectedDate" th:value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
+                    </li>
+                  </ul>
+                  <div class="contents-btn-group">
+                    <button class="btnset btnset-line" type="submit">좌석선택</button>
+                  </div>
+                </form>
               </div>
-             </div>
             </div>
           </div>
         </div>
@@ -147,15 +147,15 @@
           <div class="textset">
               <h2 class="textset-tit">상세 내역&nbsp;</h2>
           </div>
-          <div class="cardset" th:each="performance : ${performanceList}">
-              <figure class="cardset-figure">
-                  <img class="cardset-img img-pc" th:src="@{'../static/images/' + ${performance.id} + '_1.png'}" alt="PC 이미지" th:alt="${performance.performanceName}">
-                  <img class="cardset-img img-mobile" th:src="@{'../static/images/' + ${performance.id} + '_mobile_1.png'}" alt="모바일 이미지" th:alt="${performance.performanceName}">
-              </figure>
-              <div class="cardset-body">
-                  <h5 class="cardset-tit" th:text="${performance.performanceName}">공연이름</h5>
-                  <p class="cardset-desc" th:text="${performance.performanceContents}">공연설명</p>
-              </div>
+        <div class="cardset">
+          <figure class="cardset-figure">
+            <img class="cardset-img img-pc" th:src="@{'../static/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
+            <img class="cardset-img img-mobile" th:src="@{'../static/images/' + ${performance.id} + '_mobile_1.png'}" th:alt="${performance.performanceName}">
+          </figure>
+          <div class="cardset-body">
+            <h5 class="cardset-tit" th:text="${performance.performanceName}">공연이름</h5>
+            <p class="cardset-desc" th:text="${performance.performanceContents}">공연설명</p>
+          </div>
           </div>
       </div>
   </div>

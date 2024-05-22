@@ -119,6 +119,28 @@ $(document).ready(function() {
 
 });
 
+function login() {
+  const email = document.getElementById('memberemail').value;
+  const password = document.getElementById('password').value;
+
+  fetch('/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email: email, password: password })
+  })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = '/home.html';
+        } else {
+          alert('존재하지 않는 계정입니다');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+}
+
 // basic-N11 [SHlvv7XJ9G]
 let selectedSeats = [];
 
@@ -152,3 +174,47 @@ function submitSeats() {
     alert('No seats selected.');
   }
 }
+
+document.getElementById("commentForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+  const actionUrl = this.getAttribute("th:action");
+
+  fetch(actionUrl, {
+    method: "POST",
+    body: formData,
+  })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+
+          const commentList = document.getElementById("commentList");
+          const newComment = document.createElement("div");
+          newComment.className = "comment-item";
+          newComment.innerHTML = `
+          <div class="comment-info">
+            <span class="comment-author">${data.comment.author}</span>
+          </div>
+          <div class="comment-content">
+            <p>${data.comment.content}</p>
+          </div>
+          <div class="comment-actions">
+            <button class="edit-btn">수정</button>
+            <button class="delete-btn">삭제</button>
+          </div>
+          <hr>
+        `;
+          commentList.appendChild(newComment);
+
+          document.getElementById("commentForm").reset();
+        } else {
+          alert("댓글을 등록하는 데 실패했습니다.");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("댓글을 등록하는 도중 오류가 발생했습니다.");
+      });
+});
+
