@@ -76,6 +76,8 @@ public class PostService {
     }
 
     public Post readPostById(Long id) {
+        System.out.println("update 테스트 시작");
+        postRepository.updateViewCount(id);
         return postRepository.readById(id);
     }
 
