@@ -14,11 +14,11 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>게시글 작성 | test1</title>
-  <link rel="stylesheet" href="../static/css/setting.css">
-  <link rel="stylesheet" href="../static/css/plugin.css">
-  <link rel="stylesheet" href="../static/css/template.css">
-  <link rel="stylesheet" href="../static/css/common.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../static/images/img_logo_black.png" alt="로고">
+            <img src="/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
@@ -69,7 +69,7 @@
   <!-- [S]basic-N11 -->
   <div class="basic-N11" data-bid="FtlvTT1I63" >
     <div class="contents-container container-md">
-      <form th:action="@{/board}" th:object="${Post}" method="post">
+      <form th:action="@{/board}" th:object="${post}" method="post">
         <h2>문의사항 게시 글 작성</h2>
         <table>
           <tbody>
@@ -82,7 +82,7 @@
           <tr>
             <td>
               <input type="submit" value="게시" onclick="alert('게시되었습니다')">
-              <button type="button" id="cancel" th:onclick="'window.location.href=\'' + @{/cancel} + '\''">취소</button>
+              <button type="button" id="cancel" th:onclick="'window.location.href=\'/community\''">취소</button>
             </td>
           </tr>
           </tbody>
@@ -111,9 +111,9 @@
   </div>
 </div>
 <!-- [E]basic-N4 -->
-<script src="../static/js/setting.js"></script>
-<script src="../static/js/plugin.js"></script>
-<script src="../static/js/template.js"></script>
-<script src="../static/js/common.js"></script>
-<script src="../static/js/script.js"></script>
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
 </body>
