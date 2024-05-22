@@ -80,7 +80,7 @@
         </li>
       </ul>
       <!-- Form -->
-      <form th:action="@{/registerMember}" th:object="${member}" method="post">
+      <form th:action="@{/registerMember}" th:object="${member}" method="post" id="signup-form" style="display:none">
         <!-- email input -->
         <div class="input__block">
           <input type="email" placeholder="Member Email" th:field="*{memberEmail}" class="input memberemail" id="memberemail">
@@ -104,6 +104,29 @@
         <!-- sign in button -->
         <button type="submit" class="signin__btn">Sign up</button>
       </form>
+
+      <!-- 가수정 부분 상단 *****************    -->
+
+      <form th:action="@{/login}" method="post" id="signin-form">
+        <!-- id input -->
+        <div class="input__block">
+          <input type="text" placeholder="ID" name="username" class="input id" id="login-id">
+        </div>
+        <!-- password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Password" name="password" class="input password" id="login-password">
+        </div>
+        <!-- sign in button -->
+        <button type="submit" class="signin__btn">Sign in</button>
+      </form>
+
+      <!-- 로그인 에러 메시지 표시 -->
+      <div th:if="${loginError}" class="error-message">
+        <p th:text="${loginError}"></p>
+      </div>
+
+      <!-- 가수정 부분 하단 ********************    -->
+
       <!-- separator -->
       <div class="separator">
         <p>OR</p>
@@ -136,6 +159,31 @@
     </div>
   </div>
 </div>
+
+<!-- 가수정 부분 상단 ************-->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var signinTab = document.getElementById('signin');
+      var signupTab = document.getElementById('signup');
+      var signinForm = document.getElementById('signin-form');
+      var signupForm = document.getElementById('signup-form');
+
+      signinTab.addEventListener('click', function () {
+          event.preventDefault();
+          signinForm.style.display = 'block';
+          signupForm.style.display = 'none';
+      });
+
+      signupTab.addEventListener('click', function () {
+          event.preventDefault();
+          signinForm.style.display = 'none';
+          signupForm.style.display = 'block';
+      });
+  });
+</script>
+
+<!-- 가수정 부분 하단 ************-->
 <!-- [E]basic-N4 -->
 <script src="../static/js/setting.js"></script>
 <script src="../static/js/plugin.js"></script>
