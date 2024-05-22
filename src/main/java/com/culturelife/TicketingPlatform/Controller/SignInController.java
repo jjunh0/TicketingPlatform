@@ -3,6 +3,7 @@ package com.culturelife.TicketingPlatform.Controller;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
 import com.culturelife.TicketingPlatform.Service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("name")
@@ -37,7 +39,8 @@ public class SignInController {
         ResponseEntity response = null;
         try {
 
-            if(!(member.getPassword().equals(member.getRepeatPassword()))) {
+            if(!(member.getPassword()
+                    .equals(member.getRepeatPassword()))) {
                 throw new IllegalStateException("비밀번호 확인란 입력과 일치하지 않습니다.");
             }
 
@@ -56,8 +59,26 @@ public class SignInController {
         }
     }
 
-    @GetMapping("/signup")
-    public String gotoSignUpPage() {
-        return "sign_up";
+    @PostMapping("/login")
+    public String gotoSignUpPage(@RequestParam String username,
+                                 @RequestParam String password,
+                                 Model model,
+                                 HttpSession session) {
+        Optional<Member> optionalMember = memberRepository.readByMemberId(username);
+
+        if(optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+
+            if(passwordEncoder.matches(password, member.getPassword())) {
+                session.setAttribute("loggedInUser", member);
+                return "redirect:/home";
+            } else {
+                model.addAttribute("loginError", "잘못된 비밀번호입니다.");
+                return "signinup";
+            }
+        }  else {
+            model.addAttribute("loginError", "존재하지 않는 아이디입니다.");
+            return "signinup";
+        }
     }
 }
