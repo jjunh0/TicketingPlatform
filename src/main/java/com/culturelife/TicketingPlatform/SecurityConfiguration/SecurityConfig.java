@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,18 +48,19 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/h2-console/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .headers(headers -> headers
-                        .frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
                         /*
                         관리자만 접근 가능한 페이지를 설정할 경우
-                        해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup").authenticated() 등으로 추가해주시면 됩니다.
+                        해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup", "/home").authenticated() 형태로 추가해주시면 됩니다.
+                        맨 처음 추가하시는 분은 바로 아래 코드의 주석을 풀어주시면 됩니다.
                          */
 //                        .requestMatchers().authenticated()
 
                         /*
-                        모든 사용자에게 열려있는 페이지는 같은 방식으로 하단의 requestMatchers 메서드에 추가
+                        모든 사용자에게 열려있는 페이지는 같은 방식으로 하단의 requestMatchers 메서드에 추가합니다.
                         지금은 모든 페이지에 대해 접근할 수 있도록 설정되어 있습니다.
                          */
                         .requestMatchers("/", "/**").permitAll())
