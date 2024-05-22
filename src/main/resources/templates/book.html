@@ -28,7 +28,7 @@
       <div class="header-container container-lg">
         <h1 class="header-title">
           <a href="javascript:void(0)">
-            <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+            <img src="/images/duri.png" alt="">
           </a>
         </h1>
         <div class="header-right">
@@ -39,22 +39,22 @@
           </div>
           <ul class="header-gnblist">
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="home.html">
+              <a class="header-gnblink" th:href="@{/home}">
                 <span>홈</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="contestlist.html">
+              <a class="header-gnblink" th:href="@{/contestlist}">
                 <span>공연</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="community.html">
+              <a class="header-gnblink" th:href="@{/community}">
                 <span contenteditable="true">게시판</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="signinup.html">
+              <a class="header-gnblink" th:href="@{/signinup}">
                 <span>로그인</span>
               </a>
             </li>
@@ -118,9 +118,9 @@
                       <button class="selectset-link btn" type="submit" th:name="selectedDate" th:value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
                     </li>
                   </ul>
-                  <div class="contents-btn-group">
+                  <form th:action="@{/seatbook}" method="get">
                     <button class="btnset btnset-line" type="submit">좌석선택</button>
-                  </div>
+                  </form>
                 </form>
               </div>
             </div>
