@@ -13,11 +13,11 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>로그인회원가입 | test1</title>
-  <link rel="stylesheet" href="../static/css/setting.css">
-  <link rel="stylesheet" href="../static/css/plugin.css">
-  <link rel="stylesheet" href="../static/css/template.css">
-  <link rel="stylesheet" href="../static/css/common.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../static/images/img_logo_black.png" alt="로고">
+            <img src="/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
@@ -108,12 +108,18 @@
       <div class="separator">
         <p>OR</p>
       </div>
-      <!-- google button -->
-      <button class="google__btn">
-        <i class="fa fa-google"></i> Sign in with Google </button>
-      <!-- google button -->
-      <button class="kakao__btn">
-        <i class="fa fa-kakao"></i> Sign in with kakao</button>
+      <!-- (임시) google button -->
+      <a href="/oauth2/authorization/google" class="google__btn">
+        <button>
+          <i class="fa fa-google"></i> Sign in with Google
+        </button>
+      </a>
+      <!-- (임시)kakao button -->
+      <a href="/oauth2/authorization/kakao" class="kakao__btn">
+        <button>
+          <i class="fa fa-kakao"></i> Sign in with Kakao
+        </button>
+      </a>
     </div>
     <footer>
     </footer>
@@ -137,9 +143,9 @@
   </div>
 </div>
 <!-- [E]basic-N4 -->
-<script src="../static/js/setting.js"></script>
-<script src="../static/js/plugin.js"></script>
-<script src="../static/js/template.js"></script>
-<script src="../static/js/common.js"></script>
-<script src="../static/js/script.js"></script>
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
 </body>

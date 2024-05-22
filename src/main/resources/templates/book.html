@@ -14,11 +14,11 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>공연예약 | test1</title>
-  <link rel="stylesheet" href="../static/css/setting.css">
-  <link rel="stylesheet" href="../static/css/plugin.css">
-  <link rel="stylesheet" href="../static/css/template.css">
-  <link rel="stylesheet" href="../static/css/common.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="header-right">
           <div class="header-title header-mobile-top">
             <a href="javascript:void(0)">
-              <img src="../static/images/img_logo_black.png" alt="로고">
+              <img src="/images/img_logo_black.png" alt="로고">
             </a>
           </div>
           <ul class="header-gnblist">
@@ -62,10 +62,10 @@
         </div>
         <div class="header-utils">
           <button class="btn-momenu">
-            <img src="../static/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+            <img src="/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
           </button>
           <button class="btn-close">
-            <img src="../static/icons/ico_close_black.svg" alt="닫기 아이콘">
+            <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
           </button>
         </div>
       </div>
@@ -85,7 +85,7 @@
         <div class="contents-container container-md">
           <div class="contents-left">
             <div class="contents-thumbnail">
-              <img class="contents-thumbimg" src="../static/images/img_basic_N51_1.png" alt="썸네일이미지">
+              <img class="contents-thumbimg" src="/images/img_basic_N51_1.png" alt="썸네일이미지">
             </div>
           </div>
           <div class="contents-right">
@@ -95,7 +95,7 @@
                   <button class="contents-btn btn-like-line">
                   </button>
                   <button class="contents-btn btn-like-fill">
-                    <img src="../static/icons/ico_like_black_fill.svg" alt="하트 채워진 아이콘">
+                    <img src="/icons/ico_like_black_fill.svg" alt="하트 채워진 아이콘">
                   </button>
                   <button class="contents-btn">
                   </button>
@@ -149,8 +149,8 @@
           </div>
         <div class="cardset">
           <figure class="cardset-figure">
-            <img class="cardset-img img-pc" th:src="@{'../static/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
-            <img class="cardset-img img-mobile" th:src="@{'../static/images/' + ${performance.id} + '_mobile_1.png'}" th:alt="${performance.performanceName}">
+            <img class="cardset-img img-pc" th:src="@{'/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
+            <img class="cardset-img img-mobile" th:src="@{'/images/' + ${performance.id} + '_mobile_1.png'}" th:alt="${performance.performanceName}">
           </figure>
           <div class="cardset-body">
             <h5 class="cardset-tit" th:text="${performance.performanceName}">공연이름</h5>
@@ -178,9 +178,9 @@
     </div>
   </footer>
   <!-- [E]basic-N4 -->
-  <script src="../static/js/setting.js"></script>
-  <script src="../static/js/plugin.js"></script>
-  <script src="../static/js/template.js"></script>
-  <script src="../static/js/common.js"></script>
-  <script src="../static/js/script.js"></script>
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
 </body>
