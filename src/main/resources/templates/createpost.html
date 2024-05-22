@@ -69,7 +69,7 @@
   <!-- [S]basic-N11 -->
   <div class="basic-N11" data-bid="FtlvTT1I63" >
     <div class="contents-container container-md">
-      <form th:action="@{/board}" th:object="${Post}" method="post">
+      <form th:action="@{/board}" th:object="${post}" method="post">
         <h2>문의사항 게시 글 작성</h2>
         <table>
           <tbody>
@@ -82,7 +82,7 @@
           <tr>
             <td>
               <input type="submit" value="게시" onclick="alert('게시되었습니다')">
-              <button type="button" id="cancel" th:onclick="'window.location.href=\'' + @{/cancel} + '\''">취소</button>
+              <button type="button" id="cancel" th:onclick="'window.location.href=\'/community\''">취소</button>
             </td>
           </tr>
           </tbody>
