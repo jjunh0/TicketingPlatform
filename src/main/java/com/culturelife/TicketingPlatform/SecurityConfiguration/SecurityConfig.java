@@ -4,6 +4,7 @@ import com.culturelife.TicketingPlatform.Entity.Enum.UserRole;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
 import com.culturelife.TicketingPlatform.Service.UserSecurityService;
+import com.culturelife.TicketingPlatform.filter.CheckAlreadyLoggedInFilter;
 import com.culturelife.TicketingPlatform.filter.CsrfCookieFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -26,6 +27,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
@@ -40,19 +42,18 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final MemberRepository memberRepository;
     private final UserSecurityService userSecurityService;
 
+
+
     @Autowired
-    public SecurityConfig(MemberRepository memberRepository,
-                          UserSecurityService userSecurityService) {
-        this.memberRepository = memberRepository;
+    public SecurityConfig(UserSecurityService userSecurityService) { // 수정된 부분
         this.userSecurityService = userSecurityService;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserSecurityService(memberRepository);
+        return userSecurityService;
     }
 
     @Bean
@@ -97,6 +98,7 @@ public class SecurityConfig {
                          */
                         .requestMatchers("/test2").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/", "/home", "/**").permitAll())
+                .addFilterBefore(new CheckAlreadyLoggedInFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/signinup")
                         .loginProcessingUrl("/login")

@@ -2,6 +2,7 @@ package com.culturelife.TicketingPlatform.Repository;
 
 import com.culturelife.TicketingPlatform.Entity.Member;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ public class MemberRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public void save(Member member) {
         em.persist(member);
     }
