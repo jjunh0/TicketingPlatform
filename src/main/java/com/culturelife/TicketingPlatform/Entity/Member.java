@@ -1,8 +1,11 @@
 package com.culturelife.TicketingPlatform.Entity;
 
+import com.culturelife.TicketingPlatform.Entity.Enum.UserRole;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,4 +57,10 @@ public class Member {
     private LocalDateTime memberCreateDate;
 
     private LocalDateTime memberUpdateDate;
+
+    // 권한 관련 추가
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private List<UserRole> roles = new ArrayList<>();
 }

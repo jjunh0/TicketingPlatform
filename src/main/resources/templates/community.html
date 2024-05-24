@@ -14,11 +14,12 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>게시글 목록 | test1</title>
-  <link rel="stylesheet" href="../static/css/setting.css">
-  <link rel="stylesheet" href="../static/css/plugin.css">
-  <link rel="stylesheet" href="../static/css/template.css">
-  <link rel="stylesheet" href="../static/css/common.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -28,33 +29,33 @@
     <div class="header-container container-lg">
       <h1 class="header-title">
         <a href="javascript:void(0)">
-          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+          <img src="/images/duri.png" alt="">
         </a>
       </h1>
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../static/images/img_logo_black.png" alt="로고">
+            <img src="/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="home.html">
+            <a class="header-gnblink" th:href="@{/home}">
               <span>홈</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="contestlist.html">
+            <a class="header-gnblink" th:href="@{/contestlist}">
               <span>공연</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="community.html">
+            <a class="header-gnblink" th:href="@{/community}">
               <span contenteditable="true">게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="signinup.html">
+            <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
@@ -86,7 +87,7 @@
             </span>
         </form>
         <br><br>
-        <a href="createpost.html" id="writeButton" class="btn">글 작성</a>
+        <a th:href="@{/createpost}" id="writeButton" class="btn">글 작성</a>
         <br>
         <table>
           <tbody>
@@ -97,12 +98,12 @@
             <th>일시</th>
             <th>조회수</th>
           </tr>
-          <tr th:each="Post, stat : ${Postlist}">
+          <tr th:each="Post, stat : ${Postlist}" th:onclick="'window.location.href=\'/post/' + ${Post.id} + '\'" style="cursor:pointer;">
             <td th:text="${stat.count}">1</td> <!-- stat.count는 Thymeleaf의 반복 인덱스를 사용 -->
             <td th:text="${Post.postSubject}">게시글 제목</td>
             <td th:text="${Post.member.name}">글쓴이 이름</td>
             <td th:text="${#dates.format(Post.postUpdateDate, 'yyyy-MM-dd HH:mm')}">0000-00-00 00:00</td>
-            <td th:text="${Post.viewCount}">0</td> <!-- 조회수, Post 엔티티에 추가 필요 -->
+            <td th:text="${Post.viewCount}">0</td>
           </tr>
           </tbody>
         </table>
@@ -163,9 +164,9 @@
   </div>
 </footer>
 <!-- [E]basic-N4 -->
-<script src="../static/js/setting.js"></script>
-<script src="../static/js/plugin.js"></script>
-<script src="../static/js/template.js"></script>
-<script src="../static/js/common.js"></script>
-<script src="../static/js/script.js"></script>
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
 </body>
