@@ -35,19 +35,15 @@ public class SignInController {
 //    }
 
     @GetMapping("/test1")
-    // 리스폰스바디 애너테이션
-    // hello 메소드의 응답 결과 반환
     @ResponseBody
     public String hell1o() {
-        return "test 1번!";
+        return "ADMIN 권한 사용자만 접근 가능한 페이지입니다.";
     }
 
     @GetMapping("/test2")
-    // 리스폰스바디 애너테이션
-    // hello 메소드의 응답 결과 반환
     @ResponseBody
     public String hello2() {
-        return "test 2번!";
+        return "ADMIN, USER 권한 사용자만 접근 가능한 페이지입니다.";
     }
 
     @PostMapping("/registerMember")
@@ -75,7 +71,9 @@ public class SignInController {
         }
     }
 
-
+    /*
+        /login에 대한 POST 요청은 SecurityConfig와 UserSecurityService가 처리
+     */
 //    @PostMapping("/login")
 //    public String gotoSignUpPage(@RequestParam String username,
 //                                 @RequestParam String password,

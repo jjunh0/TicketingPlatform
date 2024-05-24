@@ -29,7 +29,7 @@ public class Member {
     @Transient
     private String repeatPassword;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 16)
     private String memberName;
 
     @Column(nullable = false, length = 50, unique = true)
