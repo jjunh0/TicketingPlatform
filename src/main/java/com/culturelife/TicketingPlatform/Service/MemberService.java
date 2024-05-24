@@ -1,5 +1,6 @@
 package com.culturelife.TicketingPlatform.Service;
 
+import com.culturelife.TicketingPlatform.Entity.Enum.UserRole;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
@@ -28,6 +29,13 @@ public class MemberService {
         member.setMemberCreateDate(localDateTime);
         member.setMemberUpdateDate(localDateTime);
         member.setUniversityAttendance(true);
+
+        // 어드민 부분은 수정 예정
+        if(member.getMemberId().equals("admin")) {
+            member.getRoles().add(UserRole.ADMIN);
+        } else {
+            member.getRoles().add(UserRole.USER);
+        }
         memberRepository.save(member);
         return member.getId();
     }

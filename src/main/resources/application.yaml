@@ -9,8 +9,8 @@ spring:
   h2:
     console:
       enabled: true
-  mvc:
-    static-path-pattern: /static/**
+#  mvc:
+#    static-path-pattern: /static/**
 
   jpa:
     hibernate:
@@ -34,4 +34,7 @@ logging:
         type:
           descriptor:
             sql: trace
+
+      springframework:
+        security: DEBUG
 

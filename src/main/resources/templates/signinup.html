@@ -13,11 +13,12 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>로그인회원가입 | test1</title>
-  <link rel="stylesheet" href="../static/css/setting.css">
-  <link rel="stylesheet" href="../static/css/plugin.css">
-  <link rel="stylesheet" href="../static/css/template.css">
-  <link rel="stylesheet" href="../static/css/common.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -27,33 +28,33 @@
     <div class="header-container container-lg">
       <h1 class="header-title">
         <a href="javascript:void(0)">
-          <img src="../medias/04fdd970a205455b8317246043e71402.png" alt="">
+          <img src="/images/duri.png" alt="">
         </a>
       </h1>
       <div class="header-right">
         <div class="header-title header-mobile-top">
           <a href="javascript:void(0)">
-            <img src="../static/images/img_logo_black.png" alt="로고">
+            <img src="/images/img_logo_black.png" alt="로고">
           </a>
         </div>
         <ul class="header-gnblist">
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="home.html">
+            <a class="header-gnblink" th:href="@{/home}">
               <span>홈</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="contestlist.html">
+            <a class="header-gnblink" th:href="@{/contestlist}">
               <span>공연</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="community.html">
-              <span >게시판</span>
+            <a class="header-gnblink" th:href="@{/community}">
+              <span contenteditable="true">게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="signinup.html">
+            <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
@@ -105,9 +106,8 @@
         <button type="submit" class="signin__btn">Sign up</button>
       </form>
 
-      <!-- 가수정 부분 상단 *****************    -->
-
       <form th:action="@{/login}" method="post" id="signin-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <!-- id input -->
         <div class="input__block">
           <input type="text" placeholder="ID" name="username" class="input id" id="login-id">
@@ -125,18 +125,22 @@
         <p th:text="${loginError}"></p>
       </div>
 
-      <!-- 가수정 부분 하단 ********************    -->
-
       <!-- separator -->
       <div class="separator">
         <p>OR</p>
       </div>
-      <!-- google button -->
-      <button class="google__btn">
-        <i class="fa fa-google"></i> Sign in with Google </button>
-      <!-- google button -->
-      <button class="kakao__btn">
-        <i class="fa fa-kakao"></i> Sign in with kakao</button>
+      <!-- (임시) google button -->
+      <a href="/oauth2/authorization/google" class="google__btn">
+        <button>
+          <i class="fa fa-google"></i> Sign in with Google
+        </button>
+      </a>
+      <!-- (임시)kakao button -->
+      <a href="/oauth2/authorization/kakao" class="kakao__btn">
+        <button>
+          <i class="fa fa-kakao"></i> Sign in with Kakao
+        </button>
+      </a>
     </div>
     <footer>
     </footer>
@@ -159,35 +163,30 @@
     </div>
   </div>
 </div>
-
-<!-- 가수정 부분 상단 ************-->
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-      var signinTab = document.getElementById('signin');
-      var signupTab = document.getElementById('signup');
-      var signinForm = document.getElementById('signin-form');
-      var signupForm = document.getElementById('signup-form');
+    var signinTab = document.getElementById('signin');
+    var signupTab = document.getElementById('signup');
+    var signinForm = document.getElementById('signin-form');
+    var signupForm = document.getElementById('signup-form');
 
-      signinTab.addEventListener('click', function () {
-          event.preventDefault();
-          signinForm.style.display = 'block';
-          signupForm.style.display = 'none';
-      });
+    signinTab.addEventListener('click', function () {
+      event.preventDefault();
+      signinForm.style.display = 'block';
+      signupForm.style.display = 'none';
+    });
 
-      signupTab.addEventListener('click', function () {
-          event.preventDefault();
-          signinForm.style.display = 'none';
-          signupForm.style.display = 'block';
-      });
+    signupTab.addEventListener('click', function () {
+      event.preventDefault();
+      signinForm.style.display = 'none';
+      signupForm.style.display = 'block';
+    });
   });
 </script>
-
-<!-- 가수정 부분 하단 ************-->
 <!-- [E]basic-N4 -->
-<script src="../static/js/setting.js"></script>
-<script src="../static/js/plugin.js"></script>
-<script src="../static/js/template.js"></script>
-<script src="../static/js/common.js"></script>
-<script src="../static/js/script.js"></script>
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
 </body>
