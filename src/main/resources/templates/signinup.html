@@ -13,6 +13,7 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>로그인회원가입 | test1</title>
+  <base href="/">
   <link rel="stylesheet" href="/css/setting.css">
   <link rel="stylesheet" href="/css/plugin.css">
   <link rel="stylesheet" href="/css/template.css">
@@ -80,7 +81,7 @@
         </li>
       </ul>
       <!-- Form -->
-      <form th:action="@{/registerMember}" th:object="${member}" method="post">
+      <form th:action="@{/registerMember}" th:object="${member}" method="post" id="signup-form" style="display:none">
         <!-- email input -->
         <div class="input__block">
           <input type="email" placeholder="Member Email" th:field="*{memberEmail}" class="input memberemail" id="memberemail">
@@ -99,13 +100,14 @@
         </div>
         <!-- repeat password input -->
         <div class="input__block">
-          <input type="password" placeholder="Repeat password" class="input repeat__password" id="repeat__password">
+          <input type="password" placeholder="Repeat password" th:field="*{repeatPassword}" class="input repeat__password" id="repeat__password">
         </div>
         <!-- sign in button -->
         <button type="submit" class="signin__btn">Sign up</button>
       </form>
 
       <form th:action="@{/login}" method="post" id="signin-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <!-- id input -->
         <div class="input__block">
           <input type="text" placeholder="ID" name="username" class="input id" id="login-id">
@@ -161,7 +163,6 @@
     </div>
   </div>
 </div>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var signinTab = document.getElementById('signin');
