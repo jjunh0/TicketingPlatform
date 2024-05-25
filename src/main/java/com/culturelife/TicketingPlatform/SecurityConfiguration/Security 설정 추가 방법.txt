@@ -1,6 +1,7 @@
 
 1. SecurityConfiguration의 중간 부분에 추가해주셔야 하는 부분이 있습니다.
     해당 클래스에 주석을 작성해 놓았으니 해당 설명을 따라 진행해주시면 됩니다.
+    위치는 SecurityConfiguration 패키지의 SecurityConfig 클래스입니다.
 
 2. 프로그램 실행 시에, h2 db에 초기값이 생성되도록 설정하였습니다.
 

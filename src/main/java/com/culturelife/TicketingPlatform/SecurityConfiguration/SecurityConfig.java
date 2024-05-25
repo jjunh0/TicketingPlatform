@@ -83,12 +83,19 @@ public class SecurityConfig {
                 // CsrfCookieFilter를 기본 인증 필터 이후에 추가
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
-
+                        /*
+                            정적 리소스(/static) 경로에 있는 파일들에 대한 브라우저의 접근을 허용
+                         */
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**").permitAll()
                         /*
                             ADMIN 권한 사용자만 접근 가능한 페이지를 설정할 경우
-                            해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup", "/home").hasRole("ADMIN") 형태로 추가해주시면 됩니다.
+                            해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup", "/home").hasRole("ADMIN") 형태로,
+                             requestMatchers 메서드의 파라미터에 추가해주시면 됩니다.
+
+                             추가로, 만약 "/community/**" 형태로 맨 뒤에 /**를 붙이면,
+                            /community 이후에 붙는 경로 전체에 대한 설정이 가능합니다.
                          */
+
                         .requestMatchers("/test1").hasRole("ADMIN")
 
                         /*
