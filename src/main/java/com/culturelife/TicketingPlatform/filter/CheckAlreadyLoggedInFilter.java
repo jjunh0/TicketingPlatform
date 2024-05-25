@@ -18,6 +18,9 @@ public class CheckAlreadyLoggedInFilter extends OncePerRequestFilter {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !(auth.getPrincipal() instanceof String) &&
                 request.getRequestURI().equals("/signinup")) {
+            /*
+                이미 로그인한 사용자가 "/signinup"에 접근하면, /home으로 redirect
+             */
             response.sendRedirect("/home");
         } else {
             filterChain.doFilter(request, response);

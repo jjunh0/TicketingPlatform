@@ -44,8 +44,6 @@ public class SecurityConfig {
 
     private final UserSecurityService userSecurityService;
 
-
-
     @Autowired
     public SecurityConfig(UserSecurityService userSecurityService) { // 수정된 부분
         this.userSecurityService = userSecurityService;
@@ -78,25 +76,33 @@ public class SecurityConfig {
                 }))
                 .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/h2-console/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                // 프레임 옵션을 비활성화하여 H2 콘솔에 접근할 수 있도록 설정
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
+                // CsrfCookieFilter를 기본 인증 필터 이후에 추가
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
-                        /*
-                        관리자만 접근 가능한 페이지를 설정할 경우
-                        해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup", "/home").authenticated() 형태로 추가해주시면 됩니다.
-                        맨 처음 추가하시는 분은 바로 아래 코드의 주석을 풀어주시면 됩니다.
-                         */
-//                        .requestMatchers("/community").authenticated()
+
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**").permitAll()
+                        /*
+                            ADMIN 권한 사용자만 접근 가능한 페이지를 설정할 경우
+                            해당 경로를 바로 아래 코드 부분에 requestMatchers("/signinup", "/home").hasRole("ADMIN") 형태로 추가해주시면 됩니다.
+                         */
                         .requestMatchers("/test1").hasRole("ADMIN")
 
                         /*
-                        모든 사용자가 접근 가능한 페이지는 같은 방식으로 하단의 requestMatchers 메서드에 추가합니다.
-                        지금은 모든 페이지에 대해 접근할 수 있도록 설정되어 있습니다.
+                            ADMIN 권한, USER 권한 사용자가 접근 가능한 페이지는
+                            같은 방식으로 하단의 requestMatchers 메서드의 파라미터에 추가합니다.
                          */
                         .requestMatchers("/test2").hasAnyRole("ADMIN", "USER")
+                        /*
+                            ADMIN, USER 권한을 포함하여 로그인하지 않은 사용자까지 접근 가능한 페이지는
+                            같은 방식으로 하단의 requestMatchers 메서드의 파라미터에 추가합니다.
+                            모든 페이지에 대해 접근을 허용하는 "/**"를 파라미터로 받고 있지만,
+                            이 주석의 위쪽에 위치한 requestMatchers에 파라미터로 넣어준 경로가 있을 경우
+                            위쪽 라인에 먼저 선언된 requestMatchers의 권한 설정이 우선됩니다.
+                         */
                         .requestMatchers("/", "/home", "/**").permitAll())
                 .addFilterBefore(new CheckAlreadyLoggedInFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin((formLogin) -> formLogin

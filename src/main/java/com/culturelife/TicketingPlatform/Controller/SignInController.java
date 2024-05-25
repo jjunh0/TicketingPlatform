@@ -2,6 +2,7 @@ package com.culturelife.TicketingPlatform.Controller;
 
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
+import com.culturelife.TicketingPlatform.Service.AuthenticatedUserService;
 import com.culturelife.TicketingPlatform.Service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,13 @@ import java.util.Optional;
 @Controller
 @SessionAttributes("name")
 public class SignInController {
+
+    private final AuthenticatedUserService authenticatedUserService;
+
+    @Autowired
+    public SignInController(AuthenticatedUserService authenticatedUserService) {
+        this.authenticatedUserService = authenticatedUserService;
+    }
     @Autowired
     private MemberRepository memberRepository;
 
@@ -28,22 +36,24 @@ public class SignInController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @GetMapping("/signinup")
-//    public String gotoLoginPage(Model model) {
-//        model.addAttribute("member", new Member());
-//        return "signinup";
-//    }
-
     @GetMapping("/test1")
     @ResponseBody
-    public String hell1o() {
-        return "ADMIN 권한 사용자만 접근 가능한 페이지입니다.";
+    public String adminTest() {
+        String currentUserMemberId = authenticatedUserService.getCurrentMemberId();
+        String roles = authenticatedUserService.getCurrentMemberRoles();
+
+        return "ADMIN 권한 사용자만 접근 가능한 페이지입니다.<br>"
+                + authenticatedUserService.getCurrentMemberInfo();
     }
 
     @GetMapping("/test2")
     @ResponseBody
-    public String hello2() {
-        return "ADMIN, USER 권한 사용자만 접근 가능한 페이지입니다.";
+    public String userTest() {
+        String currentUserMemberId = authenticatedUserService.getCurrentMemberId();
+        String roles = authenticatedUserService.getCurrentMemberRoles();
+
+        return "ADMIN, USER 권한 사용자만 접근 가능한 페이지입니다.<br>"
+                + authenticatedUserService.getCurrentMemberInfo();
     }
 
     @PostMapping("/registerMember")

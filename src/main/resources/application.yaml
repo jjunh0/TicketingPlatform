@@ -36,5 +36,5 @@ logging:
             sql: trace
 
       springframework:
-        security: DEBUG
+        security: INFO
 

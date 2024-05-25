@@ -60,7 +60,8 @@ public class Member {
 
     // 권한 관련 추가
     @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "member_roles", joinColumns = @JoinColumn(name = "member_id"))
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private List<UserRole> roles = new ArrayList<>();
 }

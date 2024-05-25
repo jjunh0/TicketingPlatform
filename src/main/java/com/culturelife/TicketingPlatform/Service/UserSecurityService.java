@@ -43,15 +43,6 @@ public class UserSecurityService implements UserDetailsService {
 
         // 사용자 정보를 담을 객체 생성
         List<GrantedAuthority> authorities = new ArrayList<>();
-//        // 입력받은 사용자 명을 통해 인증 받은 사용자 정보를 담을 객체에 권한을 추가한다.
-//        // 사용자 명이 "admin"일 경우 ADMIN권한, 그 외의 경우 "USER" 권한 부여
-//        if("admin".equals(memberId)) {
-//            authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getRole()));
-//            authorities.add(new SimpleGrantedAuthority(UserRole.USER.getRole()));
-//        } else {
-//            authorities.add(new SimpleGrantedAuthority(UserRole.USER.getRole()));
-//        }
-
 
         for (UserRole role : siteMember.getRoles()) {
             System.out.println("Role: " + role.getRole());
