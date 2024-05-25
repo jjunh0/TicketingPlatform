@@ -10,4 +10,5 @@ public class MemberDTO {
     private String memberName;
     private String memberId;
     private String password;
+    private String repeatPassword;
 }

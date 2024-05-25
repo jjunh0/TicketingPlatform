@@ -8,7 +8,9 @@ spring:
     driver-class-name: org.h2.Driver
   h2:
     console:
-      enabled: true # h2-console 요청이 시큐리티 필터를 통과하지 않도록 설정
+      enabled: true
+#  mvc:
+#    static-path-pattern: /static/**
 
   jpa:
     hibernate:
@@ -32,4 +34,7 @@ logging:
         type:
           descriptor:
             sql: trace
+
+      springframework:
+        security: INFO
 
