@@ -3,51 +3,65 @@ package com.culturelife.TicketingPlatform.Controller;
 import com.culturelife.TicketingPlatform.Entity.Comment;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Post;
-import com.culturelife.TicketingPlatform.Entity.dto.postFormDTO;
+import com.culturelife.TicketingPlatform.Entity.dto.PostDTO;
+import com.culturelife.TicketingPlatform.Service.AuthenticatedUserService;
+import com.culturelife.TicketingPlatform.Service.MemberService;
 import com.culturelife.TicketingPlatform.Service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
   private final PostService postService;
-  // 질의 응답 게시판 글 목록으로 이동
-  @GetMapping("community/{current_page_number}")
-  public String communityListsController(@PathVariable("current_page_number") int currentPageNumber,  Model model){
-    Page<Post> postList = postService.readPostPage(currentPageNumber);
-    model.addAttribute("postList", postList.toList());
-    model.addAttribute("totalPageNumber", postList.getTotalPages());
+  private final MemberService memberService;
+  private final AuthenticatedUserService userService;
+
+  // 요청한 페이지의 글 목록을 model에 추가하여 이동
+  @GetMapping("/community/{pageNumber}")
+  public String communityPageController(@PathVariable("pageNumber") int pageNumber, Model model){
+    Page<Post> postList = postService.readPostPage(pageNumber);
+    model.addAttribute("Postlist", postList);
     return "community";
   }
-  // 질의 응답 글 작성 페이지로 이동
-  @GetMapping("create_post")
-  public String communityWriteController(){
+  @GetMapping("/createpost")
+  public String communityCreatePost(Model model) {
+    if (!userService.getCurrentMember().isPresent()) {
+      System.out.println("비회원자는 게시글을 작성할 수 없습니다.");
+      return "redirect:/community/1";
+    }
+    PostDTO postDTO = new PostDTO();
+    model.addAttribute("post", postDTO);
     return "createpost";
   }
-  // 질의 응답 게시판의 작성된 글 페이지 보기
-  // 이는 나중에 수정해야함
-  @GetMapping("view_poster/{postId}")
-  public String communityViewController(@PathVariable("postId") Long postId, Model model){
-    Post post = postService.readPostById(postId);
-    model.addAttribute("post", post);
-    model.addAttribute("comments", post.getCommentList());
-    return "post";
-  }
 
-  @PostMapping("create_newpost")
-  public void CreatePost(postFormDTO postForm) {
+  @PostMapping("/board")
+  public String createPostController(PostDTO postDTO) {
     Post post = new Post();
-    post.setPostSubject(postForm.getPostSubject());
-    post.setPostContents(postForm.getPostContents());
-    postService.createPost("1", post);
+    post.setPostSubject(postDTO.getPostSubject());
+    post.setPostContents(postDTO.getPostContents());
+    post.setPostCreateDate(LocalDateTime.now());
+    post.setPostUpdateDate(LocalDateTime.now());
+    post.setCommentList(new ArrayList<Comment>());
+    Member currentMember;
+    if(userService.getCurrentMember().isPresent()) currentMember = userService.getCurrentMember().get();
+    else{
+      System.out.println("유효하지않은 접근");
+      return "redirect:/community/1";
+    }
+    postService.createPost(currentMember.getMemberId(), post);
+    return "redirect:/community/1";
   }
 
 }
