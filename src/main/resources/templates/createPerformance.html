@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Performance</title>
+</head>
+<body>
+<h1>Create Performance</h1>
+<form action="#" th:action="@{/admin/create}" method="post">
+    <div>
+        <label>Performance Name:</label>
+        <input type="text" name="performanceName"  />
+    </div>
+    <div>
+        <label>Performance Contents:</label>
+        <textarea name="performanceContents" ></textarea>
+    </div>
+    <div>
+        <label>Performance Price:</label>
+        <input type="number" name="performancePrice"  />
+    </div>
+    <div>
+        <label>Performance Count:</label>
+        <input type="number" name="performanceCount"  />
+    </div>
+    <div>
+        <label>Performance Date:</label>
+        <input type="datetime-local" name="performanceDate"  />
+    </div>
+    <div>
+        <button type="submit">Create</button>
+    </div>
+</form>
+</body>
+</html>
