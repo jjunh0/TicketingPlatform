@@ -90,7 +90,7 @@
         <a th:href="@{/createpost}" id="writeButton" class="btn">글 작성</a>
         <br>
         <table>
-          <tbody>
+          <tbody th:if="${Postlist != null}">
           <tr>
             <th>번호</th>
             <th>제목</th>
@@ -98,12 +98,24 @@
             <th>일시</th>
             <th>조회수</th>
           </tr>
-          <tr th:each="Post, stat : ${Postlist}" th:onclick="'window.location.href=\'/post/' + ${Post.id} + '\'" style="cursor:pointer;">
+          <tr th:each="Post, stat : ${Postlist.content}" style="cursor:pointer;">
             <td th:text="${stat.count}">1</td> <!-- stat.count는 Thymeleaf의 반복 인덱스를 사용 -->
             <td th:text="${Post.postSubject}">게시글 제목</td>
-            <td th:text="${Post.member.name}">글쓴이 이름</td>
-            <td th:text="${#dates.format(Post.postUpdateDate, 'yyyy-MM-dd HH:mm')}">0000-00-00 00:00</td>
+            <td th:text="${Post.member.memberName}">글쓴이 이름</td>
+            <td th:text="${#temporals.format(Post.postUpdateDate, 'yyyy-MM-dd HH:mm')}">0000-00-00 00:00</td>
             <td th:text="${Post.viewCount}">0</td>
+          </tr>
+          </tbody>
+          <tbody th:if="${Postlist == null}">
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>일시</th>
+            <th>조회수</th>
+          </tr>
+          <tr>
+            <td colspan="10">작성된 글이 없습니다.</td>
           </tr>
           </tbody>
         </table>
