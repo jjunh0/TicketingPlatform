@@ -98,7 +98,7 @@
             <th>일시</th>
             <th>조회수</th>
           </tr>
-          <tr th:each="Post, stat : ${Postlist.content}" style="cursor:pointer;">
+          <tr th:each="Post, stat : ${Postlist.content}" style="cursor:pointer;" th:href="@{/post/{postId}(postId=${Post.id})}">
             <td th:text="${stat.count}">1</td> <!-- stat.count는 Thymeleaf의 반복 인덱스를 사용 -->
             <td th:text="${Post.postSubject}">게시글 제목</td>
             <td th:text="${Post.member.memberName}">글쓴이 이름</td>
