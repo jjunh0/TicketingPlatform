@@ -78,7 +78,7 @@
           <div th:each="performance : ${performancelist}" class="cardset cardset-hover cardset-border text-center">
             <a th:href="@{/book(performanceId=${performance.id})}">
               <figure class="cardset-figure">
-                <img th:src="@{'/static/images/img_basic_N' + ${performance.id % 28} + '_1.png'}" alt="카드 이미지" class="cardset-img">
+                <img th:src="@{'/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
               </figure>
               <div class="cardset-cont">
                 <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>

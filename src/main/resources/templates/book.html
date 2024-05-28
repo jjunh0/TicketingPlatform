@@ -86,7 +86,7 @@
         <div class="contents-container container-md">
           <div class="contents-left">
             <div class="contents-thumbnail">
-              <img class="contents-thumbimg" src="/images/img_basic_N51_1.png" alt="썸네일이미지">
+              <img class="contents-thumbimg" th:src="@{'/images/' + ${performance.id} + '_thumbnail.png'}" alt="썸네일이미지" th:alt="${performance.performanceName}">
             </div>
           </div>
           <div class="contents-right">

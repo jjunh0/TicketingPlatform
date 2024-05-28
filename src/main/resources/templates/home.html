@@ -94,34 +94,31 @@
         <div class="contents-group">
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_1.png" alt="카드 이미지">
+              <figure class="cardset-figure">
+                <img class="cardset-img" th:src="@{'/images/' + ${festival1.id} + '_1.png'}" alt="카드 이미지" th:alt="${festival1.performanceName}">
               </figure>
               <div class="cardset-body">
-                <h2 class="cardset-tit">festival1</h2>
-                <p class="cardset-desc"></p>
+                <h2 class="cardset-tit" th:text="${festival1.performanceName}">festival1</h2>
               </div>
             </a>
           </div>
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_2.png" alt="카드 이미지">
+              <figure class="cardset-figure">
+                <img class="cardset-img" th:src="@{'/images/' + ${festival2.id} + '_2.png'}" alt="카드 이미지" th:alt="${festival2.performanceName}">
               </figure>
               <div class="cardset-body">
-                <h2 class="cardset-tit">festival2</h2>
-                <p class="cardset-desc"></p>
+                <h2 class="cardset-tit" th:text="${festival2.performanceName}">festival2</h2>
               </div>
             </a>
           </div>
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_3.png" alt="카드 이미지">
+              <figure class="cardset-figure">
+                <img class="cardset-img" th:src="@{'/images/' + ${festival3.id} + '_3.png'}" alt="카드 이미지" th:alt="${festival3.performanceName}">
               </figure>
               <div class="cardset-body">
-                <h2 class="cardset-tit">festival3</h2>
-                <p class="cardset-desc"></p>
+                <h2 class="cardset-tit" th:text="${festival3.performanceName}">festival3</h2>
               </div>
             </a>
           </div>
