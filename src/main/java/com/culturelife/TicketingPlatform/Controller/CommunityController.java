@@ -45,6 +45,7 @@ public class CommunityController {
     model.addAttribute("post", postDTO);
     return "createpost";
   }
+  @GetMapping("/post/{postId}")
 
   @PostMapping("/board")
   public String createPostController(PostDTO postDTO) {
