@@ -111,17 +111,7 @@
             <div class="contents-right-group">
               <div class="selectset selectset-round selectset-lg">
                 <form th:action="@{/seatbook}" method="get">
-                  <button class="selectset-toggle btn" type="button">
-                    <span>날짜를 고르시오</span>
-                  </button>
-                  <ul class="selectset-list">
-                    <li th:each="performance : ${performanceList}" class="selectset-item">
-                      <button class="selectset-link btn" type="submit" th:name="selectedDate" th:value="${performance.performanceDate}" th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd')}">Date</button>
-                    </li>
-                  </ul>
-                  <form th:action="@{/seatbook}" method="get">
-                    <button class="btnset btnset-line" type="submit">좌석선택</button>
-                  </form>
+                  <button class="btnset btnset-line" type="submit">좌석선택</button>
                 </form>
               </div>
             </div>
@@ -184,4 +174,11 @@
   <script src="/js/template.js"></script>
   <script src="/js/common.js"></script>
   <script src="/js/script.js"></script>
+
+  <script>
+    function setSelectedDate(date) {
+      document.getElementById('selectedDate').value = date;
+    }
+  </script>
+
 </body>
