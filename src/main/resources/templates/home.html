@@ -91,34 +91,14 @@
         <div class="textset">
           <h2 class="textset-tit">현재 진행중인 공연</h2>
         </div>
-        <div class="contents-group">
+        <div class="contents-group" th:each="performance, iterStat : ${performancelist}">
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
               <figure class="cardset-figure">
-                <img class="cardset-img" th:src="@{'/images/' + ${festival1.id} + '_1.png'}" alt="카드 이미지" th:alt="${festival1.performanceName}">
+                <img class="cardset-img" th:src="@{'/images/' + ${performance.id} + '_' + ${iterStat.index + 1} + '.png'}" alt="카드 이미지" th:alt="${performance.performanceName}">
               </figure>
               <div class="cardset-body">
-                <h2 class="cardset-tit" th:text="${festival1.performanceName}">festival1</h2>
-              </div>
-            </a>
-          </div>
-          <div class="cardset cardset-inner">
-            <a th:href="@{/contestlist}">
-              <figure class="cardset-figure">
-                <img class="cardset-img" th:src="@{'/images/' + ${festival2.id} + '_2.png'}" alt="카드 이미지" th:alt="${festival2.performanceName}">
-              </figure>
-              <div class="cardset-body">
-                <h2 class="cardset-tit" th:text="${festival2.performanceName}">festival2</h2>
-              </div>
-            </a>
-          </div>
-          <div class="cardset cardset-inner">
-            <a th:href="@{/contestlist}">
-              <figure class="cardset-figure">
-                <img class="cardset-img" th:src="@{'/images/' + ${festival3.id} + '_3.png'}" alt="카드 이미지" th:alt="${festival3.performanceName}">
-              </figure>
-              <div class="cardset-body">
-                <h2 class="cardset-tit" th:text="${festival3.performanceName}">festival3</h2>
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">festival</h2>
               </div>
             </a>
           </div>
