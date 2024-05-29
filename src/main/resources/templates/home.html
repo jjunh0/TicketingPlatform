@@ -39,7 +39,11 @@
           </a>
         </div>
         <ul class="header-gnblist">
-
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/home}">
+              <span>홈</span>
+            </a>
+          </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/contestlist}">
               <span>공연</span>
@@ -47,21 +51,30 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/community}">
-              <span contenteditable="true">게시판</span>
+              <span>게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" th:if="${#authentication.name == 'anonymousUser'}">
             <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
-          <!--로그아웃버튼 수정 예정-->
-          <li class="header-gnbitem">
-            <a class="header-gnblink" th:href="@{/logout}">
+
+          <li class="header-gnbitem" th:if="${#authentication.name != 'anonymousUser'}">
+            <a class="header-gnblink" th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <span>로그아웃</span>
             </a>
           </li>
         </ul>
+
+        <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+          <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        </form>
       </div>
     </div>
   </div>
@@ -91,7 +104,10 @@
         <div class="textset">
           <h2 class="textset-tit">현재 진행중인 공연</h2>
         </div>
-        <div class="contents-group" th:each="performance, iterStat : ${performancelist}">
+        <div th:if="${#lists.isEmpty(performancelist)}">
+          <p>아직 등록된 공연이 없습니다.</p>
+        </div>
+        <div class="contents-group" th:if="${!#lists.isEmpty(performancelist)}" th:each="performance, iterStat : ${performancelist}">
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
               <figure class="cardset-figure">

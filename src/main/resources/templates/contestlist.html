@@ -51,15 +51,30 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/community}">
-              <span contenteditable="true">게시판</span>
+              <span>게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" th:if="${#authentication.name == 'anonymousUser'}">
             <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
+
+          <li class="header-gnbitem" th:if="${#authentication.name != 'anonymousUser'}">
+            <a class="header-gnblink" th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <span>로그아웃</span>
+            </a>
+          </li>
         </ul>
+
+        <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+          <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        </form>
       </div>
     </div>
   </div>
@@ -75,6 +90,9 @@
           <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
         </div>
         <div class="contents-group">
+          <div th:if="${#lists.isEmpty(performancelist)}">
+            <p>아무 공연도 등록되어 있지 않습니다.</p>
+          </div>
           <div th:each="performance : ${performancelist}" class="cardset cardset-hover cardset-border text-center">
             <a th:href="@{/book(performanceId=${performance.id})}">
               <figure class="cardset-figure">
@@ -93,30 +111,30 @@
         </div>
       </div>
     </div>
-    <nav class="pagiset pagiset-line">
+    <nav class="pagiset pagiset-line" th:if="${totalPages >1}">
       <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-first" href="javascript:void(0)">
+        <a th:href="@{/contestlist(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
           <span class="visually-hidden">처음</span>
         </a>
       </div>
       <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
+        <a th:href="@{/contestlist(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
           <span class="visually-hidden">이전</span>
         </a>
       </div>
       <div class="pagiset-list">
-        <a class="pagiset-link" href="javascript:void(0)">1</a>
-        <a class="pagiset-link" href="javascript:void(0)">2</a>
-        <a class="pagiset-link" href="javascript:void(0)">3</a>
-        <a class="pagiset-link" href="javascript:void(0)">4</a>
+        <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+           th:href="@{/contestlist(page=${pageNum})}"
+           th:text="${pageNum}"
+           th:classappend="${pageNum == currentPage} ? 'active'">1</a>
       </div>
       <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-next" href="javascript:void(0)">
+        <a th:href="@{/contestlist(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
           <span class="visually-hidden">다음</span>
         </a>
       </div>
       <div class="pagiset-ctrl">
-        <a class="pagiset-link pagiset-last" href="javascript:void(0)">
+        <a th:href="@{/contestlist(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
           <span class="visually-hidden">마지막</span>
         </a>
       </div>
