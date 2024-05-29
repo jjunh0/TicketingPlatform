@@ -29,4 +29,6 @@ public class HomeController {
         model.addAttribute("member", new MemberDTO());
         return "signinup";
     }
+    @GetMapping("/mypage")
+    public String mypage() {return  "mypage";}
 }

@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,10 +26,12 @@ public class CommunityController {
   private final AuthenticatedUserService userService;
 
   // 요청한 페이지의 글 목록을 model에 추가하여 이동
-  @GetMapping("/community/{pageNumber}")
-  public String communityPageController(@PathVariable("pageNumber") int pageNumber, Model model){
-    Page<Post> postList = postService.readPostPage(pageNumber);
-    model.addAttribute("Postlist", postList);
+  @GetMapping("/community")
+  public String getCommunityPage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    Page<Post> postPage = postService.readPostPage(page);
+    model.addAttribute("PostList", postPage.getContent());
+    model.addAttribute("currentPage", page);
+    model.addAttribute("totalPages", postPage.getTotalPages());
     return "community";
   }
   @GetMapping("/createpost")

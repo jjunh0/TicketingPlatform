@@ -140,7 +140,7 @@ function login() {
       })
       .catch(error => console.error('Error:', error));
 }
-
+/*
 // basic-N11 [SHlvv7XJ9G]
 let selectedSeats = [];
 
@@ -174,6 +174,8 @@ function submitSeats() {
     alert('No seats selected.');
   }
 }
+*/
+
 
 document.getElementById("commentForm").addEventListener("submit", function(event) {
   event.preventDefault();

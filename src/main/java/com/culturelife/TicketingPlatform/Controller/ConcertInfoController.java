@@ -34,7 +34,7 @@ public class ConcertInfoController {
     public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
         model.addAttribute("seatlist", seat.stream().sorted(Comparator.comparing((SeatInfoDTO::getSeatName))));
-        return "seatTemp";
+        return "seatbook";
     }
 
     @PostMapping("/seats/{performanceId}")

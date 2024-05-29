@@ -27,14 +27,12 @@ public class PerformanceController {
     }
 
 
-    @GetMapping({"/list/{id}"})
-    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page) {
-
-        Page<Performance> performancePage = null;
-        performancePage = performanceService.readPostPage(page);
-
-        model.addAttribute("performancePage", performancePage);
-
-        return "home"; // 임시(수정필요)
+    @GetMapping("/contestlist")
+    public String getContestList(Model model, @RequestParam(defaultValue = "1") int page) {
+        Page<Performance> performancePage = performanceService.readPostPage(page);
+        model.addAttribute("performancelist", performancePage.getContent());
+        model.addAttribute("totalPages", performancePage.getTotalPages());
+        model.addAttribute("page", page);
+        return "contestlist";
     }
 }

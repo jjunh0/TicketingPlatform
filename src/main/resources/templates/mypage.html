@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="title" content="웹사이트">
+    <meta name="description" content="웹사이트입니다.">
+    <meta name="keywords" content="키워드,키워드,키워드">
+    <meta property="og:title" content="웹사이트">
+    <meta property="og:description" content="웹사이트입니다">
+    <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+    <meta property="og:url" content="https://웹사이트">
+    <title>마이페이지 | test1</title>
+    <base href="/">
+    <link rel="stylesheet" href="/css/setting.css">
+    <link rel="stylesheet" href="/css/plugin.css">
+    <link rel="stylesheet" href="/css/template.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="iHLvqqyNrR" >
+    <div class="header-inner">
+        <div class="header-container container-lg">
+            <h1 class="header-title">
+                <a href="javascript:void(0)">
+                    <img src="/images/duri.png" alt="">
+                </a>
+            </h1>
+            <div class="header-right">
+                <div class="header-title header-mobile-top">
+                    <a href="javascript:void(0)">
+                        <img src="/images/img_logo_black.png" alt="로고">
+                    </a>
+                </div>
+                <ul class="header-gnblist">
+                    <li class="header-gnbitem">
+                        <a class="header-gnblink" th:href="@{/home}">
+                            <span>홈</span>
+                        </a>
+                    </li>
+                    <li class="header-gnbitem">
+                        <a class="header-gnblink" th:href="@{/contestlist}">
+                            <span>공연</span>
+                        </a>
+                    </li>
+                    <li class="header-gnbitem">
+                        <a class="header-gnblink" th:href="@{/community}">
+                            <span>게시판</span>
+                        </a>
+                    </li>
+                    <li class="header-gnbitem">
+                        <a class="header-gnblink" th:href="@{/mypage}">
+                            <span>마이페이지</span>
+                        </a>
+                    </li>
+                    <li class="header-gnbitem" th:if="${#authentication.name == 'anonymousUser'}">
+                        <a class="header-gnblink" th:href="@{/signinup}">
+                            <span>로그인</span>
+                        </a>
+                    </li>
+
+                    <li class="header-gnbitem" th:if="${#authentication.name != 'anonymousUser'}">
+                        <a class="header-gnblink" th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <span>로그아웃</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="header-dim"></div>
+</div>
+
+<main>
+    <h1>나의 티켓보유 현황</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>티켓</th>
+            <th>가격</th>
+            <th>공연</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(member.ticketList)}">
+            <td colspan="3">보유한 티켓이 없습니다.</td>
+        </tr>
+        <tr th:each="ticket : ${member.ticketList}">
+            <td th:text="${ticket.ticketName}">Ticket Name</td>
+            <td th:text="${ticket.ticketPrice}">Ticket Price</td>
+            <td th:text="${ticket.performance.performanceName}">Performance Name</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+
+<div class="basic-N4" data-bid="hPLvqQYq31">
+    <div class="footer-container container-lg">
+
+        <div class="footer-bottom">
+            <div class="footer-txt">
+                <p><span>강원도 춘천시 강원대학길 1</span></p>
+                <p>
+                    <span>T. 033-250-6114</span>
+                </p>
+            </div>
+            <div class="footer-txt">
+                <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- [E]basic-N4 -->
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
+</body>
