@@ -59,22 +59,16 @@
               <span>마이페이지</span>
             </a>
           </li>
-          <li class="header-gnbitem" th:if="${#authentication.name == 'anonymousUser'}">
+          <li class="header-gnbitem" >
             <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
 
-          <li class="header-gnbitem" th:if="${#authentication.name != 'anonymousUser'}">
-            <a class="header-gnblink" th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <span>로그아웃</span>
-            </a>
-          </li>
+
         </ul>
 
-        <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
-          <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-        </form>
+
       </div>
     </div>
   </div>
@@ -88,6 +82,7 @@
       <div class="contents-container container-md">
         <div class="textset">
           <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
+          <a class="btn btn-primary" th:href="@{/createperformance}">공연 등록</a>
         </div>
         <div class="contents-group">
           <div th:if="${#lists.isEmpty(performancelist)}">

@@ -83,22 +83,16 @@
                 <span>마이페이지</span>
               </a>
             </li>
-            <li class="header-gnbitem" th:if="${#authentication.name == 'anonymousUser'}">
+            <li class="header-gnbitem" >
               <a class="header-gnblink" th:href="@{/signinup}">
                 <span>로그인</span>
               </a>
             </li>
 
-            <li class="header-gnbitem" th:if="${#authentication.name != 'anonymousUser'}">
-              <a class="header-gnblink" th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <span>로그아웃</span>
-              </a>
-            </li>
+
           </ul>
 
-          <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-          </form>
+
         </div>
       </div>
     </div>
