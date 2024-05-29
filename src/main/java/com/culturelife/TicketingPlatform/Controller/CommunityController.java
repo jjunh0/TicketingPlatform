@@ -26,12 +26,10 @@ public class CommunityController {
   private final AuthenticatedUserService userService;
 
   // 요청한 페이지의 글 목록을 model에 추가하여 이동
-  @GetMapping("/community")
-  public String getCommunityPage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-    Page<Post> postPage = postService.readPostPage(page);
-    model.addAttribute("PostList", postPage.getContent());
-    model.addAttribute("currentPage", page);
-    model.addAttribute("totalPages", postPage.getTotalPages());
+  @GetMapping("/community/{pageNumber}")
+  public String communityPageController(@PathVariable("pageNumber") int pageNumber, Model model){
+    Page<Post> postList = postService.readPostPage(pageNumber);
+    model.addAttribute("Postlist", postList);
     return "community";
   }
   @GetMapping("/createpost")
