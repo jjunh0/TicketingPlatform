@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class PerformanceDTO {
+    private Long id;
     private Long performanceId;
     private String performanceName;
     private String performanceContents;
