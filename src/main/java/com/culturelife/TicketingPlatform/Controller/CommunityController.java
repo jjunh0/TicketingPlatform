@@ -87,6 +87,13 @@ public class CommunityController {
     return "redirect:/post/"+postId;
   }
 
+  @GetMapping("/search")
+  public String searchPostController(@RequestParam("query")String query, Model model){
+    Page<Post> postList = postService.searchPostPage(1, query);
+    model.addAttribute("Postlist", postList);
+    return "community";
+  }
+
 
 
 }
