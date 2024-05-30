@@ -56,9 +56,14 @@
                 <span contenteditable="true">게시판</span>
               </a>
             </li>
-            <li class="header-gnbitem">
+            <li class="header-gnbitem" sec:authorize="isAnonymous()">
               <a class="header-gnblink" th:href="@{/signinup}">
                 <span>로그인</span>
+              </a>
+            </li>
+            <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+              <a class="header-gnblink" th:href="@{/logout}">
+                <span>로그아웃</span>
               </a>
             </li>
           </ul>
