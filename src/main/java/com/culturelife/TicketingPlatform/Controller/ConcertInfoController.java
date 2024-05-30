@@ -27,6 +27,7 @@ public class ConcertInfoController {
     @GetMapping("/performances/{performanceId}")
     public String concertInfo(@PathVariable("performanceId") Long performanceId, Model model) {
         PerformanceDTO performanceDTO = concertSeatService.readPerformanceById(performanceId);
+        performanceDTO.setId(performanceId);
         model.addAttribute("performance", performanceDTO);
         return "book";
     }
