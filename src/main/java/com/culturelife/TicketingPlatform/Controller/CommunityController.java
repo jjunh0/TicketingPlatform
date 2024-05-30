@@ -5,28 +5,26 @@ import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Entity.Post;
 import com.culturelife.TicketingPlatform.Entity.dto.PostDTO;
 import com.culturelife.TicketingPlatform.Service.AuthenticatedUserService;
-import com.culturelife.TicketingPlatform.Service.MemberService;
+import com.culturelife.TicketingPlatform.Service.CommentService;
 import com.culturelife.TicketingPlatform.Service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class CommunityController {
   private final PostService postService;
-  private final MemberService memberService;
   private final AuthenticatedUserService userService;
+  private final CommentService commentService;
 
   // 요청한 페이지의 글 목록을 model에 추가하여 이동
   @GetMapping("/community/{pageNumber}")
@@ -48,7 +46,14 @@ public class CommunityController {
   @GetMapping("/post/{postId}")
   public String postViewController(@PathVariable("postId") Long postId, Model model){
     Post post = postService.readPostById(postId);
+    String currentMemberId;
+    if(userService.getCurrentMember().isPresent()) currentMemberId = userService.getCurrentMemberId();
+    else{
+      System.out.println("유효하지않은 접근");
+      return "redirect:/community/1";
+    }
     model.addAttribute("post", post);
+    model.addAttribute("currentMemberId", currentMemberId);
     return "post";
   }
 
@@ -68,6 +73,18 @@ public class CommunityController {
     }
     postService.createPost(currentMember.getMemberId(), post);
     return "redirect:/community/1";
+  }
+
+  @PostMapping("submitComment/{postId}")
+  public String commentCreateController(@PathVariable("postId")Long postId, @RequestParam("commentContent") String commentContent){
+    String currentMemberId;
+    if(userService.getCurrentMember().isPresent()) currentMemberId = userService.getCurrentMemberId();
+    else{
+      System.out.println("유효하지않은 접근");
+      return "redirect:/post/"+postId;
+    }
+    commentService.createComment(currentMemberId, postId, commentContent);
+    return "redirect:/post/"+postId;
   }
 
 
