@@ -13,7 +13,7 @@ public class Seat {
     @Column(name = "seat_id")
     private Long id;
 
-    @Column(nullable = false, length = 20, unique = true)
+    @Column(nullable = false, length = 20)
     private String seatName;
 
     @Column(nullable = false)
