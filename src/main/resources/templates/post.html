@@ -88,21 +88,21 @@
           </tbody>
         </table>
         <p th:text="${post.postContents}">문의 내용</p>        <hr>        <!-- 댓글 입력 폼 -->
-        <form th:action="@{/submitComment(postId=${post.id})}" method="post">
+        <form th:action="@{/submitComment/{postId}(postId=${post.id})}" method="post">
           <textarea class="inputset-textarea form-control" placeholder="댓글을 작성하시오." required="" name="commentContent"></textarea>
           <button class="regist" type="submit">등록</button>
         </form>        <br><br><hr>        <!-- 댓글 목록 -->
         <div th:each="comment : ${post.commentList}">
           <div class="comment-item">
             <div class="comment-info">
-              <span class="comment-author" th:text="${comment.author}">작성자</span>
+              <span class="comment-author" th:text="${comment.member.memberName}">작성자</span>
             </div>
             <div class="comment-content">
-              <p th:text="${comment.content}">댓글 내용 --------------.</p>
+              <p th:text="${comment.commentContents}">댓글 내용 --------------.</p>
             </div>
-            <div class="comment-actions">
-              <button class="edit-btn" th:if="${comment.author == #authentication.name}" th:onclick="'editComment(' + ${comment.id} + ');'">수정</button>
-              <button class="delete-btn" th:if="${comment.author == #authentication.name}" th:onclick="'deleteComment(' + ${comment.id} + ');'">삭제</button>
+            <div class="comment-actions"  th:if="${comment.member.memberId} == ${currentMemberId}">
+              <button class="edit-btn" th:onclick="'editComment(' + ${comment.id} + ');'">수정</button>
+              <button class="delete-btn" th:onclick="'deleteComment(' + ${comment.id} + ');'">삭제</button>
             </div>
             <hr>
           </div>
