@@ -46,6 +46,11 @@ public class CommunityController {
     return "createpost";
   }
   @GetMapping("/post/{postId}")
+  public String postViewController(@PathVariable("postId") Long postId, Model model){
+    Post post = postService.readPostById(postId);
+    model.addAttribute("post", post);
+    return "post";
+  }
 
   @PostMapping("/board")
   public String createPostController(PostDTO postDTO) {
@@ -64,5 +69,7 @@ public class CommunityController {
     postService.createPost(currentMember.getMemberId(), post);
     return "redirect:/community/1";
   }
+
+
 
 }

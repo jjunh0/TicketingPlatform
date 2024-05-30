@@ -49,7 +49,7 @@
             </a>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" th:href="@{/community}">
+            <a class="header-gnblink" th:href="@{/community/1}">
               <span contenteditable="true">게시판</span>
             </a>
           </li>
@@ -92,7 +92,7 @@
           <textarea class="inputset-textarea form-control" placeholder="댓글을 작성하시오." required="" name="commentContent"></textarea>
           <button class="regist" type="submit">등록</button>
         </form>        <br><br><hr>        <!-- 댓글 목록 -->
-        <div th:each="comment : ${comments}">
+        <div th:each="comment : ${post.commentList}">
           <div class="comment-item">
             <div class="comment-info">
               <span class="comment-author" th:text="${comment.author}">작성자</span>
