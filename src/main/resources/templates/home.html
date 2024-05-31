@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/css/template.css">
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 
 <body>
@@ -39,7 +40,11 @@
           </a>
         </div>
         <ul class="header-gnblist">
-
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/home}">
+              <span>홈</span>
+            </a>
+          </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/contestlist}">
               <span>공연</span>
@@ -47,21 +52,29 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/community}">
-              <span contenteditable="true">게시판</span>
+              <span>게시판</span>
             </a>
           </li>
           <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAnonymous()">
             <a class="header-gnblink" th:href="@{/signinup}">
               <span>로그인</span>
             </a>
           </li>
-          <!--로그아웃버튼 수정 예정-->
-          <li class="header-gnbitem">
+          <li class="header-gnbitem" sec:authorize="isAuthenticated()">
             <a class="header-gnblink" th:href="@{/logout}">
               <span>로그아웃</span>
             </a>
           </li>
+
+
         </ul>
+
+
       </div>
     </div>
   </div>
@@ -91,37 +104,17 @@
         <div class="textset">
           <h2 class="textset-tit">현재 진행중인 공연</h2>
         </div>
-        <div class="contents-group">
+        <div th:if="${#lists.isEmpty(performancelist)}">
+          <p>아직 등록된 공연이 없습니다.</p>
+        </div>
+        <div class="contents-group" th:if="${!#lists.isEmpty(performancelist)}" th:each="performance, iterStat : ${performancelist}">
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_1.png" alt="카드 이미지">
+              <figure class="cardset-figure">
+                <img class="cardset-img" th:src="@{'/images/' + ${performance.id} + '_' + ${iterStat.index + 1} + '.png'}" alt="카드 이미지" th:alt="${performance.performanceName}">
               </figure>
               <div class="cardset-body">
-                <h2 class="cardset-tit">festival1</h2>
-                <p class="cardset-desc"></p>
-              </div>
-            </a>
-          </div>
-          <div class="cardset cardset-inner">
-            <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_2.png" alt="카드 이미지">
-              </figure>
-              <div class="cardset-body">
-                <h2 class="cardset-tit">festival2</h2>
-                <p class="cardset-desc"></p>
-              </div>
-            </a>
-          </div>
-          <div class="cardset cardset-inner">
-            <a th:href="@{/contestlist}">
-            <figure class="cardset-figure">
-                <img class="cardset-img" src="/images/img_basic_N44_3.png" alt="카드 이미지">
-              </figure>
-              <div class="cardset-body">
-                <h2 class="cardset-tit">festival3</h2>
-                <p class="cardset-desc"></p>
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">festival</h2>
               </div>
             </a>
           </div>
