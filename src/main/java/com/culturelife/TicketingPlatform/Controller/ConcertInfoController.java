@@ -33,7 +33,7 @@ public class ConcertInfoController {
     @GetMapping("/performances/{performanceId}/seats")
     public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
-        model.addAttribute("seatlist", seat.stream().sorted(Comparator.comparing((SeatInfoDTO::getSeatName))));
+        model.addAttribute("seatlist", seat);
         return "seatbook";
     }
 
