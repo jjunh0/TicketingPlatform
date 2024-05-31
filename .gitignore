@@ -26,6 +26,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 *.yaml
+/src/main/resources/application.yaml
+
 
 ### NetBeans ###
 /nbproject/private/
