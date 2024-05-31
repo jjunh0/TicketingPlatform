@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/css/template.css">
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 
 <body>
@@ -51,7 +52,12 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/community}">
-              <span contenteditable="true">게시판</span>
+              <span>게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
             </a>
           </li>
           <li class="header-gnbitem" sec:authorize="isAnonymous()">
@@ -64,7 +70,11 @@
               <span>로그아웃</span>
             </a>
           </li>
+
+
         </ul>
+
+
       </div>
     </div>
   </div>

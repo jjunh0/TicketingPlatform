@@ -113,7 +113,7 @@ public class SecurityConfig {
                             ADMIN 권한, USER 권한 사용자가 접근 가능한 페이지는
                             같은 방식으로 하단의 requestMatchers 메서드의 파라미터에 추가합니다.
                          */
-                        .requestMatchers("/test2", "/performances/*/seats", "/seats/*").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/test2", "/performances/*/seats", "/seats/*", "/mypage").hasAnyRole("ADMIN", "USER")
                         /*
                             ADMIN, USER 권한을 포함하여 로그인하지 않은 사용자까지 접근 가능한 페이지는
                             같은 방식으로 하단의 requestMatchers 메서드의 파라미터에 추가합니다.

@@ -1,13 +1,12 @@
 package com.culturelife.TicketingPlatform.Controller;
 
-import com.culturelife.TicketingPlatform.Entity.Order;
 import com.culturelife.TicketingPlatform.Entity.dto.Message;
 import com.culturelife.TicketingPlatform.Service.AuthenticatedUserService;
 import com.culturelife.TicketingPlatform.Service.ConcertSeatService;
 import com.culturelife.TicketingPlatform.Entity.dto.PerformanceDTO;
 import com.culturelife.TicketingPlatform.Entity.dto.SeatInfoDTO;
 import com.culturelife.TicketingPlatform.Entity.dto.SeatSelectionDTO;
-import com.culturelife.TicketingPlatform.Service.OrderService;
+import com.culturelife.TicketingPlatform.Service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ public class ConcertInfoController {
 
     private final ConcertSeatService concertSeatService;
     private final AuthenticatedUserService authenticatedUserService;
-    private final OrderService orderService;
+    private final TicketService ticketService;
     @GetMapping("/performances/{performanceId}")
     public String concertInfo(@PathVariable("performanceId") Long performanceId, Model model) {
         PerformanceDTO performanceDTO = concertSeatService.readPerformanceById(performanceId);
@@ -34,8 +33,8 @@ public class ConcertInfoController {
     @GetMapping("/performances/{performanceId}/seats")
     public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
-        model.addAttribute("seatlist", seat.stream().sorted(Comparator.comparing((SeatInfoDTO::getSeatName))));
-        return "seatTemp";
+        model.addAttribute("seatlist", seat);
+        return "seatbook";
     }
 
     @PostMapping("/seats/{performanceId}")
@@ -49,7 +48,7 @@ public class ConcertInfoController {
         mav.addObject("data", new Message("예약 성공.", "/performances/"+performanceId));
         mav.setViewName("/common/message");
 
-        orderService.makeOrderAndTicket(performanceId, seatSelectionForm.getSeatName(),
+        ticketService.makeTicket(performanceId, seatSelectionForm.getSeatName(),
                 authenticatedUserService.getCurrentMember().get());
         System.out.println("예약 성공");
         return mav;

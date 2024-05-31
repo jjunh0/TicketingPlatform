@@ -1,11 +1,10 @@
 package com.culturelife.TicketingPlatform.Service;
 
-import com.culturelife.TicketingPlatform.Entity.Enum.OrderStatus;
 import com.culturelife.TicketingPlatform.Entity.Member;
-import com.culturelife.TicketingPlatform.Entity.Order;
 import com.culturelife.TicketingPlatform.Entity.Seat;
 import com.culturelife.TicketingPlatform.Entity.Ticket;
-import com.culturelife.TicketingPlatform.Repository.OrderRepository;
+import com.culturelife.TicketingPlatform.Entity.dto.SeatInfoDTO;
+import com.culturelife.TicketingPlatform.Entity.dto.TicketDTO;
 import com.culturelife.TicketingPlatform.Repository.PerformanceRepository;
 import com.culturelife.TicketingPlatform.Repository.SeatRepository;
 import com.culturelife.TicketingPlatform.Repository.TicketRepository;
@@ -13,36 +12,41 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class OrderService {
-    private final OrderRepository orderRepository;
+public class TicketService {
     private final TicketRepository ticketRepository;
     private final PerformanceRepository performanceRepository;
     private final SeatRepository seatRepository;
-    public void makeOrderAndTicket(Long performanceId, String seatName, Member member) {
-        Order order = new Order();
-        order.setOrderPrice(performanceRepository.readById(performanceId).getPerformancePrice());
-        order.setOrderCount(1);
-        order.setOrderStatus(OrderStatus.ORDER);
-        order.setMemberCreateDate(LocalDateTime.now());
-        order.setMember(member);
-
+    public void makeTicket(Long performanceId, String seatName, Member member) {
+        System.out.println("makeTicket" + ' ' + seatRepository.readByIdAndName(performanceId, seatName).getSeatName());
         Ticket ticket = new Ticket();
+        Seat seat = seatRepository.readByIdAndName(performanceId, seatName);
         ticket.setTicketName(seatName);
         ticket.setTicketPrice(performanceRepository.readById(performanceId).getPerformancePrice());
-        ticket.setOrder(order);
         ticket.setPerformance(performanceRepository.readById(performanceId));
         ticket.setMember(member);
-        ticket.setSeat(seatRepository.readByIdAndName(performanceId, seatName));
+        ticket.setSeat(seat);
+        seat.setTicket(ticket);
         ticketRepository.save(ticket);
-        order.getTicketList().add(ticket);
-        orderRepository.save(order);
     }
-
+    public List<TicketDTO> getMemberTickets(Long memberId) {
+        List<TicketDTO> ticketDTOList = new ArrayList<>();
+        List<Ticket> ticketList = ticketRepository.findByMemberId(memberId);
+        for(Ticket t : ticketList) {
+            System.out.println(t.getMember().getId());
+            TicketDTO ticketDTO = TicketDTO.builder()
+                    .memberId(memberId)
+                    .performance(t.getPerformance())
+                    .ticketPrice(t.getTicketPrice())
+                    .seatName(t.getSeat().getSeatName())
+                    .build();
+            ticketDTOList.add(ticketDTO);
+        }
+        return ticketDTOList;
+    }
 }

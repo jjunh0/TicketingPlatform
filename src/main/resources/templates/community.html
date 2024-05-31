@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/css/template.css">
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
   <style>
     #writeButton {
       float: right;
@@ -68,7 +69,12 @@
           </li>
           <li class="header-gnbitem">
             <a class="header-gnblink" th:href="@{/community}">
-              <span contenteditable="true">게시판</span>
+              <span>게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
             </a>
           </li>
           <li class="header-gnbitem" sec:authorize="isAnonymous()">
@@ -81,7 +87,11 @@
               <span>로그아웃</span>
             </a>
           </li>
+
+
         </ul>
+
+
       </div>
     </div>
   </div>
@@ -143,30 +153,30 @@
           </tbody>
         </table>
         <br>
-        <nav class="pagiset pagiset-line">
+        <nav class="pagiset pagiset-line" th:if="${totalPages > 1}">
           <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-first" href="javascript:void(0)">
+            <a th:href="@{/community(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
               <span class="visually-hidden">처음</span>
             </a>
           </div>
           <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-prev" href="javascript:void(0)">
+            <a th:href="@{/community(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
               <span class="visually-hidden">이전</span>
             </a>
           </div>
           <div class="pagiset-list">
-            <a class="pagiset-link" href="javascript:void(0)">1</a>
-            <a class="pagiset-link" href="javascript:void(0)">2</a>
-            <a class="pagiset-link" href="javascript:void(0)">3</a>
-            <a class="pagiset-link" href="javascript:void(0)">4</a>
+            <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+               th:href="@{/community(page=${pageNum})}"
+               th:text="${pageNum}"
+               th:classappend="${pageNum == currentPage} ? 'active'">1</a>
           </div>
           <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-next" href="javascript:void(0)">
+            <a th:href="@{/community(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
               <span class="visually-hidden">다음</span>
             </a>
           </div>
           <div class="pagiset-ctrl">
-            <a class="pagiset-link pagiset-last" href="javascript:void(0)">
+            <a th:href="@{/community(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
               <span class="visually-hidden">마지막</span>
             </a>
           </div>
