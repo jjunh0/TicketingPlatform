@@ -75,14 +75,6 @@
 
 
       </div>
-      <div class="header-utils">
-        <button class="btn-momenu">
-          <img src="/api/t-a/57/1714744800/resources/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
-        </button>
-        <button class="btn-close">
-          <img src="/api/t-a/57/1714744800/resources/icons/ico_close_black.svg" alt="닫기 아이콘">
-        </button>
-      </div>
     </div>
   </div>
 <!-- [E]basic-N2 -->
@@ -115,10 +107,12 @@
             <div class="comment-content">
               <p th:text="${comment.commentContents}"></p>
             </div>
-            <div class="comment-actions">
-              <div class="comment-actions"  th:if="${comment.member.memberId} == ${currentMemberId}">
-                <button class="edit-btn" th:onclick="'editComment(' + ${comment.id} + ');'">수정</button>
-                <button class="delete-btn" th:onclick="'deleteComment(' + ${comment.id} + ');'">삭제</button>
+            <div class="comment-actions" th:if="${comment.member.memberId} == ${currentMemberId}">
+              <a th:href="@{/updateComment(commentId=${comment.id})}" class="edit-btn">수정</a>
+              <form th:action="@{/deleteComment}" method="post" style="display:inline;">
+                <input type="hidden" name="commentId" th:value="${comment.id}">
+                <button type="submit" class="delete-btn">삭제</button>
+              </form>
             </div>
             <hr>
           </div>
@@ -126,8 +120,9 @@
       </div>
     </div>
     </div>
-  </div>
-  <!-- [E]basic-N24 --></main>
+
+
+</main>
 <!-- [S]basic-N4 -->
 <div class="basic-N4" data-bid="yPlvQQZ1v3" id="">
   <div class="footer-container container-lg">
@@ -145,6 +140,7 @@
 
 </div>
 </div>
+
 <!-- [E]basic-N4 -->
 <script src="/js/setting.js"></script>
   <script src="/js/plugin.js"></script>

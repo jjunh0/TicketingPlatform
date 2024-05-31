@@ -1,6 +1,7 @@
 @charset "utf-8";
 /* basic-N37 [FRLuQynxaj] : 편집됨 */
-body { font-family: "Montserrat", sans-serif; background: white; }
+body { font-family: "Montserrat", sans-serif; background: white;  overflow-y: scroll;
+    scroll-behavior: smooth;}
 .container { display: block; max-width: 680px; width: 80%; margin: 120px auto; }
 .links { list-style-type: none; }
 .links li { display: inline-block; margin: 0 20px 0 0; transition: 0.2s linear; }
@@ -28,9 +29,13 @@ form .signin__btn { background: #25282d; color: white; display: block; width: 92
 .google__btn.kakao__btn .fa,.kakao__btn.kakao__btn .fa { font-size: 20px; padding: 0 5px 0 0; }
 .google__btn.kakao__btn:hover,.kakao__btn.kakao__btn:hover { box-shadow: 0 0 0 rgba(37, 40, 45, 0); }
 
+* {
+    will-change: transform, opacity;
+}
 /* basic-N24 [BULujLZ1zl] */
-.basic-N24 .contents-container { padding: 10rem 1.6rem; background-color: var(--highlight-bg); border-radius: 2rem; }
-.basic-N24 .contents-inner { padding: 8rem 1.6rem; }
+.basic-N24 .contents-container { padding: 10rem 1.6rem; background-color: var(--highlight-bg); border-radius: 2rem;  overflow-y: scroll;
+    scroll-behavior: smooth; will-change: contents;}
+.basic-N24 .contents-inner { padding: 8rem 1.6rem;  overflow-y: auto; }
 .basic-N24 .form-group { max-width: 96rem; margin: 0 auto; }
 @media (max-width: 992px) {
     .basic-N24 .contents-inner { padding: 5rem 1.6rem; }
