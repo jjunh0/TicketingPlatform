@@ -22,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/community")
     public String community() {
-        return "community";
+        return "redirect:/community/1";
     }
     @GetMapping("/signinup")
     public String signinup(Model model) {
