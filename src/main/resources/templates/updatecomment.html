@@ -88,6 +88,7 @@
     <input type="hidden" name="commentId" th:value="${comment.id}">
     <textarea name="commentContent" th:text="${comment.commentContents}" required></textarea>
     <button type="submit">수정</button>
+    <button type="button" onclick="window.location.href='/post/${comment.post.id}'">취소</button>
   </form>
 </main>
 
