@@ -29,4 +29,5 @@ public class HomeController {
         model.addAttribute("member", new MemberDTO());
         return "signinup";
     }
+
 }
