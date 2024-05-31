@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>홈 | test1</title>
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="CbLVQR1Eay">
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="/images/duri.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
+          <a href="javascript:void(0)">
+            <img src="/images/img_logo_black.png" alt="로고">
+          </a>
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/home}">
+              <span>홈</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/contestlist}">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/community}">
+              <span>게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAnonymous()">
+            <a class="header-gnblink" th:href="@{/signinup}">
+              <span>로그인</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+            <a class="header-gnblink" th:href="@{/logout}">
+              <span>로그아웃</span>
+            </a>
+          </li>
+
+
+        </ul>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+<!-- [S]basic-N1 -->
+
+<!-- [E]basic-N1 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N5 -->
+  <div class="basic-N5" data-bid="VKLufKD4Xk" >
+    <div class="contents-container"> <img class="contents-backimg img-pc" src="https://uicf.kangwon.ac.kr/img/top_img03.jpg" alt="PC 배너 이미지">
+      <div class="contents-slide-group container-md">
+        <div class="textset textset-visual">
+          <h2 class="textset-tit">Kangwon festival</h2>
+          <p class="textset-desc">since1947</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [E]basic-N5 -->
+  <!-- [S]basic-N44 -->
+  <div class="basic-N44" data-bid="NnLUfKoXBe" >
+    <div class="contents-inner">
+      <div class="contents-container container-md">
+        <div class="textset">
+          <h2 class="textset-tit">현재 진행중인 공연</h2>
+        </div>
+        <div th:if="${#lists.isEmpty(performancelist)}">
+          <p>아직 등록된 공연이 없습니다.</p>
+        </div>
+        <div class="contents-group" th:if="${!#lists.isEmpty(performancelist)}" th:each="performance, iterStat : ${performancelist}">
+          <div class="cardset cardset-inner">
+            <a th:href="@{/contestlist}">
+              <figure class="cardset-figure">
+                <img class="cardset-img" th:src="@{'/images/' + ${performance.id} + '_' + ${iterStat.index + 1} + '.png'}" alt="카드 이미지" th:alt="${performance.performanceName}">
+              </figure>
+              <div class="cardset-body">
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">festival</h2>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [E]basic-N44 -->
+  <!-- [S]basic-N38 -->
+
+  <!-- [E]basic-N38 -->
+  <!-- [S]basic-N38 -->
+  <div class="basic-N38" data-bid="DfLuTm2zwq" >
+    <div class="contents-inner">
+      <div class="contents-container container-md">
+        <div class="textset">
+          <h2 class="textset-tit">오시는길</h2>
+        </div>
+        <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:1280px; height:332px; color:#333; position:relative">
+          <div style="height: 300px;"><a href="https://map.kakao.com/?urlX=663667.0&amp;urlY=1214427.0&amp;itemId=10124518&amp;q=%EA%B0%95%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90%20%EC%B6%98%EC%B2%9C%EC%BA%A0%ED%8D%BC%EC%8A%A4&amp;srcid=10124518&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/e376d4df2ee6333fc27036a73efb3260ec94d71739e7c5c0f2e491ca09242fb2" width="1278px" height="298px" style="border:1px solid #ccc;"></a></div>
+          <div style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);"><a href="https://map.kakao.com" target="_blank" style="float: left;"><img src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72" height="16" alt="카카오맵" style="display:block;width:72px;height:16px"></a>
+            <div style="float: right; position: relative; top: 1px; font-size: 11px;"><a target="_blank" href="https://map.kakao.com/?from=roughmap&amp;srcid=10124518&amp;confirmid=10124518&amp;q=%EA%B0%95%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90%20%EC%B6%98%EC%B2%9C%EC%BA%A0%ED%8D%BC%EC%8A%A4&amp;rv=on" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">로드뷰</a><span style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a target="_blank" href="https://map.kakao.com/?from=roughmap&amp;eName=%EA%B0%95%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90%20%EC%B6%98%EC%B2%9C%EC%BA%A0%ED%8D%BC%EC%8A%A4&amp;eX=663667.0&amp;eY=1214427.0" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a><span style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span><a target="_blank" href="https://map.kakao.com?map_type=TYPE_MAP&amp;from=roughmap&amp;srcid=10124518&amp;itemId=10124518&amp;q=%EA%B0%95%EC%9B%90%EB%8C%80%ED%95%99%EA%B5%90%20%EC%B6%98%EC%B2%9C%EC%BA%A0%ED%8D%BC%EC%8A%A4&amp;urlX=663667.0&amp;urlY=1214427.0" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">지도 크게 보기</a></div>
+          </div>
+        </div>
+        <ul class="contents-list">
+          <li class="contents-item">
+            <div class="contents-ico">
+              <figure class="contents-figure">
+                <img src="/icons/ico_location_black.svg" alt="주소 아이콘">
+              </figure> 주소
+            </div>
+            <p class="contents-desc">춘천캠 - 강원특별자치도 춘천시 강원대학길1 (효자동)</p>
+          </li>
+          <li class="contents-item">
+            <div class="contents-ico">
+              <figure class="contents-figure">
+                <img src="/icons/ico_mail_black.svg" alt="이메일 아이콘">
+              </figure> 이메일
+            </div>
+            <p class="contents-desc">@kangwon.ac.kr</p>
+          </li>
+          <li class="contents-item">
+            <div class="contents-ico">
+              <figure class="contents-figure">
+                <img src="/icons/ico_call_black.svg" alt="전화번호 아이콘">
+              </figure> 전화번호
+            </div>
+            <p class="contents-desc">033-250-6114</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- [E]basic-N38 -->
+</main>
+<!-- [S]basic-N4 -->
+<footer class="basic-N4" data-bid="AMlUFkD5Pd" id="">
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
+      <div class="footer-txt">
+        <p><span>강원도 춘천시 강원대학길 1</span></p>
+        <p>
+          <span>T. 033-250-6114</span>
+        </p>
+      </div>
+      <div class="footer-txt">
+        <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- [E]basic-N4 -->
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
+</body>

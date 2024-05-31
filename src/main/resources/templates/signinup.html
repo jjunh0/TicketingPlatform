@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>로그인회원가입 | test1</title>
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="hiluqyNI85" >
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="/images/duri.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
+          <a href="javascript:void(0)">
+            <img src="/images/img_logo_black.png" alt="로고">
+          </a>
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/home}">
+              <span>홈</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/contestlist}">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/community}">
+              <span>게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAnonymous()">
+            <a class="header-gnblink" th:href="@{/signinup}">
+              <span>로그인</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+            <a class="header-gnblink" th:href="@{/logout}">
+              <span>로그아웃</span>
+            </a>
+          </li>
+
+
+        </ul>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- [E]basic-N2 -->
+<main class="th-layout-main ">
+  <!-- [S]basic-N37 -->
+  <div class="basic-N37" data-bid="FRLuQynxaj">
+    <div class="container">
+      <!-- Heading -->
+      <!-- Links -->
+      <ul class="links">
+        <li>
+          <a href="#" id="signin">로그인</a>
+        </li>
+        <li>
+          <a href="#" id="signup">회원가입</a>
+        </li>
+        <li>
+        </li>
+      </ul>
+      <!-- Form -->
+      <form th:action="@{/registerMember}" th:object="${member}" method="post" id="signup-form" style="display:none">
+        <!-- email input -->
+        <div class="input__block">
+          <input type="email" placeholder="Member Email" th:field="*{memberEmail}" class="input memberemail" id="memberemail">
+        </div>
+        <!-- name input-->
+        <div class="input__block">
+          <input type="text" placeholder="Member Name" th:field="*{memberName}" class="input membername" id="membername">
+        </div>
+        <!-- id input-->
+        <div class="input__block">
+          <input type="text" placeholder="ID" th:field="*{memberId}" class="input id" id="id">
+        </div>
+        <!-- password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Password" th:field="*{password}" class="input password" id="password">
+        </div>
+        <!-- repeat password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Repeat password" th:field="*{repeatPassword}" class="input repeat__password" id="repeat__password">
+        </div>
+        <!-- sign in button -->
+        <button type="submit" class="signin__btn">Sign up</button>
+      </form>
+
+      <form th:action="@{/login}" method="post" id="signin-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <!-- id input -->
+        <div class="input__block">
+          <input type="text" placeholder="ID" name="username" class="input id" id="login-id">
+        </div>
+        <!-- password input -->
+        <div class="input__block">
+          <input type="password" placeholder="Password" name="password" class="input password" id="login-password">
+        </div>
+        <!-- sign in button -->
+        <button type="submit" class="signin__btn">Sign in</button>
+      </form>
+
+      <!-- 로그인 에러 메시지 표시 -->
+      <div th:if="${loginError}" class="error-message">
+        <p th:text="${loginError}"></p>
+      </div>
+
+      <!-- separator -->
+      <div class="separator">
+        <p>OR</p>
+      </div>
+      <!-- (임시) google button -->
+      <button class="google__btn">
+        <i class="fa fa-google"></i>
+        Sign in with Google
+      </button>
+      <!-- kakao button -->
+      <button class="kakao__btn">
+        <i class="fa fa-kakao"></i>
+        Sign in with kakao</button>
+
+    </div>
+    <footer>
+    </footer>
+  </div>
+  <!-- [E]basic-N37 -->
+</main>
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="yKLuqZbgI4" >
+  <div class="footer-container container-lg">
+    <div class="footer-bottom">
+      <div class="footer-txt">
+        <p><span>강원도 춘천시 강원대학길 1</span></p>
+        <p>
+          <span>T. 033-250-6114</span>
+        </p>
+      </div>
+      <div class="footer-txt">
+        <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var signinTab = document.getElementById('signin');
+    var signupTab = document.getElementById('signup');
+    var signinForm = document.getElementById('signin-form');
+    var signupForm = document.getElementById('signup-form');
+
+    signinTab.addEventListener('click', function () {
+      event.preventDefault();
+      signinForm.style.display = 'block';
+      signupForm.style.display = 'none';
+    });
+
+    signupTab.addEventListener('click', function () {
+      event.preventDefault();
+      signinForm.style.display = 'none';
+      signupForm.style.display = 'block';
+    });
+  });
+</script>
+<!-- [E]basic-N4 -->
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
+</body>
