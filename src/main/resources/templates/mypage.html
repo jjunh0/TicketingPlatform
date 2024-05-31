@@ -92,11 +92,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${#lists.isEmpty(member.ticketList)}">
+        <tr th:if="${#lists.isEmpty(ticketList)}">
             <td colspan="3">보유한 티켓이 없습니다.</td>
         </tr>
-        <tr th:each="ticket : ${member.ticketList}">
-            <td th:text="${ticket.ticketName}">Ticket Name</td>
+        <tr th:each="ticket : ${ticketList}">
+            <td th:text="${ticket.seatName}">Seat Name</td>
             <td th:text="${ticket.ticketPrice}">Ticket Price</td>
             <td th:text="${ticket.performance.performanceName}">Performance Name</td>
         </tr>
