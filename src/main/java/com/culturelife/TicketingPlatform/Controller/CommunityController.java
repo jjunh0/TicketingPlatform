@@ -30,7 +30,12 @@ public class CommunityController {
   @GetMapping("/community/{pageNumber}")
   public String communityPageController(@PathVariable("pageNumber") int pageNumber, Model model){
     Page<Post> postList = postService.readPostPage(pageNumber);
+    int totalPage = postService.readAllPosts().size();
+    if(totalPage % 10 > 0) totalPage += 10;
+    totalPage /= 10;
     model.addAttribute("Postlist", postList);
+    model.addAttribute("currentPage", pageNumber);
+    model.addAttribute("totalPages", totalPage);
     return "community";
   }
   @GetMapping("/createpost")
