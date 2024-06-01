@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -96,6 +97,16 @@ public class CommunityController {
     Page<Post> postList = postService.searchPostPage(1, query);
     model.addAttribute("Postlist", postList);
     return "community";
+  }
+
+  @GetMapping("/updateComment/{postId}/{commentId}")
+  public String updateCommentViewController(@PathVariable("postId")Long postId,
+                                            @PathVariable("commentId")Long commentId,
+                                            Model model)
+  {
+    Comment comment = commentService.readComment(commentId);
+    model.addAttribute("comment", comment);
+    return "updatecomment";
   }
 
 
