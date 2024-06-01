@@ -99,14 +99,35 @@ public class CommunityController {
     return "community";
   }
 
-  @GetMapping("/updateComment/{postId}/{commentId}")
-  public String updateCommentViewController(@PathVariable("postId")Long postId,
+  @GetMapping("/updateComment/{postId}/{commentId}/updateForm")
+  public String updateCommentFormController(@PathVariable("postId")Long postId,
                                             @PathVariable("commentId")Long commentId,
                                             Model model)
   {
     Comment comment = commentService.readComment(commentId);
-    model.addAttribute("comment", comment);
+    model.addAttribute("commentId", comment.getId());
+    model.addAttribute("commentContents", comment.getCommentContents());
+    model.addAttribute("postId", postId);
     return "updatecomment";
+  }
+
+  @PostMapping("/updateComment/{postId}/{commentId}/update")
+  public String updateCommentController(@PathVariable("postId") Long postId,
+                                          @PathVariable("commentId") Long commentId,
+                                          @RequestParam("commentContent")String updatedContent)
+  {
+    System.out.println("postId: "+postId);
+    System.out.println("commentId: "+commentId);
+    System.out.println("updatedContent: "+updatedContent);
+    commentService.updateComment(commentId, updatedContent);
+    return "redirect:/post/"+postId;
+  }
+
+  @PostMapping("/deleteComment/{postId}/{commentId}")
+  public String deleteCommentController(@PathVariable("postId")Long postId,
+                                        @PathVariable("commentId")Long commentId)
+  {
+    
   }
 
 

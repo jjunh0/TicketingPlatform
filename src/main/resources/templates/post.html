@@ -108,7 +108,7 @@
               <p th:text="${comment.commentContents}"></p>
             </div>
             <div class="comment-actions" th:if="${comment.member.memberId} == ${currentMemberId}">
-              <a th:href="@{/updateComment/{postId}/{commentId}(postId=${post.id}, commentId=${comment.id})}" class="edit-btn">수정</a>
+              <a th:href="@{/updateComment/{postId}/{commentId}/updeateForm(postId=${post.id}, commentId=${comment.id})}" class="edit-btn">수정</a>
               <form th:action="@{/deleteComment/{postId}/{commentId}(postId=${post.id}, commentId=${comment.id})}" method="post" style="display:inline;">
                 <input type="hidden" name="commentId" th:value="${comment.id}">
                 <button type="submit" class="delete-btn">삭제</button>
