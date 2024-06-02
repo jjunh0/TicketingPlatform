@@ -23,21 +23,21 @@ public class ConcertInfoController {
     private final ConcertSeatService concertSeatService;
     private final AuthenticatedUserService authenticatedUserService;
     private final TicketService ticketService;
-    @GetMapping("/performances/{performanceId}")
-    public String concertInfo(@PathVariable("performanceId") Long performanceId, Model model) {
+    @GetMapping("/book")
+    public String concertInfo(@RequestParam(name = "performanceId") Long performanceId, Model model) {
         PerformanceDTO performanceDTO = concertSeatService.readPerformanceById(performanceId);
         performanceDTO.setId(performanceId);
         model.addAttribute("performance", performanceDTO);
         return "book";
     }
-    @GetMapping("/performances/{performanceId}/seats")
-    public String concertSelect(@PathVariable("performanceId") Long performanceId, Model model) {
+    @GetMapping("/seatbook")
+    public String concertSelect(@RequestParam("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
         model.addAttribute("seatlist", seat);
         return "seatbook";
     }
 
-    @PostMapping("/seats/{performanceId}")
+    @PostMapping("/seatbook/{performanceId}")
     public ModelAndView seatReserve(@PathVariable("performanceId") Long performanceId, SeatSelectionDTO seatSelectionForm, ModelAndView mav) {
         if(!concertSeatService.reserve(performanceId, seatSelectionForm.getSeatName())) {
             System.out.println("예약 실패");
