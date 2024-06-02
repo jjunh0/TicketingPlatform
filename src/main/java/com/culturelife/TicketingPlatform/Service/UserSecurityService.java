@@ -44,10 +44,10 @@ public class UserSecurityService implements UserDetailsService {
         // 사용자 정보를 담을 객체 생성
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        for (UserRole role : siteMember.getRoles()) {
-            System.out.println("Role: " + role.getRole());
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
+        UserRole role = siteMember.getRole();
+        System.out.println("Role: " + role.getRole());
+        authorities.add(new SimpleGrantedAuthority(role.getRole()));
+
         System.out.println("User loaded: " + siteMember.getMemberId());
         return new User(siteMember.getMemberId(), siteMember.getPassword(), authorities);
     }
