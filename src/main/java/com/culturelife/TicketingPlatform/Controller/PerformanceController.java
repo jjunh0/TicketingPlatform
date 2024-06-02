@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -17,24 +18,17 @@ public class PerformanceController {
 
     private final PerformanceService performanceService;
 
-    @GetMapping("/list")
-    public String list(Model model) {
+    @GetMapping(value = {"/contestlist/{page}", "/contestlist"})
+    public String list(Model model, @PathVariable(name="page", required = false) Integer page ) {
+        if(page == null) {
+            page = 1;
+        }
 
-        List<Performance> allPerformanceList = performanceService.readAllPerformance();
-        model.addAttribute("performanceList", allPerformanceList);
+        Page<Performance> performances = performanceService.readPostPage(page);
+        model.addAttribute("performancelist", performances);
 
-        return "home"; // 임시(수정필요)
+        return "contestlist"; // 임시(수정필요)
     }
 
 
-    @GetMapping({"/list/{id}"})
-    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page) {
-
-        Page<Performance> performancePage = null;
-        performancePage = performanceService.readPostPage(page);
-
-        model.addAttribute("performancePage", performancePage);
-
-        return "home"; // 임시(수정필요)
-    }
 }

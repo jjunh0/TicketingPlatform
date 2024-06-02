@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +31,12 @@ public class CommunityController {
   @GetMapping("/community/{pageNumber}")
   public String communityPageController(@PathVariable("pageNumber") int pageNumber, Model model){
     Page<Post> postList = postService.readPostPage(pageNumber);
+    int totalPage = postService.readAllPosts().size();
+    if(totalPage % 10 > 0) totalPage += 10;
+    totalPage /= 10;
     model.addAttribute("Postlist", postList);
+    model.addAttribute("currentPage", pageNumber);
+    model.addAttribute("totalPages", totalPage);
     return "community";
   }
   @GetMapping("/createpost")
@@ -86,13 +92,46 @@ public class CommunityController {
     commentService.createComment(currentMemberId, postId, commentContent);
     return "redirect:/post/"+postId;
   }
-
   @GetMapping("/search")
   public String searchPostController(@RequestParam("query")String query, Model model){
     Page<Post> postList = postService.searchPostPage(1, query);
     model.addAttribute("Postlist", postList);
     return "community";
   }
+
+  @GetMapping("/updateComment/{postId}/{commentId}/updateForm")
+  public String updateCommentFormController(@PathVariable("postId")Long postId,
+                                            @PathVariable("commentId")Long commentId,
+                                            Model model)
+  {
+    Comment comment = commentService.readComment(commentId);
+    model.addAttribute("commentId", comment.getId());
+    model.addAttribute("commentContents", comment.getCommentContents());
+    model.addAttribute("postId", postId);
+    return "updatecomment";
+  }
+
+  @PostMapping("/updateComment/{postId}/{commentId}/update")
+  public String updateCommentController(@PathVariable("postId") Long postId,
+                                          @PathVariable("commentId") Long commentId,
+                                          @RequestParam("commentContent")String updatedContent)
+  {
+    System.out.println("postId: "+postId);
+    System.out.println("commentId: "+commentId);
+    System.out.println("updatedContent: "+updatedContent);
+    commentService.updateComment(commentId, updatedContent);
+    return "redirect:/post/"+postId;
+  }
+
+  @PostMapping("/deleteComment/{postId}/{commentId}")
+  public String deleteCommentController(@PathVariable("postId")Long postId,
+                                        @PathVariable("commentId")Long commentId)
+  {
+
+    commentService.deleteComment(postId, commentId);
+    return "redirect:/post/"+postId;
+  }
+
 
 
 

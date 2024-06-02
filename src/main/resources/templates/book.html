@@ -123,7 +123,8 @@
               </div>
             <div class="contents-right-group">
               <div class="selectset selectset-round selectset-lg">
-                <form th:action="@{'/performances/' + ${performance.performanceId} + '/seats'}" method="get">
+                <form th:action="@{/seatbook}" method="get">
+                  <input type="hidden" name="performanceId" th:value="${performance.performanceId}" />
                   <button class="btnset btnset-line" type="submit">좌석선택</button>
                 </form>
               </div>
