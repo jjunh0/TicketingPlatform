@@ -27,9 +27,7 @@ public class SignInController {
     public SignInController(AuthenticatedUserService authenticatedUserService) {
         this.authenticatedUserService = authenticatedUserService;
     }
-    @Autowired
-    private MemberRepository memberRepository;
-
+    
     @Autowired
     private MemberService memberService;
 

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "ticket")
@@ -26,11 +28,6 @@ public class Ticket {
 
     @JsonBackReference
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @JsonBackReference
-    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
@@ -38,4 +35,8 @@ public class Ticket {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    private LocalDateTime memberCreateDate;
+
+    private LocalDateTime memberUpdateDate;
 }

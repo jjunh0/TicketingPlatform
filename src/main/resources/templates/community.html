@@ -153,30 +153,30 @@
           </tbody>
         </table>
         <br>
-        <nav class="pagiset pagiset-line" th:if="${totalPages > 1}">
+        <nav class="pagiset pagiset-line" th:if="${totalPages > 0}">
           <div class="pagiset-ctrl">
-            <a th:href="@{/community(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
+            <a th:href="@{/community/1}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
               <span class="visually-hidden">처음</span>
             </a>
           </div>
-          <div class="pagiset-ctrl">
-            <a th:href="@{/community(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
+          <div class="pagiset-ctrl" th:if="${currentPage != 1}">
+            <a th:href="@{/community/{page}(page=${currentPage - 1})}" class="pagiset-link pagiset-prev">
               <span class="visually-hidden">이전</span>
             </a>
           </div>
           <div class="pagiset-list">
             <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
-               th:href="@{/community(page=${pageNum})}"
+               th:href="@{/community/{page}(page=${pageNum})}"
                th:text="${pageNum}"
                th:classappend="${pageNum == currentPage} ? 'active'">1</a>
           </div>
-          <div class="pagiset-ctrl">
-            <a th:href="@{/community(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
+          <div class="pagiset-ctrl" th:if="${currentPage != totalPages}">
+            <a th:href="@{/community/{page}(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
               <span class="visually-hidden">다음</span>
             </a>
           </div>
           <div class="pagiset-ctrl">
-            <a th:href="@{/community(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a th:href="@{/community/{page}(page=${totalPages})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
               <span class="visually-hidden">마지막</span>
             </a>
           </div>

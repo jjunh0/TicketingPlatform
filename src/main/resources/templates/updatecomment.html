@@ -84,11 +84,11 @@
 <main>
   <br>
   <h1>댓글 수정</h1>
-  <form th:action="@{/updateComment}" method="post">
-    <input type="hidden" name="commentId" th:value="${comment.id}">
-    <textarea name="commentContent" th:text="${comment.commentContents}" required></textarea>
+  <form th:action="@{/updateComment/{postId}/{commentId}/update(postId = ${postId}, commentId = ${commentId})}" method="post">
+    <input type="hidden" name="commentId" th:value="${commentId}">
+    <textarea name="commentContent" th:text="${commentContents}" required></textarea>
     <button type="submit">수정</button>
-    <button type="button" onclick="window.location.href='/post/${comment.post.id}'">취소</button>
+    <button type="button" th:onclick="|window.location.href='@{/post/{postId}(postId=${postId})}'|" >취소</button>
   </form>
 </main>
 

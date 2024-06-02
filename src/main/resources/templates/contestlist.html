@@ -102,7 +102,7 @@
                 <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
                 <p class="cardset-desc">
                   <span th:text="${performance.performanceContents}">공연 내용</span> <br>
-                  <span th:text="${#dates.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
+                  <span th:text="${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
                   <span th:text="${performance.performancePrice + '원'}">가격</span>
                 </p>
               </div>

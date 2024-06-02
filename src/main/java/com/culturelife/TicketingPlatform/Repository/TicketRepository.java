@@ -1,6 +1,5 @@
 package com.culturelife.TicketingPlatform.Repository;
 
-import com.culturelife.TicketingPlatform.Entity.Order;
 import com.culturelife.TicketingPlatform.Entity.Ticket;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

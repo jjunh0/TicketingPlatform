@@ -32,10 +32,9 @@ public class MemberService {
 
         // 어드민 부분은 수정 예정
         if(member.getMemberId().equals("admin")) {
-            member.getRoles().add(UserRole.ADMIN);
-        } else {
-            member.getRoles().add(UserRole.USER);
+            member.setRole(UserRole.ADMIN);
         }
+        
         memberRepository.save(member);
         return member.getId();
     }

@@ -44,6 +44,11 @@ public class CommentService {
         return commentList;
     }
 
+    public Comment readComment(Long commentId){
+        Comment comment = commentRepository.reaById(commentId);
+        return comment;
+    }
+
     public void updateComment(Long commentId, String content) {
         Comment comment = commentRepository.reaById(commentId);
         comment.setCommentContents(content);
