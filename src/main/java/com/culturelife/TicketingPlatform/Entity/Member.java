@@ -37,10 +37,6 @@ public class Member {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "member")
-    private List<Order> orderList = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "member")
     private List<Ticket> ticketList = new ArrayList<>();
 
     @JsonManagedReference
@@ -59,9 +55,7 @@ public class Member {
     private LocalDateTime memberUpdateDate;
 
     // 권한 관련 추가
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "member_roles", joinColumns = @JoinColumn(name = "member_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private List<UserRole> roles = new ArrayList<>();
+    private UserRole role = UserRole.USER;
 }

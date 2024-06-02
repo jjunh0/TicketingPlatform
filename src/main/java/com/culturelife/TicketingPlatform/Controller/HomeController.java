@@ -1,23 +1,26 @@
 package com.culturelife.TicketingPlatform.Controller;
 
+import com.culturelife.TicketingPlatform.Entity.Performance;
 import com.culturelife.TicketingPlatform.Entity.dto.MemberDTO;
+import com.culturelife.TicketingPlatform.Service.PerformanceService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
-    @GetMapping("/")
-    public String homePage() {
+
+    private final PerformanceService performanceService;
+
+    @GetMapping(value = {"/", "/home"})
+    public String homePage(Model model) {
+
+        Page<Performance> performances = performanceService.readPostPage(1);
+        model.addAttribute("performancelist", performances);
         return "home";
-    }
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
-    @GetMapping("/contestlist")
-    public String concertList() {
-        return "contestlist";
     }
 
     @GetMapping("/community")

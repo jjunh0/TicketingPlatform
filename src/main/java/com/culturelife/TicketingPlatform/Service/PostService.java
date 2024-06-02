@@ -36,6 +36,7 @@ public class PostService {
         Long total = postRepository.counts();
         int startPage = 0;
         int remainPageCount = 10;
+        int postCount = 10;
 
         startPage = (int) (total - page * 10);
         if(startPage < 0) {
@@ -46,7 +47,7 @@ public class PostService {
         List<Post> postList = postRepository.readPostPage(startPage, remainPageCount);
         Collections.reverse(postList);
 
-        Pageable pageable = PageRequest.of(page-1 ,10);
+        Pageable pageable = PageRequest.of(page-1 ,postCount);
         PageImpl<Post> postPage = new PageImpl<>(postList, pageable, total);
         return postPage;
     }

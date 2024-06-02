@@ -31,6 +31,7 @@ public class PerformanceService {
         Long total = performanceRepository.counts();
         int startPage = 0;
         int remainPageCount = 3;
+        int pageCount =3;
 
         startPage = (int) (total - page * 3);
         if(startPage < 0) {
@@ -42,7 +43,7 @@ public class PerformanceService {
         Collections.reverse(performanceList);
 
 
-        Pageable pageable = PageRequest.of(page-1 ,3);
+        Pageable pageable = PageRequest.of(page-1 ,pageCount);
         PageImpl<Performance> performancePage = new PageImpl<>(performanceList, pageable, total);
         return performancePage;
     }
