@@ -88,7 +88,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             member.setMemberName(name != null ? name : "No Name");
             member.setMemberId(email);
             member.setPassword(""); // 소셜 로그인 사용자에게는 비밀번호가 필요하지 않음
-            member.setRoles(Collections.singletonList(UserRole.USER));
+            member.setRole(UserRole.USER);
             member.setUniversityAttendance(true);
             member.setMemberCreateDate(localDateTime);
             member.setMemberUpdateDate(localDateTime);
@@ -101,9 +101,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (UserRole role : member.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
+
+        authorities.add(new SimpleGrantedAuthority(member.getRole().getRole()));
+
 
         return new DefaultOAuth2User(authorities, modifiedAttributes, "email");
     }
