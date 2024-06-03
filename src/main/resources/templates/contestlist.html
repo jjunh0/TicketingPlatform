@@ -81,10 +81,11 @@
   <div class="header-dim"></div>
 </div>
 <!-- [E]basic-N2 -->
-<main class="th-layout-main ">
+
   <!-- [S]basic-N28 -->
-  <div class="basic-N28" data-bid="TYlvQu87m0" >
-    <div class="contents-inner">
+
+<!-- css오류로 container삭제(임시)-->
+
       <div class="contents-container container-md">
         <div class="textset">
           <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
@@ -110,39 +111,45 @@
           </div>
         </div>
       </div>
-    </div>
-    <nav class="pagiset pagiset-line" th:if="${totalPages >1}">
-      <div class="pagiset-ctrl">
-        <a th:href="@{/contestlist(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
-          <span class="visually-hidden">처음</span>
-        </a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a th:href="@{/contestlist(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
-          <span class="visually-hidden">이전</span>
-        </a>
-      </div>
-      <div class="pagiset-list">
-        <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
-           th:href="@{/contestlist(page=${pageNum})}"
-           th:text="${pageNum}"
-           th:classappend="${pageNum == currentPage} ? 'active'">1</a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a th:href="@{/contestlist(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
-          <span class="visually-hidden">다음</span>
-        </a>
-      </div>
-      <div class="pagiset-ctrl">
-        <a th:href="@{/contestlist(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
-          <span class="visually-hidden">마지막</span>
-        </a>
-      </div>
-    </nav>
-  </div>
+<br>
+      <nav class="pagiset pagiset-line" th:if="${totalPages >0}">
+        <div class="pagiset-ctrl">
+          <a th:href="@{/contestlist(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
+            <span class="visually-hidden">처음</span>
+          </a>
+        </div>
+        <div class="pagiset-ctrl">
+          <a th:href="@{/contestlist(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
+            <span class="visually-hidden">이전</span>
+          </a>
+        </div>
+        <div class="pagiset-list">
+          <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+             th:href="@{/contestlist(page=${pageNum})}"
+             th:text="${pageNum}"
+             th:classappend="${pageNum == currentPage} ? 'active'">1</a>
+        </div>
+        <div class="pagiset-ctrl">
+          <a th:href="@{/contestlist(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <span class="visually-hidden">다음</span>
+          </a>
+        </div>
+        <div class="pagiset-ctrl">
+          <a th:href="@{/contestlist(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <span class="visually-hidden">마지막</span>
+          </a>
+        </div>
+      </nav>
+<br>
+<br>
+
+
+
+
+
 
   <!-- [E]basic-N28 -->
-</main>
+
 <!-- [S]basic-N4 -->
 <div class="basic-N4" data-bid="jzlvQQX1F2" >
   <div class="footer-container container-lg">

@@ -94,7 +94,16 @@
           </tr>
           </tbody>
         </table>
-        <p th:text="${post.postContents}"></p>        <hr>        <!-- 댓글 입력 폼 -->
+        <p th:text="${post.postContents}"></p>
+        <div th:if="${post.member.memberId} == ${currentMemberId}">
+          <a th:href="@{/updatePost(postId=${post.id})}" class="edit-btn">수정</a>
+          <form th:action="@{/deletePost}" method="post" style="display:inline;">
+            <input type="hidden" name="postId" th:value="${post.id}">
+            <button type="submit" class="delete-btn">삭제</button>
+          </form>
+        </div>
+        <hr>
+        <!-- 댓글 입력 폼 -->
         <form th:action="@{/submitComment/{postId}(postId=${post.id})}" method="post">
           <textarea class="inputset-textarea form-control" placeholder="댓글을 작성하시오." required="" name="commentContent"></textarea>
           <button class="regist" type="submit">등록</button>
