@@ -106,7 +106,7 @@
   </div>
   <!-- [E]basic-N2 -->
   <h2>Seat Selection</h2>
-  <form id="reservationForm" th:action="@{/seats/{performanceId}(performanceId=${performanceId})}" method="post">
+  <form id="reservationForm" th:action="@{/seatbook/{performanceId}(performanceId=${performanceId})}" method="post">
     <div class="seatContainer">
       <div th:if="${#lists.isEmpty(seatlist)}">
         <p>예약 가능한 좌석이 없습니다.</p>
