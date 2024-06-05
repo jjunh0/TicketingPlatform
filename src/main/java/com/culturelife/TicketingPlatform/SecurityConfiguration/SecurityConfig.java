@@ -3,11 +3,14 @@ package com.culturelife.TicketingPlatform.SecurityConfiguration;
 import com.culturelife.TicketingPlatform.Entity.Enum.UserRole;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
+import com.culturelife.TicketingPlatform.Service.CustomOAuth2UserService;
 import com.culturelife.TicketingPlatform.Service.UserSecurityService;
 import com.culturelife.TicketingPlatform.filter.CheckAlreadyLoggedInFilter;
 import com.culturelife.TicketingPlatform.filter.CsrfCookieFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -27,6 +30,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -42,11 +47,15 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserSecurityService userSecurityService;
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
-    @Autowired
-    public SecurityConfig(UserSecurityService userSecurityService) { // 수정된 부분
+    private final UserSecurityService userSecurityService;
+    private final CustomOAuth2UserService customOAuth2UserService;
+
+    public SecurityConfig(UserSecurityService userSecurityService, CustomOAuth2UserService customOAuth2UserService) {
+
         this.userSecurityService = userSecurityService;
+        this.customOAuth2UserService = customOAuth2UserService;
     }
 
     @Bean
@@ -56,6 +65,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        logger.debug("Configuring SecurityFilterChain");
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
 
@@ -74,7 +84,8 @@ public class SecurityConfig {
                         return config;
                     }
                 }))
-                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/h2-console/**")
+                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler)
+                        .ignoringRequestMatchers("/h2-console/**", "/oauth2/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 // 프레임 옵션을 비활성화하여 H2 콘솔에 접근할 수 있도록 설정
                 .headers(headers -> headers
@@ -123,7 +134,17 @@ public class SecurityConfig {
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/home")
-                        .invalidateHttpSession(true));
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                )
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .loginPage("/signinup")
+                        .loginProcessingUrl("/login/oauth2/code/*")
+                        .defaultSuccessUrl("/home", true)
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                                .userService(customOAuth2UserService))  // openID를 사용하지 않으므로 oidcUserService -> userService로 변경
+                        .successHandler(oAuth2LoginSuccessHandler())
+                );
 
 
         return http.build();
@@ -146,4 +167,10 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(provider);
     }
+
+    @Bean
+    public AuthenticationSuccessHandler oAuth2LoginSuccessHandler() {
+        return new SimpleUrlAuthenticationSuccessHandler("/home");
+    }
+
 }

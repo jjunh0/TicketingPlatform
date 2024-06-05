@@ -25,6 +25,9 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+*.yaml
+/src/main/resources/application.yaml
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -35,3 +38,4 @@ out/
 
 ### VS Code ###
 .vscode/
+src/main/resources/application.yaml

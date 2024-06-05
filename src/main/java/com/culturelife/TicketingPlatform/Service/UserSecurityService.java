@@ -46,7 +46,7 @@ public class UserSecurityService implements UserDetailsService {
 
         UserRole role = siteMember.getRole();
         System.out.println("Role: " + role.getRole());
-        authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        authorities.add(new SimpleGrantedAuthority(siteMember.getRole().getRole()));
 
         System.out.println("User loaded: " + siteMember.getMemberId());
         return new User(siteMember.getMemberId(), siteMember.getPassword(), authorities);
