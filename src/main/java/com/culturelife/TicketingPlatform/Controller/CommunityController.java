@@ -70,7 +70,6 @@ public class CommunityController {
     post.setPostContents(postDTO.getPostContents());
     post.setPostCreateDate(LocalDateTime.now());
     post.setPostUpdateDate(LocalDateTime.now());
-    post.setCommentList(new ArrayList<Comment>());
     Member currentMember;
     if(userService.getCurrentMember().isPresent()) currentMember = userService.getCurrentMember().get();
     else{

@@ -85,4 +85,13 @@ public class PostService {
         return postRepository.readByMemberId(memberId);
     }
 
+    @Transactional
+    public Long deletePost(Long postId) {
+        Post deletePost = postRepository.readById(postId);
+        Member member = deletePost.getMember();
+        deletePost.setMember(null);
+        member.getPostList().remove(deletePost);
+
+        return deletePost.getId();
+    }
 }

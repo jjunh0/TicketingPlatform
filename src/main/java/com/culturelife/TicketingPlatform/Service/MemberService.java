@@ -115,13 +115,4 @@ public class MemberService {
     }
 
 
-    @Transactional
-    public Long deleteQuestion(Long questionId) {
-        Post deletePost = postRepository.readById(questionId);
-        Member member = deletePost.getMember();
-        deletePost.setMember(null);
-        member.getPostList().remove(deletePost);
-
-        return deletePost.getId();
-    }
 }

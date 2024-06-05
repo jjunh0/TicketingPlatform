@@ -77,12 +77,12 @@ public class AuthenticatedUserService {
      */
     public Optional<Member> getCurrentMember() {
         String memberId = getCurrentMemberId();
-        logger.info("Current memberId: {}", memberId);
+       // logger.info("Current memberId: {}", memberId);
         if ("알 수 없음".equals(memberId)) {
             return Optional.empty();
         }
         Optional<Member> memberOpt = memberRepository.readByMemberId(memberId);
-        logger.info("Current member: {}", memberOpt);
+        //logger.info("Current member: {}", memberOpt);
         return memberOpt;
     }
 
