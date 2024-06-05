@@ -48,7 +48,7 @@
 }
 
 /* basic-N38 [OiLufrN2Y2] */
-.basic-N38 .contents-inner { padding: 8rem 1.6rem; }
+.basic-N38 .contents-inner { padding: 8rem 1.6rem; overflow-y: auto;  max-height: calc(100vh - 200px);  }
 .basic-N38 .root_daum_roughmap { width: 100%; border-radius: 2rem; }
 .basic-N38 .root_daum_roughmap .wrap_map { height: 40rem; }
 .basic-N38 .root_daum_roughmap .wrap_controllers { display: none; }

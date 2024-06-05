@@ -34,6 +34,7 @@ public class ConcertInfoController {
     public String concertSelect(@RequestParam("performanceId") Long performanceId, Model model) {
         List<SeatInfoDTO> seat = concertSeatService.readSeatById(performanceId);
         model.addAttribute("seatlist", seat);
+        model.addAttribute("performanceId", performanceId);
         return "seatbook";
     }
 
@@ -41,11 +42,11 @@ public class ConcertInfoController {
     public ModelAndView seatReserve(@PathVariable("performanceId") Long performanceId, SeatSelectionDTO seatSelectionForm, ModelAndView mav) {
         if(!concertSeatService.reserve(performanceId, seatSelectionForm.getSeatName())) {
             System.out.println("예약 실패");
-            mav.addObject("data", new Message("이미 선택된 좌석입니다.", "/performances/"+performanceId+"/seats"));
+            mav.addObject("data", new Message("이미 선택된 좌석입니다.", "/seatbook?performanceId="+performanceId));
             mav.setViewName("/common/message");
             return mav;
         }
-        mav.addObject("data", new Message("예약 성공.", "/performances/"+performanceId));
+        mav.addObject("data", new Message("예약 성공.", "/book?performanceId="+performanceId));
         mav.setViewName("/common/message");
 
         ticketService.makeTicket(performanceId, seatSelectionForm.getSeatName(),
