@@ -25,6 +25,8 @@ public class PerformanceController {
         }
 
         Page<Performance> performances = performanceService.readPostPage(page);
+        int totalPages = performances.getTotalPages();
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("performancelist", performances);
 
         return "contestlist"; // 임시(수정필요)

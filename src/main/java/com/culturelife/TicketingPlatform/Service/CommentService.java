@@ -55,9 +55,9 @@ public class CommentService {
     }
     public void deleteComment(Long postId, Long commentId) {
         Post post = postRepository.readById(postId);
-        Comment comment = post.getCommentList().get((int) (commentId - 1));
+        Comment comment = commentRepository.reaById(commentId);
         commentRepository.delete(comment);
-        post.getCommentList().remove((int)(commentId-1));
+        post.getCommentList().remove(comment);
     }
 
     public void deleteCommentAll(Long postId) {
