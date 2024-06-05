@@ -19,6 +19,8 @@ public class HomeController {
     public String homePage(Model model) {
 
         Page<Performance> performances = performanceService.readPostPage(1);
+        int totalPages = performances.getTotalPages();
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("performancelist", performances);
         return "home";
     }
