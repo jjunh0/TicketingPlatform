@@ -113,7 +113,7 @@
           <div class="cardset cardset-inner">
             <a th:href="@{/contestlist}">
               <figure class="cardset-figure">
-                <img class="cardset-img" th:src="@{'/images/' + ${performance.id} + '_' + ${iterStat.index + 1} + '.png'}" alt="카드 이미지" th:alt="${performance.performanceName}">
+                <img class="cardset-img" th:src="@{'/images/' + ${performance.id} +  '.png'}" alt="카드 이미지" th:alt="${performance.performanceName}">
               </figure>
               <div class="cardset-body">
                 <h2 class="cardset-tit" th:text="${performance.performanceName}">festival</h2>

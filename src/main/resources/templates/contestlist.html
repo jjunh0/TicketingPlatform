@@ -86,10 +86,10 @@
 
 <!-- css오류로 container삭제(임시)-->
 
-      <div class="contents-container container-md">
-        <div class="textset">
-          <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
-        </div>
+<div class="textset" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+  <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
+  <a href="/admin/create" class="btn btn-primary" style="margin-left: 20px;">공연 추가</a>
+</div>
         <div class="contents-group">
           <div th:if="${#lists.isEmpty(performancelist)}">
             <p>아무 공연도 등록되어 있지 않습니다.</p>
@@ -97,7 +97,7 @@
           <div th:each="performance : ${performancelist}" class="cardset cardset-hover cardset-border text-center">
             <a th:href="@{/book(performanceId=${performance.id})}">
               <figure class="cardset-figure">
-                <img th:src="@{'/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
+                <img th:src="@{'/images/' + ${performance.id} + '.png'}" th:alt="${performance.performanceName}">
               </figure>
               <div class="cardset-cont">
                 <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
@@ -112,34 +112,34 @@
         </div>
       </div>
 <br>
-      <nav class="pagiset pagiset-line" th:if="${totalPages >0}">
-        <div class="pagiset-ctrl">
-          <a th:href="@{/contestlist(page=0)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
-            <span class="visually-hidden">처음</span>
-          </a>
-        </div>
-        <div class="pagiset-ctrl">
-          <a th:href="@{/contestlist(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
-            <span class="visually-hidden">이전</span>
-          </a>
-        </div>
-        <div class="pagiset-list">
-          <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
-             th:href="@{/contestlist(page=${pageNum})}"
-             th:text="${pageNum}"
-             th:classappend="${pageNum == currentPage} ? 'active'">1</a>
-        </div>
-        <div class="pagiset-ctrl">
-          <a th:href="@{/contestlist(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
-            <span class="visually-hidden">다음</span>
-          </a>
-        </div>
-        <div class="pagiset-ctrl">
-          <a th:href="@{/contestlist(page=${totalPages - 1})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
-            <span class="visually-hidden">마지막</span>
-          </a>
-        </div>
-      </nav>
+<nav class="pagiset pagiset-line" th:if="${totalPages > 0}">
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=1)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
+      <span class="visually-hidden">처음</span>
+    </a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
+      <span class="visually-hidden">이전</span>
+    </a>
+  </div>
+  <div class="pagiset-list">
+    <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+       th:href="@{/contestlist/page(page=${pageNum})}"
+       th:text="${pageNum}"
+       th:classappend="${pageNum == currentPage} ? 'active'">1</a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <span class="visually-hidden">다음</span>
+    </a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${totalPages})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <span class="visually-hidden">마지막</span>
+    </a>
+  </div>
+</nav>
 <br>
 <br>
 

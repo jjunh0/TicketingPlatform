@@ -105,7 +105,7 @@
     <div class="header-dim"></div>
   </div>
   <!-- [E]basic-N2 -->
-  <h2>Seat Selection</h2>
+  <h2>좌석을 고르시오</h2>
   <form id="reservationForm" th:action="@{/seatbook/{performanceId}(performanceId=${performanceId})}" method="post">
     <div class="seatContainer">
       <div th:if="${#lists.isEmpty(seatlist)}">

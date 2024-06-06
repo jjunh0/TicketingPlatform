@@ -25,13 +25,13 @@ form .signin__btn { background: #25282d; color: white; display: block; width: 92
 .separator { display: block; margin: 30px auto 10px; text-align: center; height: 40px; position: relative; background: transparent; color: rgba(15, 19, 42, 0.4); font-size: 13px; width: 90%; max-width: 680px; }
 .separator::before { content: ""; position: absolute; top: 8px; left: 0; background: rgba(15, 19, 42, 0.2); height: 1px; width: 45%; }
 .separator::after { content: ""; position: absolute; top: 8px; right: 0; background: rgba(15, 19, 42, 0.2); height: 1px; width: 45%; }
-.google__btn,.kakao__btn { display: block; width: 90%; max-width: 680px; margin: 20px auto; height: 50px; cursor: pointer; font-size: 14px; font-family: "Montserrat", sans-serif; border-radius: 8px; border: none; line-height: 40px; }
-.google__btn.google__btn,.kakao__btn.google__btn { background: #5b90f0; color: white; box-shadow: 0 15px 30px rgba(91, 144, 240, 0.36); transition: 0.2s linear; }
-.google__btn.google__btn .fa,.kakao__btn.google__btn .fa { font-size: 20px; padding: 0 5px 0 0; }
-.google__btn.google__btn:hover,.kakao__btn.google__btn:hover { box-shadow: 0 0 0 rgba(91, 144, 240, 0); }
-.google__btn.kakao__btn,.kakao__btn.kakao__btn { background: #FFD700; color: white; box-shadow: 0 15px 30px rgba(37, 40, 45, 0.36); transition: 0.2s linear; }
-.google__btn.kakao__btn .fa,.kakao__btn.kakao__btn .fa { font-size: 20px; padding: 0 5px 0 0; }
-.google__btn.kakao__btn:hover,.kakao__btn.kakao__btn:hover { box-shadow: 0 0 0 rgba(37, 40, 45, 0); }
+.google__btn,.naver__btn { display: block; width: 90%; max-width: 680px; margin: 20px auto; height: 50px; cursor: pointer; font-size: 14px; font-family: "Montserrat", sans-serif; border-radius: 8px; border: none; line-height: 40px; }
+.google__btn.google__btn,.naver__btn.google__btn { background: #5b90f0; color: white; box-shadow: 0 15px 30px rgba(91, 144, 240, 0.36); transition: 0.2s linear; }
+.google__btn.google__btn .fa,.naver__btn.google__btn .fa { font-size: 20px; padding: 0 5px 0 0; }
+.google__btn.google__btn:hover,.naver__btn.google__btn:hover { box-shadow: 0 0 0 rgba(91, 144, 240, 0); }
+.google__btn.naver__btn,.naver__btn.naver__btn { background: #2DB400; color: white; box-shadow: 0 15px 30px rgba(37, 40, 45, 0.36); transition: 0.2s linear; }
+.google__btn.naver__btn .fa,.naver__btn.naver__btn .fa { font-size: 20px; padding: 0 5px 0 0; }
+.google__btn.naver__btn:hover,.naver__btn.naver__btn:hover { box-shadow: 0 0 0 rgba(37, 40, 45, 0); }
 
 * {
     will-change: transform, opacity;
