@@ -126,9 +126,15 @@ public class CommunityController {
   public String deleteCommentController(@PathVariable("postId")Long postId,
                                         @PathVariable("commentId")Long commentId)
   {
-
     commentService.deleteComment(postId, commentId);
     return "redirect:/post/"+postId;
+  }
+
+  @PostMapping("/deletePost")
+  public String deletePostController(@RequestParam("postId")Long postId){
+    commentService.deleteCommentAll(postId);
+    postService.deletePost(postId);
+    return "redirect:/community/1";
   }
 
 

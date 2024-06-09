@@ -90,10 +90,10 @@
         <table>
           <tbody>
           <tr>
-            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{postSubject}" name="postSubject"></td>
+            <td><input type="text" placeholder="제목을 입력하세요" th:field="*{postSubject}" name="postSubject" th:text="${postSubject}"></td>
           </tr>
           <tr>
-            <td><textarea placeholder="내용을 입력하세요" th:field="*{postContents}" name="postContents"></textarea></td>
+            <td><textarea placeholder="내용을 입력하세요" th:field="*{postContents}" name="postContents" th:text="${postContents}"></textarea></td>
           </tr>
           <tr>
             <td>

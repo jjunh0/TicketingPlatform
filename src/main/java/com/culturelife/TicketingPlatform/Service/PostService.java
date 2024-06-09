@@ -89,9 +89,9 @@ public class PostService {
     public Long deletePost(Long postId) {
         Post deletePost = postRepository.readById(postId);
         Member member = deletePost.getMember();
-        deletePost.setMember(null);
+//        deletePost.setMember(null);
         member.getPostList().remove(deletePost);
-
+        postRepository.deletePost(deletePost);
         return deletePost.getId();
     }
 }
