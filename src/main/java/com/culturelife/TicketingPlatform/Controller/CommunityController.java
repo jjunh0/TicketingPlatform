@@ -136,8 +136,10 @@ public class CommunityController {
     postService.deletePost(postId);
     return "redirect:/community/1";
   }
-
-
-
-
+  @GetMapping("/updatePost/{postId}")
+  public String updatePostFormController(@PathVariable("postId")Long postId, Model model) {
+    Post post = postService.readPostById(postId);
+    model.addAttribute("post", post);
+    return "updatepost";
+  }
 }
