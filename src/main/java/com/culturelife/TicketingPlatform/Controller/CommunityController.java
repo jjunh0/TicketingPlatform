@@ -142,4 +142,12 @@ public class CommunityController {
     model.addAttribute("post", post);
     return "updatepost";
   }
+  @PostMapping("/updatePost")
+  public String updatePostController(@RequestParam("postId") Long postId,
+                                     @RequestParam("postSubject") String postSubject,
+                                     @RequestParam("postContents") String postContents)
+  {
+    postService.updatePost(postId, postSubject, postContents);
+    return "redirect:/community/1";
+  }
 }

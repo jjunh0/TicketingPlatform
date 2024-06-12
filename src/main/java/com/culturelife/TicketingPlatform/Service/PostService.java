@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -93,5 +94,13 @@ public class PostService {
         member.getPostList().remove(deletePost);
         postRepository.deletePost(deletePost);
         return deletePost.getId();
+    }
+    @Transactional
+    public void updatePost(Long postId, String newSubject, String newContents){
+        Post post = postRepository.readById(postId);
+        post.setPostSubject(newSubject);
+        post.setPostContents(newContents);
+        post.setPostUpdateDate(LocalDateTime.now());
+        postRepository.save(post);
     }
 }
