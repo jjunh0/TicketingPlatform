@@ -46,7 +46,7 @@ public class PerformanceController {
         model.addAttribute("performancelist", performancePage);
         model.addAttribute("currentPage", page);
 
-        return "contestlist"; // 임시(수정필요)
+        return "contestlist";
     }
 
 
