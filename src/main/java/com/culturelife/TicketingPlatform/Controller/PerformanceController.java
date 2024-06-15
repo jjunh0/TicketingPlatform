@@ -19,7 +19,7 @@ public class PerformanceController {
 
     private final PerformanceService performanceService;
 
-    @GetMapping("/contestlist")
+    @GetMapping(value = {"/contestlist", "/contestlist/"})
     public String getContestList(Model model) {
 
         return getContestListByPage(model, 1);
@@ -27,15 +27,23 @@ public class PerformanceController {
 
     @GetMapping(value = {"/contestlist/page"})
     public String getContestListByPage(Model model, @RequestParam(value = "page", defaultValue = "1") int page ) {
+        if(page <= 0)
+            page = 1;
 
+        Long pageCount = performanceService.count() / 10;
+
+        if(page > pageCount) {
+            page = pageCount.intValue();
+        }
 
         PageRequest pageable = PageRequest.of(page - 1, 10);
         Page<Performance> performancePage = performanceService.readPostPage(page);
 
-        Page<Performance> performances = performanceService.readPostPage(page);
-        int totalPages = performances.getTotalPages();
+        int totalPages = performancePage.getTotalPages();
+
+
         model.addAttribute("totalPages", totalPages);
-        model.addAttribute("performancelist", performances);
+        model.addAttribute("performancelist", performancePage);
         model.addAttribute("currentPage", page);
 
         return "contestlist"; // 임시(수정필요)

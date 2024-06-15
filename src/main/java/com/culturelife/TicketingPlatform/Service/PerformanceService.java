@@ -27,6 +27,10 @@ public class PerformanceService {
         return performance.getId();
     }
 
+    public Long count() {
+        return performanceRepository.counts();
+    }
+
     public Page<Performance> readPostPage(int page) {
         Long total = performanceRepository.counts();
         int startPage = 0;
