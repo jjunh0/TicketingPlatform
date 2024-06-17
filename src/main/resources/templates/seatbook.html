@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>좌석 선택 | test1</title>
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <style>
+    .seatContainer {
+      display: flex;
+      flex-wrap: wrap;
+      width: 520px; /* 한 줄에 10개의 좌석을 배치하기 위해 너비 조정 */
+      flex-direction: row;
+    }
+    .seat {
+      width: 40px;
+      height: 40px;
+      background-color: #f0f0f0;
+      margin: 5px; /* 좌우 여백을 5px로 설정 */
+      border: 2px solid transparent;
+      box-sizing: border-box
+    }
+    .booked { background-color: grey; }
+    .available { background-color: #9076E9; }
+    .selected {
+      background-color: #C7BAF4;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- [S]basic-N2 -->
+  <!-- [E]basic-N2 -->
+  <!-- [S]basic-N2 -->
+  <div class="basic-N2" data-bid="OvlVv86q8f" >
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <h1 class="header-title">
+          <a href="javascript:void(0)">
+            <img src="/images/duri.png" alt="">
+          </a>
+        </h1>
+        <div class="header-right">
+          <div class="header-title header-mobile-top">
+            <a href="javascript:void(0)">
+              <img src="/images/img_logo_black.png" alt="로고">
+            </a>
+          </div>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/home}">
+                <span>홈</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/contestlist}">
+                <span>공연</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/community}">
+                <span>게시판</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/mypage}">
+                <span>마이페이지</span>
+              </a>
+            </li>
+            <li class="header-gnbitem" sec:authorize="isAnonymous()">
+              <a class="header-gnblink" th:href="@{/signinup}">
+                <span>로그인</span>
+              </a>
+            </li>
+            <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+              <a class="header-gnblink" th:href="@{/logout}">
+                <span>로그아웃</span>
+              </a>
+            </li>
+
+
+          </ul>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="header-dim"></div>
+  </div>
+  <!-- [E]basic-N2 -->
+  <h2>좌석을 고르시오</h2>
+  <form id="reservationForm" th:action="@{/seatbook/{performanceId}(performanceId=${performanceId})}" method="post">
+    <div class="seatContainer">
+      <div th:if="${#lists.isEmpty(seatlist)}">
+        <p>예약 가능한 좌석이 없습니다.</p>
+      </div>
+      <div th:each="seat : ${seatlist}">
+        <div th:class="${seat.isBooked} ? 'seat booked' : 'seat available'" th:id="${seat.seatName}" onclick="selectSeat(this)">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedSeat" name="seatName">
+    <button type="submit" disabled id="reserveButton">Reserve</button>
+  </form>
+  <!-- [S]basic-N4 -->
+
+  <!-- [E]basic-N4 -->
+  <!-- [S]basic-N4 -->
+  <div class="basic-N4" data-bid="GklVv86yiQ" >
+    <div class="footer-container container-lg">
+      <div class="footer-bottom">
+        <div class="footer-txt">
+          <p><span>강원도 춘천시 강원대학길 1</span></p>
+          <p>
+            <span>T. 033-250-6114</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [E]basic-N4 -->
+  <script>
+    let selectedSeat = null;
+
+    function selectSeat(seatElement) {
+      // Check if the seat is already booked
+      if (seatElement.classList.contains('booked')) {
+        return;
+      }
+
+      // Deselect the previously selected seat, if any
+      if (selectedSeat) {
+        selectedSeat.classList.replace('selected', 'available');
+      }
+
+      // Select the new seat
+      seatElement.classList.replace('available', 'selected');
+      selectedSeat = seatElement;
+
+      // Enable the reservation button
+      document.getElementById('reserveButton').disabled = false;
+
+      // Set the selected seat name in the hidden input field
+      document.getElementById('selectedSeat').value = seatElement.id;
+    }
+  </script>
+</body>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>공연예약 | test1</title>
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+
+</head>
+
+<body>
+  <!-- [S]basic-N2 -->
+  <div class="basic-N2" data-bid="YALVQr2Mqm" >
+    <div class="header-inner">
+      <div class="header-container container-lg">
+        <h1 class="header-title">
+          <a href="javascript:void(0)">
+            <img src="/images/duri.png" alt="">
+          </a>
+        </h1>
+        <div class="header-right">
+          <div class="header-title header-mobile-top">
+            <a href="javascript:void(0)">
+              <img src="/images/img_logo_black.png" alt="로고">
+            </a>
+          </div>
+          <ul class="header-gnblist">
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/home}">
+                <span>홈</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/contestlist}">
+                <span>공연</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/community}">
+                <span>게시판</span>
+              </a>
+            </li>
+            <li class="header-gnbitem">
+              <a class="header-gnblink" th:href="@{/mypage}">
+                <span>마이페이지</span>
+              </a>
+            </li>
+            <li class="header-gnbitem" sec:authorize="isAnonymous()">
+              <a class="header-gnblink" th:href="@{/signinup}">
+                <span>로그인</span>
+              </a>
+            </li>
+            <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+              <a class="header-gnblink" th:href="@{/logout}">
+                <span>로그아웃</span>
+              </a>
+            </li>
+
+
+          </ul>
+
+
+        </div>
+        <div class="header-utils">
+          <button class="btn-momenu">
+            <img src="/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+          </button>
+          <button class="btn-close">
+            <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="header-dim"></div>
+  </div>
+  <!-- [E]basic-N2 -->
+  <!-- [S]basic-N3 -->
+  <!-- [E]basic-N3 -->
+  <main class="th-layout-main ">
+    <!-- [S]basic-N51 -->
+    <div class="basic-N51" data-bid="PjLuFriO07" >
+      <div class="contents-inner">
+        <div class="contents-container container-md">
+          <div class="contents-left">
+            <div class="contents-thumbnail">
+              <img class="contents-thumbimg" th:src="@{'/images/' + ${performance.id} + '_thumbnail.png'}" alt="썸네일이미지" th:alt="${performance.performanceName}">
+            </div>
+          </div>
+          <div class="contents-right">
+            <div class="contents-right-group">
+              <div class="contents-brand">
+                <div class="contents-brand-group">
+                  <button class="contents-btn btn-like-line">
+                  </button>
+                  <button class="contents-btn btn-like-fill">
+                    <img src="/icons/ico_like_black_fill.svg" alt="하트 채워진 아이콘">
+                  </button>
+                  <button class="contents-btn">
+                  </button>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <div>
+                  <h2 th:text="${performance.performanceName}">Performance Name</h2>
+                  <p th:text="${performance.performanceContents}">Contents</p>
+                  <p th:text="'Date: ' + ${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">Date</p>
+                  <p th:text="'Price: ' + ${performance.performancePrice} + '원'">Price</p>
+                </div>
+                <div style="margin-left: auto;">
+                  <form th:action="@{/seatbook}" method="get" style="display: inline;">
+                    <input type="hidden" name="performanceId" th:value="${performance.performanceId}" />
+                    <button class="btnset btnset-line" type="submit">좌석선택</button>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [E]basic-N51 -->
+    <!-- [S]basic-N29 -->
+
+    <!-- [E]basic-N29 -->
+    <!-- [S]basic-N10 -->
+
+    <!-- [E]basic-N10 -->
+    <!-- [S]basic-N52 -->
+
+    </div>
+    <!-- [E]basic-N52 -->
+  </main>
+  <!-- [S]basic-N15 -->
+  <div class="basic-N15" data-bid="TjLvQtyfG2" >
+    <div class="contents-inner">
+      <div class="contents-container container-md">
+          <div class="textset">
+              <h2 class="textset-tit">상세 내역&nbsp;</h2>
+          </div>
+        <div class="cardset">
+          <figure class="cardset-figure">
+            <img class="cardset-img img-pc" th:src="@{'/images/' + ${performance.id} + '_1.png'}" th:alt="${performance.performanceName}">
+            <img class="cardset-img img-mobile" th:src="@{'/images/' + ${performance.id} + '_mobile_1.png'}" th:alt="${performance.performanceName}">
+          </figure>
+          <div class="cardset-body">
+            <h5 class="cardset-tit" th:text="${performance.performanceName}">공연이름</h5>
+            <p class="cardset-desc" th:text="${performance.performanceContents}">공연설명</p>
+          </div>
+          </div>
+      </div>
+  </div>
+  </div>
+  <!-- [E]basic-N15 -->
+  <!-- [S]basic-N4 -->
+  <footer class="basic-N4" data-bid="OFluFrioa3" id="">
+    <div class="footer-container container-lg">
+      <div class="footer-bottom">
+        <div class="footer-txt">
+          <p><span>강원도 춘천시 강원대학길 1</span></p>
+          <p>
+            <span>T. 033-250-6114</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- [E]basic-N4 -->
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
+
+  <script>
+    function setSelectedDate(date) {
+      document.getElementById('selectedDate').value = date;
+    }
+  </script>
+
+</body>

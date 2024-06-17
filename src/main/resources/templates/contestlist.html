@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="title" content="웹사이트">
+  <meta name="description" content="웹사이트입니다.">
+  <meta name="keywords" content="키워드,키워드,키워드">
+  <meta property="og:title" content="웹사이트">
+  <meta property="og:description" content="웹사이트입니다">
+  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:url" content="https://웹사이트">
+  <title>공연목록 | test1</title>
+  <base href="/">
+  <link rel="stylesheet" href="/css/setting.css">
+  <link rel="stylesheet" href="/css/plugin.css">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+<!-- [S]basic-N2 -->
+<div class="basic-N2" data-bid="ZxLVQQWYX6" >
+  <div class="header-inner">
+    <div class="header-container container-lg">
+      <h1 class="header-title">
+        <a href="javascript:void(0)">
+          <img src="/images/duri.png" alt="">
+        </a>
+      </h1>
+      <div class="header-right">
+        <div class="header-title header-mobile-top">
+          <a href="javascript:void(0)">
+            <img src="/images/img_logo_black.png" alt="로고">
+          </a>
+        </div>
+        <ul class="header-gnblist">
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/home}">
+              <span>홈</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/contestlist}">
+              <span>공연</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/community}">
+              <span>게시판</span>
+            </a>
+          </li>
+          <li class="header-gnbitem">
+            <a class="header-gnblink" th:href="@{/mypage}">
+              <span>마이페이지</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAnonymous()">
+            <a class="header-gnblink" th:href="@{/signinup}">
+              <span>로그인</span>
+            </a>
+          </li>
+          <li class="header-gnbitem" sec:authorize="isAuthenticated()">
+            <a class="header-gnblink" th:href="@{/logout}">
+              <span>로그아웃</span>
+            </a>
+          </li>
+
+
+        </ul>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="header-dim"></div>
+</div>
+<!-- [E]basic-N2 -->
+
+  <!-- [S]basic-N28 -->
+
+<!-- css오류로 container삭제(임시)-->
+
+<div class="textset" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+  <h2 class="textset-tit" contenteditable="true">공연 목록</h2>
+  <a href="/admin/create" class="btn btn-primary" style="margin-left: 20px;">공연 추가</a>
+</div>
+        <div class="contents-group">
+          <div th:if="${#lists.isEmpty(performancelist)}">
+            <p>아무 공연도 등록되어 있지 않습니다.</p>
+          </div>
+          <div th:each="performance : ${performancelist}" class="cardset cardset-hover cardset-border text-center">
+            <a th:href="@{/book(performanceId=${performance.id})}">
+              <figure class="cardset-figure">
+                <img th:src="@{'/images/' + ${performance.id} + '.png'}" th:alt="${performance.performanceName}">
+              </figure>
+              <div class="cardset-cont">
+                <h2 class="cardset-tit" th:text="${performance.performanceName}">공연 이름</h2>
+                <p class="cardset-desc">
+                  <span th:text="${performance.performanceContents}">공연 내용</span> <br>
+                  <span th:text="${#temporals.format(performance.performanceDate, 'yyyy-MM-dd HH:mm')}">공연 날짜 및 시간</span> <br>
+                  <span th:text="${performance.performancePrice + '원'}">가격</span>
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+<br>
+<nav class="pagiset pagiset-line" th:if="${totalPages > 0}">
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=1)}" class="pagiset-link pagiset-first" th:classappend="${currentPage == 1} ? 'disabled'">
+      <span class="visually-hidden">처음</span>
+    </a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${currentPage - 1})}" class="pagiset-link pagiset-prev" th:classappend="${currentPage == 1} ? 'disabled'">
+      <span class="visually-hidden">이전</span>
+    </a>
+  </div>
+  <div class="pagiset-list">
+    <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+       th:href="@{/contestlist/page(page=${pageNum})}"
+       th:text="${pageNum}"
+       th:classappend="${pageNum == currentPage} ? 'active'">1</a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${currentPage + 1})}" class="pagiset-link pagiset-next" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <span class="visually-hidden">다음</span>
+    </a>
+  </div>
+  <div class="pagiset-ctrl">
+    <a th:href="@{/contestlist/page(page=${totalPages})}" class="pagiset-link pagiset-last" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <span class="visually-hidden">마지막</span>
+    </a>
+  </div>
+</nav>
+<br>
+<br>
+
+
+
+
+
+
+  <!-- [E]basic-N28 -->
+
+<!-- [S]basic-N4 -->
+<div class="basic-N4" data-bid="jzlvQQX1F2" >
+  <div class="footer-container container-lg">
+
+      <div class="footer-bottom">
+        <div class="footer-txt">
+          <p><span>강원도 춘천시 강원대학길 1</span></p>
+          <p>
+            <span>T. 033-250-6114</span>
+          </p>
+        </div>
+        <div class="footer-txt">
+          <p><span>KANGWON NATIONAL UNIVERSITY.</span></p>
+        </div>
+      </div>
+
+  </div>
+</div>
+<!-- [E]basic-N4 -->
+<script src="/js/setting.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/template.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/script.js"></script>
+</body>
