@@ -47,8 +47,6 @@ import java.util.Collections;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
-
     private final UserSecurityService userSecurityService;
     private final CustomOAuth2UserService customOAuth2UserService;
 
@@ -65,7 +63,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        logger.debug("Configuring SecurityFilterChain");
+//        logger.debug("Configuring SecurityFilterChain");
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
 
