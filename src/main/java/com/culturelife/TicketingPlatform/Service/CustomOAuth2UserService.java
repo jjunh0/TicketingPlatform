@@ -4,17 +4,12 @@ import com.culturelife.TicketingPlatform.Entity.Enum.UserRole;
 import com.culturelife.TicketingPlatform.Entity.Member;
 import com.culturelife.TicketingPlatform.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
@@ -27,13 +22,13 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
+//    private static final Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberRepository memberRepository;
 
     @Override
     @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        logger.info("CustomOAuth2UserService.loadUser called");
+//        logger.info("CustomOAuth2UserService.loadUser called");
 
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
@@ -72,16 +67,16 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         if (email == null) {
-            logger.error("Email is null in OAuth2User");
+//            logger.error("Email is null in OAuth2User");
             throw new OAuth2AuthenticationException("Email not found from OAuth2 provider");
         }
 
-        logger.info("User email: {}", email);
+//        logger.info("User email: {}", email);
         Optional<Member> existingMember = memberRepository.readByEmail(email);
         Member member;
 
         if (existingMember.isEmpty()) {
-            logger.info("Creating new member for email: {}", email);
+//            logger.info("Creating new member for email: {}", email);
             LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
             member = new Member();
             member.setMemberEmail(email);
@@ -94,10 +89,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             member.setMemberUpdateDate(localDateTime);
 
             memberRepository.save(member);
-            logger.info("New member saved: {}", member);
+//            logger.info("New member saved: {}", member);
         } else {
             member = existingMember.get();
-            logger.info("Member already exists for email: {}", email);
+//            logger.info("Member already exists for email: {}", email);
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();

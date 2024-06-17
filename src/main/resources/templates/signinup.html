@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/custom.css">
+
 </head>
 
 <body>
@@ -112,10 +113,12 @@
         <!-- password input -->
         <div class="input__block">
           <input type="password" placeholder="Password" th:field="*{password}" class="input password" id="password">
+          <div id="password-error" class="error-message" style="color: red; display: none;">비밀번호는 8자 이상, 16자 이하로 입력해야 합니다.</div>
         </div>
         <!-- repeat password input -->
         <div class="input__block">
           <input type="password" placeholder="Repeat password" th:field="*{repeatPassword}" class="input repeat__password" id="repeat__password">
+          <div id="repeat-password-error" class="error-message" style="color: red; display: none;">입력한 비밀번호와 일치하지 않습니다.</div>
         </div>
         <!-- sign in button -->
         <button type="submit" class="signin__btn">Sign up</button>
@@ -183,6 +186,11 @@
     var signupTab = document.getElementById('signup');
     var signinForm = document.getElementById('signin-form');
     var signupForm = document.getElementById('signup-form');
+    var passwordInput = document.getElementById('password');
+    var repeatPasswordInput = document.getElementById('repeat__password');
+    var passwordError = document.getElementById('password-error');
+    var repeatPasswordError = document.getElementById('repeat-password-error');
+
 
     signinTab.addEventListener('click', function () {
       event.preventDefault();
@@ -194,6 +202,34 @@
       event.preventDefault();
       signinForm.style.display = 'none';
       signupForm.style.display = 'block';
+    });
+
+    // 폼 제출 시 비밀번호 유효성 검사 및 비밀번호 일치 여부 검사
+    signupForm.addEventListener('submit', function (event) {
+      var password = passwordInput.value;
+      var repeatPassword = repeatPasswordInput.value;
+      var isValid = true;
+
+      // 비밀번호 길이 검사
+      if (password.length < 8 || password.length > 16) {
+        passwordError.style.display = 'block';
+        isValid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      // 비밀번호 일치 여부 검사
+      if (password !== repeatPassword) {
+        repeatPasswordError.style.display = 'block';
+        isValid = false;
+      } else {
+        repeatPasswordError.style.display = 'none';
+      }
+
+      // 유효성 검사 실패 시 폼 제출 막기
+      if (!isValid) {
+        event.preventDefault();
+      }
     });
   });
 </script>
