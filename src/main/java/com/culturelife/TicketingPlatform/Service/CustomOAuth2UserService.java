@@ -22,13 +22,11 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-//    private static final Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
     private final MemberRepository memberRepository;
 
     @Override
     @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-//        logger.info("CustomOAuth2UserService.loadUser called");
 
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
@@ -67,16 +65,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         if (email == null) {
-//            logger.error("Email is null in OAuth2User");
             throw new OAuth2AuthenticationException("Email not found from OAuth2 provider");
         }
 
-//        logger.info("User email: {}", email);
         Optional<Member> existingMember = memberRepository.readByEmail(email);
         Member member;
 
         if (existingMember.isEmpty()) {
-//            logger.info("Creating new member for email: {}", email);
             LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
             member = new Member();
             member.setMemberEmail(email);
@@ -89,10 +84,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             member.setMemberUpdateDate(localDateTime);
 
             memberRepository.save(member);
-//            logger.info("New member saved: {}", member);
         } else {
             member = existingMember.get();
-//            logger.info("Member already exists for email: {}", email);
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
